@@ -18,8 +18,21 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('code')->nullable();
+            $table->date('birthday')->nullable();
+            $table->tinyInteger('gender')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('mission')->nullable();
+            $table->integer('group_id')->nullable();
+            // parent_id
+            $table->integer('manager_id')->nullable();
+            $table->string('localtion')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('token_verification')->nullable();
+            $table->integer('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletesTz();
         });
     }
 
