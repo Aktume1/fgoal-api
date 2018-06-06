@@ -21,10 +21,7 @@ abstract class ApiController extends AbstractController
 
     protected function jsonRender($data = [])
     {
-        $this->compacts['message'] = [
-            'code' => 200,
-            'status' => true,
-        ];
+        $this->compacts['code'] = 200;
 
         $compacts = array_merge($data, $this->compacts);
 

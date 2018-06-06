@@ -4,7 +4,7 @@ namespace App\Exceptions\Api;
 
 class UnknownException extends ApiException
 {
-    public function __construct($message = null, $statusCode = 400)
+    public function __construct($message = null, $statusCode = BAD_REQUEST)
     {
         $message = $message ? $message : translate('exception.unknown_error');
 

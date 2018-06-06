@@ -81,11 +81,8 @@ class Handler extends ExceptionHandler
         $httpCode = $httpCode !== 0 ? $httpCode : 500;
         $description = $description ? $description : translate('http_message.' . config('httpstatus.code.' . $httpCode));
         $response = [
-            'message' => [
-                'status' => false,
-                'code' => $httpCode,
-                'description' => [$description]
-            ]
+            'code' => $httpCode,
+            'description' => [$description]
         ];
 
         return response()->json($response, $httpCode);
@@ -102,11 +99,8 @@ class Handler extends ExceptionHandler
     {
         if ($request->expectsJson()) {
             return response()->json([
-                'message' => [
-                    'status' => false,
-                    'code' => 401,
-                    'description' => $exception->getMessage() ? [$exception->getMessage()] : [],
-                ]
+                'code' => 401,
+                'description' => $exception->getMessage() ? [$exception->getMessage()] : [],
             ], 401);
         }
 
