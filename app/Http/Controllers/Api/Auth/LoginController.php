@@ -65,7 +65,6 @@ class LoginController extends ApiController
                 $this->compacts['data'] = $response;
             }
         } else {
-
             throw new NotFoundException(__('auth.failed'), UNAUTHORIZED);
         }
 
