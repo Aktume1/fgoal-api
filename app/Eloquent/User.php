@@ -25,12 +25,11 @@ class User extends Authenticatable
         'gender',
         'phone',
         'mission',
-        'group_id',
         'manager_id',
-        'localtion',
+        'location',
         'avatar',
         'token_verification',
-        'status'
+        'status',
     ];
 
     /**
@@ -52,5 +51,20 @@ class User extends Authenticatable
         if ($value) {
             $this->attributes['password'] = bcrypt($value);
         }
+    }
+
+    public function objectives()
+    {
+        return $this->belongsToMany(Objective::class, 'objective_user', 'user_id', 'objective_id');
+    }
+
+    public function comments()
+    {
+        return $this->belongsToMany(Objective::class, 'comments', 'user_id', 'objective_id');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id');
     }
 }

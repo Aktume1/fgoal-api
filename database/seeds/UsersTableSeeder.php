@@ -1,8 +1,5 @@
 <?php
-
 use App\Eloquent\User;
-use App\Eloquent\Service;
-use App\Eloquent\Category;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -15,7 +12,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory(User::class, 100)->create();
-
         User::find(1)->update([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
