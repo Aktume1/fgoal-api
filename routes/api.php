@@ -14,8 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], function () {
-
-        Route::group(['namespace' => 'Auth'], function () {
-            Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
-        });
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
+        Route::post('loginwsm', ['as' => 'loginwsm', 'uses' => 'LoginController@loginWithWsm']);
+    });
 });

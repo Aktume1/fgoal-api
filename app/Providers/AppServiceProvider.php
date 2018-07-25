@@ -38,6 +38,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Passport::class
         );
 
+        $this->app->bind(
+            \App\Contracts\Services\SocialInterface::class,
+            \App\Services\Social::class
+        );
+
 
     }
 }
