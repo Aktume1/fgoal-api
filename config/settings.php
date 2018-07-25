@@ -2,6 +2,13 @@
 
 return [
     'action_exception_method' => [
-        'store', 'storeMultiple', 'update', 'destroy', 'updateMultiple', 'restore', 'delete'
+        'store',
+        'storeMultiple',
+        'update',
+        'destroy',
+        'updateMultiple',
+        'restore',
+        'delete',
     ],
+    'default_provider' => 'framgia',
 ];

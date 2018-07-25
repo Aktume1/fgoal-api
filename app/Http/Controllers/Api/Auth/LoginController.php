@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Contracts\Services\PassportInterface;
+use App\Contracts\Services\SocialInterface;
 use App\Http\Controllers\Api\ApiController;
 use App\Exceptions\Api\NotFoundException;
 use App\Http\Requests\Api\Auth\LoginRequest;
@@ -67,6 +68,16 @@ class LoginController extends ApiController
         } else {
             throw new NotFoundException(__('auth.failed'), UNAUTHORIZED);
         }
+
+        return $this->jsonRender();
+    }
+
+    public function loginWithWsm(LoginRequest $request, SocialInterface $service)
+    {
+        $data = $request->only(['email', 'password']);
+        $user = $service->getUserFromWsm($data['email'], $data['password']);
+        
+        $this->compacts['user'] = $user;
 
         return $this->jsonRender();
     }

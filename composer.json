@@ -11,8 +11,14 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/passport": "^4.0",
-        "laravel/tinker": "^1.0"
+        "framgia/fauth-php": "dev-develop",
+        "laravel/tinker": "^1.0",
+        "nesbot/carbon": "1.25.*"
     },
+    "repositories": [{
+        "url": "https://github.com/framgia/fauth-php",
+        "type": "git"
+    }],
     "require-dev": {
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
@@ -35,13 +41,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Framgia\\Fauth\\": "vendor/framgia/fauth-php/"
         }
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {

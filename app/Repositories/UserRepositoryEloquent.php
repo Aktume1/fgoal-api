@@ -15,7 +15,7 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
     public function checkActiveAccount($email)
     {
         return $this->model()->where('email', $email)
-            ->where('status', config('model.user.status.active'))
+            ->where('status', config('model.user.status.working'))
             ->count() !== 0;
     }
 
