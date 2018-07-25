@@ -79,7 +79,7 @@ class Social implements SocialInterface
             $currentUser->groups()->attach($userGroupId);
         }
 
-        return $currentUser;
+        return $currentUser->with('groups')->get();
     }
 
     /**
