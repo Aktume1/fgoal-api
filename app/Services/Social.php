@@ -62,24 +62,30 @@ class Social implements SocialInterface
         //Get Workspace from Auth Sever
         $workspaceInfo = $userFromAuthServer['workspaces'][0] ? : null;
         $birthday = Carbon::parse($userFromAuthServer['birthday'])->toDateString();
-        $currentUser = $this->userRepository->model()->updateOrCreate([
-            'email' => $userFromAuthServer['email'],
-            'name' => $userFromAuthServer['name'],
-            'code' => $userFromAuthServer['employee_code'],
-            'birthday' => $birthday,
-            'location' => $workspaceInfo['name'],
-            'avatar' => $userFromAuthServer['avatar'],
-            'mission' => $userFromAuthServer['position']['name'],
-            'gender' => array_get(config('model.user.gender'), $userFromAuthServer['gender']),
-            'status' => array_get(config('model.user.status'), $userFromAuthServer['status']),
-        ]);
+        $currentUser = $this->userRepository->model()->updateOrCreate(
+            [
+                'email' => $userFromAuthServer['email'],
+            ],
+            [
+                'name' => $userFromAuthServer['name'],
+                'code' => $userFromAuthServer['employee_code'],
+                'birthday' => $birthday,
+                'location' => $workspaceInfo['name'],
+                'avatar' => $userFromAuthServer['avatar'],
+                'mission' => $userFromAuthServer['position']['name'],
+                'gender' => array_get(config('model.user.gender'), $userFromAuthServer['gender']),
+                'status' => array_get(config('model.user.status'), $userFromAuthServer['status']),
+            ]
+        );
         //Check if data exist in pivot table
         $exists = $currentUser->groups->contains($userGroupId);
         if (!$exists) {
             $currentUser->groups()->attach($userGroupId);
         }
+        //Return user from database
+        $user = $this->userRepository->model()->where('id', $currentUser->id)->with('groups')->get();
 
-        return $currentUser->with('groups')->get();
+        return $user;
     }
 
     /**
@@ -96,19 +102,27 @@ class Social implements SocialInterface
         $parentGroupCode = null;
         //Parent Group Of Current User Group
         foreach ($parentGroupInfo as $group) {
-            $group = app(Group::class)::updateOrCreate([
-                'code' => $group['id'],
-                'name' => $group['name'],
-                'parent_id' => $parentGroupCode,
-            ]);
+            $group = app(Group::class)::updateOrCreate(
+                [
+                    'code' => $group['id'],
+                ],
+                [
+                    'name' => $group['name'],
+                    'parent_id' => $parentGroupCode,
+                ]
+            );
             $parentGroupCode = $group->code;
         }
         //Current User Group
-        $groupUser = app(Group::class)::updateOrCreate([
-            'code' => $groupInfo['id'],
-            'name' => $groupInfo['name'],
-            'parent_id' => $parentGroupCode,
-        ]);
+        $groupUser = app(Group::class)::updateOrCreate(
+            [
+                'code' => $groupInfo['id'],
+            ],
+            [
+                'name' => $groupInfo['name'],
+                'parent_id' => $parentGroupCode,
+            ]
+        );
 
         return $groupUser->id;
     }
