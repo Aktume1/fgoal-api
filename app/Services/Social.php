@@ -20,33 +20,34 @@ class Social implements SocialInterface
     }
     
     /**
-     * Get User Info From WSM
+     * Get User Info From WSM By Password
      * @param email
      * @param password
      * @return App\Eloquent\User
      **/
-    public function getUserFromWsm($email, $password)
+    public function getUserByPasswordGrant($email, $password)
     {
-        $accessToken = $this->getAccessTokenFromWsm($email, $password);
-        $user = $this->getUserInfo($accessToken);
+        $token = $this->getTokenByPasswordGrant($email, $password);
+        $user = $this->getUserInfo($token['access_token']);
+        $user[0]['refresh_token'] = $token['refresh_token'];
 
         return $user;
     }
 
     /**
-     * Get Access Token From WSM
+     * Get Token From WSM
      * @param string $email
      * @param string $password
-     * @return string $accessToken
+     * @return array token
      **/
-    public function getAccessTokenFromWsm($email, $password)
+    public function getTokenByPasswordGrant($email, $password)
     {
         $response = Fauth::driver(config('settings.default_provider'))->getTokenByPasswordGrant($email, $password);
         if (isset($response['error'])) {
             throw new NotFoundException($response['error'], 404);
         }
 
-        return $response['access_token'];
+        return $response;
     }
 
     /**
@@ -75,6 +76,7 @@ class Social implements SocialInterface
                 'mission' => $userFromAuthServer['position']['name'],
                 'gender' => array_get(config('model.user.gender'), $userFromAuthServer['gender']),
                 'status' => array_get(config('model.user.status'), $userFromAuthServer['status']),
+                'token_verification' => str_random(60),
             ]
         );
         //Check if data exist in pivot table
@@ -125,5 +127,35 @@ class Social implements SocialInterface
         );
 
         return $groupUser->id;
+    }
+
+    /**
+     * Get Token From WSM By Refresh Token
+     * @param string $refreshToken
+     * @return array token
+     **/
+    public function refreshToken($refreshToken)
+    {
+        $response = Fauth::driver(config('settings.default_provider'))->refreshToken($refreshToken);
+        if (isset($response['error'])) {
+            throw new NotFoundException($response['error'], 404);
+        }
+        
+        return $response;
+    }
+
+    /**
+     * Get User Info From WSM By Refresh Token
+     * @param email
+     * @param password
+     * @return App\Eloquent\User
+     **/
+    public function getUserByRefreshToken($refreshToken)
+    {
+        $token = $this->refreshToken($refreshToken);
+        $user = $this->getUserInfo($token['access_token']);
+        $user[0]['refresh_token'] = $token['refresh_token'];
+
+        return $user;
     }
 }
