@@ -8,6 +8,7 @@ use App\Contracts\Services\SocialInterface;
 use App\Http\Controllers\Api\ApiController;
 use App\Exceptions\Api\NotFoundException;
 use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\RefreshTokenRequest;
 use Carbon\Carbon;
 use App\Contracts\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -48,7 +49,6 @@ class LoginController extends ApiController
         $isActiveAccount = $this->repository->checkActiveAccount($data['email']);
 
         if ($this->attemptLogin($request)) {
-
             if (! $isActiveAccount) {
                 throw new NotFoundException(__('auth.not_active'), NOT_FOUND);
             }
@@ -75,9 +75,19 @@ class LoginController extends ApiController
     public function loginWithWsm(LoginRequest $request, SocialInterface $service)
     {
         $data = $request->only(['email', 'password']);
-        $user = $service->getUserFromWsm($data['email'], $data['password']);
-        
-        $this->compacts['user'] = $user;
+
+        $this->compacts['data'] = $service->getUserByPasswordGrant($data['email'], $data['password']);
+        $this->compacts['description'] = 'Signed in successfully.';
+
+        return $this->jsonRender();
+    }
+
+    public function refreshToken(RefreshTokenRequest $request, SocialInterface $service)
+    {
+        $requestData = $request->only('refresh_token');
+
+        $this->compacts['data'] = $service->getUserByRefreshToken($requestData['refresh_token']);
+        $this->compacts['description'] = 'Signed in successfully.';
 
         return $this->jsonRender();
     }
