@@ -24,10 +24,10 @@ class CreateObjectivesTable extends Migration
             $table->date('end_date');
             $table->string('method');
             $table->string('description');
-            $table->tinyInteger('status');
-            $table->tinyInteger('current')->unsigned();
-            $table->tinyInteger('improgress')->unsigned();
-            $table->tinyInteger('estimate')->unsigned();
+            $table->tinyInteger('status')->unsigned()->default(0);
+            $table->tinyInteger('current')->unsigned()->default(0);
+            $table->tinyInteger('improgress')->unsigned()->default(0);
+            $table->tinyInteger('estimate')->unsigned()->default(0);
             $table->integer('unit_id')->unsigned()->index();
             $table->timestamps();
         });
