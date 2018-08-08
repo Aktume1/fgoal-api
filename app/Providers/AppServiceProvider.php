@@ -42,7 +42,5 @@ class AppServiceProvider extends ServiceProvider
             \App\Contracts\Services\SocialInterface::class,
             \App\Services\Social::class
         );
-
-
     }
 }

@@ -19,4 +19,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::post('loginwsm', ['as' => 'loginwsm', 'uses' => 'LoginController@loginWithWsm']);
         Route::post('refresh_token', ['as' => 'login', 'uses' => 'LoginController@refreshToken']);
     });
+    Route::resource('groups', 'GroupController');
+    Route::resource('groups.objectives', 'ObjectiveController');
 });

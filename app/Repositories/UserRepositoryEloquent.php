@@ -23,4 +23,9 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
     {
         return $this->model()->where('email', $email)->select($dataSelect)->first();
     }
+
+    public function getUserByToken($token)
+    {
+        return $this->model()->where('token_verification', $token)->first();
+    }
 }

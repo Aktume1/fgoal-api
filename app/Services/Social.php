@@ -29,7 +29,7 @@ class Social implements SocialInterface
     {
         $token = $this->getTokenByPasswordGrant($email, $password);
         $user = $this->getUserInfo($token['access_token']);
-        $user[0]['refresh_token'] = $token['refresh_token'];
+        $user['refresh_token'] = $token['refresh_token'];
 
         return $user;
     }
@@ -59,11 +59,11 @@ class Social implements SocialInterface
     {
         $userFromAuthServer = Fauth::driver(config('settings.default_provider'))->getUserByToken($accessToken);
         //Get Group ID
-        $userGroupId = $this->getGroupDetail($userFromAuthServer);
+        $listGroup = $this->getGroupDetail($userFromAuthServer);
         //Get Workspace from Auth Sever
         $workspaceInfo = $userFromAuthServer['workspaces'][0] ? : null;
         $birthday = Carbon::parse($userFromAuthServer['birthday'])->toDateString();
-        $currentUser = $this->userRepository->model()->updateOrCreate(
+        $currentUser = $this->userRepository->updateOrCreate(
             [
                 'email' => $userFromAuthServer['email'],
             ],
@@ -80,12 +80,12 @@ class Social implements SocialInterface
             ]
         );
         //Check if data exist in pivot table
-        $exists = $currentUser->groups->contains($userGroupId);
-        if (!$exists) {
-            $currentUser->groups()->attach($userGroupId);
-        }
+  
+        $exists = $currentUser->groups()->sync($listGroup);
+          
+     
         //Return user from database
-        $user = $this->userRepository->model()->where('id', $currentUser->id)->with('groups')->get();
+        $user = $this->userRepository->where('id', $currentUser->id)->with('groups')->first();
 
         return $user;
     }
@@ -93,40 +93,45 @@ class Social implements SocialInterface
     /**
      * Update Or Create And Get Group Info
      * @param string $accessToken
-     * @return int $group_id
+     * @return array $listGroup
      **/
     public function getGroupDetail($userFromAuthServer)
     {
+        $listGroup = [];
         //Get Group Detail From Auth Sever
-        $groupInfo = $userFromAuthServer['groups'][0] ? : null;
-        //Create Group From Detail
-        $parentGroupInfo = $groupInfo['parent_path'];
-        $parentGroupCode = null;
-        //Parent Group Of Current User Group
-        foreach ($parentGroupInfo as $group) {
-            $group = app(Group::class)::updateOrCreate(
+        $listGroupInfo = $userFromAuthServer['groups'];
+        foreach ($listGroupInfo as $groupInfo) {
+            //Create Group From Detail
+            $parentGroupInfo = $groupInfo['parent_path'];
+            $parentGroupCode = null;
+            //Parent Group Of Current User Group
+            foreach ($parentGroupInfo as $group) {
+                $group = app(Group::class)::updateOrCreate(
+                    [
+                        'code' => $group['id'],
+                    ],
+                    [
+                        'name' => $group['name'],
+                        'parent_id' => $parentGroupCode,
+                    ]
+                );
+                $parentGroupCode = $group->code;
+            }
+            //Current User Group
+            $groupUser = app(Group::class)::updateOrCreate(
                 [
-                    'code' => $group['id'],
+                    'code' => $groupInfo['id'],
                 ],
                 [
-                    'name' => $group['name'],
+                    'name' => $groupInfo['name'],
                     'parent_id' => $parentGroupCode,
                 ]
             );
-            $parentGroupCode = $group->code;
+            $listGroup[] = $groupUser->id;
         }
-        //Current User Group
-        $groupUser = app(Group::class)::updateOrCreate(
-            [
-                'code' => $groupInfo['id'],
-            ],
-            [
-                'name' => $groupInfo['name'],
-                'parent_id' => $parentGroupCode,
-            ]
-        );
+        $listGroup[] = $this->createGroupWithLoginUser($userFromAuthServer);
 
-        return $groupUser->id;
+        return $listGroup;
     }
 
     /**
@@ -154,8 +159,26 @@ class Social implements SocialInterface
     {
         $token = $this->refreshToken($refreshToken);
         $user = $this->getUserInfo($token['access_token']);
-        $user[0]['refresh_token'] = $token['refresh_token'];
+        $user['refresh_token'] = $token['refresh_token'];
 
         return $user;
+    }
+
+    /**
+     * Create group for loginnd user
+     *  return group id
+     */
+    public function createGroupWithLoginUser($userFromAuthServer)
+    {
+        $groupUser = app(Group::class)::updateOrCreate(
+            [
+                'code' => $userFromAuthServer['employee_code'],
+            ],
+            [
+                'name' => $userFromAuthServer['name'],
+            ]
+        );
+        
+        return $groupUser->id;
     }
 }
