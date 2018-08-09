@@ -45,6 +45,11 @@ return [
            'driver' => 'passport',
            'provider' => 'users',
         ],
+
+        'fauth' => [
+            'driver' => 'custom',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -69,11 +74,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Eloquent\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
