@@ -29,7 +29,7 @@ class Passport implements PassportInterface
                 return json_decode($response->getBody());
             }
 
-            throw new \Exception("RequestException");
+            throw new \Exception('RequestException');
         }
     }
 

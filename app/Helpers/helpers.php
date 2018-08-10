@@ -63,7 +63,6 @@ if (!function_exists('array_random')) {
 
         return $results;
     }
-
 }
 
 /**
@@ -77,7 +76,7 @@ if (!function_exists('csvToArray')) {
     function csvToArray($fileName = '', $delimiter = ',')
     {
         if (!file_exists($fileName) || !is_readable($fileName)) {
-          return false;
+            return false;
         }
 
         $header = null;
@@ -86,9 +85,9 @@ if (!function_exists('csvToArray')) {
         if (($handle = fopen($fileName, 'r')) !== false) {
             while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
                 if (!$header) {
-                  $header = $row;
+                    $header = $row;
                 } else {
-                  $data[] = array_combine($header, $row);
+                    $data[] = array_combine($header, $row);
                 }
             }
 
@@ -107,7 +106,8 @@ if (!function_exists('csvToArray')) {
  * @return array
  */
 if (!function_exists('formatResponse')) {
-    function formatResponse($code, $description) {
+    function formatResponse($code, $description)
+    {
         if (! $code || empty($description)) {
             return false;
         }
@@ -129,7 +129,7 @@ if (!function_exists('formatResponse')) {
  * @return double
  */
 if (!function_exists('distanceGeoPoints')) {
-    function distanceGeoPoints ($lat1, $lng1, $lat2, $lng2)
+    function distanceGeoPoints($lat1, $lng1, $lat2, $lng2)
     {
         return 6378.10 * ACOS(COS(deg2rad($lat1))
             * COS(deg2rad($lat2))

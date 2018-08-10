@@ -61,13 +61,13 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         switch ($e) {
-            case ($e instanceOf ActionException
-                || $e instanceOf NotFoundException
-                || $e instanceOf NotOwnerException
-                || $e instanceOf UnknownException
+            case ($e instanceof ActionException
+                || $e instanceof NotFoundException
+                || $e instanceof NotOwnerException
+                || $e instanceof UnknownException
             ):
                 return $this->setResponse($e->getCode(), $e->getErrorDescription());
-            case ($e instanceOf MethodNotAllowedHttpException):
+            case ($e instanceof MethodNotAllowedHttpException):
                 return $this->setResponse($e->getStatusCode(), $e->getMessage());
             default:
                 break;
@@ -79,10 +79,11 @@ class Handler extends ExceptionHandler
     private function setResponse(int $httpCode, $description = [])
     {
         $httpCode = $httpCode !== 0 ? $httpCode : 500;
-        $description = $description ? $description : translate('http_message.' . config('httpstatus.code.' . $httpCode));
+        $description = $description ? $description
+                                    : translate('http_message.' . config('httpstatus.code.' . $httpCode));
         $response = [
             'code' => $httpCode,
-            'description' => [$description]
+            'description' => [$description],
         ];
 
         return response()->json($response, $httpCode);
