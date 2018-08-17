@@ -22,5 +22,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
     Route::group(['middleware' => 'fapi'], function () {
         Route::resource('groups', 'GroupController');
         Route::resource('groups.objectives', 'ObjectiveController');
+        Route::resource('quarter', 'QuarterController');
     });
 });
