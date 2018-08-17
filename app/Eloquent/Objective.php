@@ -11,6 +11,7 @@ class Objective extends Model
         'name',
         'description',
         'status',
+        'objectiveable_type',
         'actual',
         'estimate',
         'parent_id',
@@ -26,12 +27,13 @@ class Objective extends Model
 
     public function group()
     {
-        return $this->belongsTo(Group::class, 'group_id', 'code');
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'objective_user', 'objective_id', 'user_id');
+        return $this->belongsToMany(User::class, 'objective_user', 'objective_id', 'user_id')
+                    ->withPivot('progress')->withTimestamps();
     }
 
     public function unit()

@@ -37,7 +37,7 @@ abstract class ApiController extends AbstractController
         } catch (Exception $e) {
             throw new UnknownException($e->getMessage(), $e->getCode());
         }
-        $this->compacts['description'] = 'Get data successful';
+        $this->compacts['description'] = translate('success.get_data');
 
         return $this->jsonRender();
     }
@@ -88,7 +88,7 @@ abstract class ApiController extends AbstractController
 
             throw new UnknownException($e->getMessage(), $e->getCode());
         }
-
+        
         return $this->jsonRender();
     }
 

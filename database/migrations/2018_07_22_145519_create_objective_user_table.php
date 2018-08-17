@@ -17,8 +17,7 @@ class CreateObjectiveUserTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('objective_id')->unsigned()->index();
-            $table->tinyInteger('result');
-            $table->tinyInteger('status');
+            $table->tinyInteger('progress');
             $table->timestamps();
         });
     }

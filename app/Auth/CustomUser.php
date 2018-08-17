@@ -19,12 +19,22 @@ class CustomUser
     }
 
     /**
-     * Get the ID for the currently authenticated user.
+     * Get User of the currently authenticated user.
      *
      * @return $user|null
      */
     public function user()
     {
         return $this->user;
+    }
+
+    /**
+    * Get ID of the currently authenticated user.
+    *
+    * @return $id|null
+    */
+    public function id()
+    {
+        return $this->user->id;
     }
 }

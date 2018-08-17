@@ -21,7 +21,7 @@ class ObjectiveController extends ApiController
 
     /**
      * Display a listing of the resource by group id
-     *
+     * @param  int  $groupId
      * @return \Illuminate\Http\Response
      */
     public function index($groupId, Request $request)
@@ -53,7 +53,7 @@ class ObjectiveController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  int  $groupId
      */
     public function store($groupId, Request $request)
     {
@@ -67,6 +67,7 @@ class ObjectiveController extends ApiController
 
         return $this->doAction(function () use ($groupId, $data) {
             $this->compacts['data'] = $this->objectiveRepository->create($groupId, $data);
+            $this->compacts['description'] = translate('success.create');
         });
     }
 

@@ -31,7 +31,7 @@ class Api
             throw new UnknownException(translate('http_message.unauthorized'), 401);
         }
         Auth::guard('fauth')->setUser($userFromToken);
-        
+
         return $next($request);
     }
 }
