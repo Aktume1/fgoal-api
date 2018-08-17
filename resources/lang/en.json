@@ -1,5 +1,5 @@
 {
-  "app":{
+  "app": {
     "name": "Lobe",
     "version": ":param"
   },
@@ -33,5 +33,11 @@
   },
   "other_error": {
     "invalid": ":param is invalid value"
+  },
+  "success": {
+    "get_data": "Get data successful",
+    "update": "Update Successful",
+    "create": "Create Successful",
+    "delete": "Delete Successful"
   }
 }

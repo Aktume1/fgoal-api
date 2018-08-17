@@ -53,7 +53,8 @@ class User extends Authenticatable
 
     public function objectives()
     {
-        return $this->belongsToMany(Objective::class, 'objective_user', 'user_id', 'objective_id');
+        return $this->belongsToMany(Objective::class, 'objective_user', 'user_id', 'objective_id')
+                    ->withPivot('progress')->withTimestamps();
     }
 
     public function comments()

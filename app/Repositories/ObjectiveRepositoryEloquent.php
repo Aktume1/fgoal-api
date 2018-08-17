@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 use App\Eloquent\Objective;
 use App\Contracts\Repositories\ObjectiveRepository;
+use App\Exceptions\Api\NotFoundException;
+use App\Exceptions\Api\UnknownException;
+use Auth;
 
 class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements ObjectiveRepository
 {
@@ -12,20 +15,34 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return app(Objective::class);
     }
 
+    /**
+     * Create Objective
+     * @param int $groupId
+     * @param array $data
+     * @return Objective
+     */
     public function create($groupId, $data)
     {
         if (!isset($data['parent_id'])) {
             $data['parent_id'] = null;
+            $data['objective_type'] = 'Objective';
+        } else {
+            $data['objective_type'] = 'Key Result';
+        }
+        if (!isset($data['description'])) {
+            $data['description'] = null;
         }
         $objective = $this->model()->create([
             'name' => $data['name'],
+            'objectiveable_type' => $data['objective_type'],
             'group_id' => $groupId,
+            'description' => $data['description'],
             'unit_id' => $data['unit_id'],
             'quarter_id' => $data['quarter_id'],
             'parent_id' => $data['parent_id'],
         ]);
 
-        return $this->model()->find($objective->id);
+        return $this->find($objective->id);
     }
 
     /**
@@ -34,9 +51,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function isObjective()
     {
-        return $this->model()->where('parent_id', null);
+        return $this->where('objectiveable_type', 'Objective');
     }
-
     /**
      * Get Objective and key by Group Id
      */
