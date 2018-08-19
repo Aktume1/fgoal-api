@@ -17,6 +17,7 @@ class CreateGroupUserTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('group_id')->unsigned()->index();
+            $table->boolean('manager')->default(false);
             $table->timestamps();
         });
     }

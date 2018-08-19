@@ -40,7 +40,6 @@ class QuarterController extends ApiController
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -51,7 +50,6 @@ class QuarterController extends ApiController
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -62,7 +60,6 @@ class QuarterController extends ApiController
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -73,7 +70,6 @@ class QuarterController extends ApiController
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -85,7 +81,6 @@ class QuarterController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -96,6 +91,5 @@ class QuarterController extends ApiController
      */
     public function destroy($id)
     {
-        //
     }
 }

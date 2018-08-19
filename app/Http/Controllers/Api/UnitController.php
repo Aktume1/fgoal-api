@@ -26,8 +26,8 @@ class UnitController extends ApiController
      */
     public function index()
     {
-        return $this->getData(function(){
-        	$this->compacts['data'] = $this->unitRepository->getAll();
+        return $this->getData(function () {
+            $this->compacts['data'] = $this->unitRepository->getAll();
         });
     }
 
@@ -38,7 +38,6 @@ class UnitController extends ApiController
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -49,7 +48,6 @@ class UnitController extends ApiController
      */
     public function store(Request $request)
     {
-       
     }
 
     /**
@@ -60,7 +58,6 @@ class UnitController extends ApiController
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -71,7 +68,6 @@ class UnitController extends ApiController
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -83,7 +79,6 @@ class UnitController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -94,6 +89,5 @@ class UnitController extends ApiController
      */
     public function destroy($id)
     {
-        //
     }
 }

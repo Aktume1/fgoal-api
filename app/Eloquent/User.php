@@ -64,6 +64,18 @@ class User extends Authenticatable
 
     public function groups()
     {
-        return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id');
+        return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id')
+                    ->withPivot('manager');
+    }
+    
+    /**
+     * Check if user is group's manager
+     * @param int $groupId
+     * @return boolean true|false
+     */
+    public function isGroupManager($groupId)
+    {
+        return $this->groups()->where('group_id', $groupId)->firstOrFail()
+                    ->pivot->manager;
     }
 }

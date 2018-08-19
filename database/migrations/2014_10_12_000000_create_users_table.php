@@ -24,8 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('mission')->nullable();
             $table->integer('group_id')->nullable();
-            // parent_id
-            $table->integer('manager_id')->nullable();
             $table->string('localtion')->nullable();
             $table->string('avatar')->nullable();
             $table->string('token_verification')->nullable();
