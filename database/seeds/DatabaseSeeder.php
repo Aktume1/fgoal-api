@@ -13,12 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Unit
-        factory(Unit::class, 5)->create();
-        sleep(2);
-        factory(Unit::class)->create([
-            'unit' => '%',
-        ]);
-
-	}
+        $this->call(QuartersTableSeeder::class);
+        $this->call(UnitsTableSeeder::class);
+    }
 }

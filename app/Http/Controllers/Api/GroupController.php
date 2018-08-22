@@ -13,7 +13,7 @@ class GroupController extends ApiController
     /**
      * Create a new controller instance.
      * @return void
-    **/
+     **/
     public function __construct(GroupRepository $repository)
     {
         parent::__construct();
@@ -43,7 +43,7 @@ class GroupController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +54,7 @@ class GroupController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -65,7 +65,7 @@ class GroupController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -76,8 +76,8 @@ class GroupController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -88,11 +88,33 @@ class GroupController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param $groupId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getParentByGroupId($groupId)
+    {
+        return $this->getData(function () use ($groupId) {
+            $this->compacts['data'] = $this->repository->getParentOfGroup($groupId);
+        });
+    }
+
+    /**
+     * @param $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getParentByUserId($userId)
+    {
+        return $this->getData(function () use ($userId) {
+            $this->compacts['data'] = $this->repository->getParentsOfUser($userId);
+        });
     }
 }

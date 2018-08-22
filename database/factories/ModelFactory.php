@@ -13,9 +13,3 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Eloquent\Unit::class, function (Faker $faker) {
-
-    return [
-        'unit' => $faker->name,
-    ];
-});
