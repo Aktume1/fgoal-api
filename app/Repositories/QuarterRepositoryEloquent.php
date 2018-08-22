@@ -15,7 +15,8 @@ class QuarterRepositoryEloquent extends AbstractRepositoryEloquent implements Qu
     /**
     * Return list quarter
     */
-    public function getQuarter(){
+    public function getQuarter()
+    {
         return $this->all();
     }
 }

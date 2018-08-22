@@ -9,6 +9,7 @@ use App\Contracts\Repositories\UserRepository;
 use App\Eloquent\User;
 use App\Exceptions\Api\NotFoundException;
 use App\Eloquent\Group;
+use Illuminate\Support\Collection;
 
 class Social implements SocialInterface
 {
@@ -29,7 +30,7 @@ class Social implements SocialInterface
     {
         $token = $this->getTokenByPasswordGrant($email, $password);
         $user = $this->getUserInfo($token['access_token']);
-        $user['refresh_token'] = $token['refresh_token'];
+        $user->setAttribute('refresh_token', $token['refresh_token']);
 
         return $user;
     }
@@ -79,15 +80,12 @@ class Social implements SocialInterface
                 'token_verification' => str_random(60),
             ]
         );
-        //Check if data exist in pivot table
-  
-        $exists = $currentUser->groups()->sync($listGroup);
-          
-     
+        //Sync Group With User And Set Role to Loggin User's Group
+        $currentUser->groups()->syncWithoutDetaching($listGroup);
+        $currentUser->groups()->updateExistingPivot(last($listGroup), ['manager' => true]);
+    
         //Return user from database
-        $user = $this->userRepository->where('id', $currentUser->id)->with('groups')->first();
-
-        return $user;
+        return $this->userRepository->where('id', $currentUser->id)->with('groups')->first();
     }
 
     /**
@@ -159,7 +157,7 @@ class Social implements SocialInterface
     {
         $token = $this->refreshToken($refreshToken);
         $user = $this->getUserInfo($token['access_token']);
-        $user['refresh_token'] = $token['refresh_token'];
+        $user->setAttribute('refresh_token', $token['refresh_token']);
 
         return $user;
     }

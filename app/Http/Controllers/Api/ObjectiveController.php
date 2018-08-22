@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\ObjectiveRepository;
+use App\Http\Requests\Api\Objective\UpdateObjectiveRequest;
+use App\Http\Requests\Api\Objective\CreateObjectiveRequest;
 
 class ObjectiveController extends ApiController
 {
@@ -46,7 +48,6 @@ class ObjectiveController extends ApiController
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -55,7 +56,7 @@ class ObjectiveController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $groupId
      */
-    public function store($groupId, Request $request)
+    public function store($groupId, CreateObjectiveRequest $request)
     {
         $data = $request->only(
             'name',
@@ -79,7 +80,6 @@ class ObjectiveController extends ApiController
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -90,7 +90,6 @@ class ObjectiveController extends ApiController
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -100,9 +99,16 @@ class ObjectiveController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateObjectiveRequest $request, $groupId, $objectiveId)
     {
-        //
+        $data = $request->only(
+            'actual'
+        );
+
+        return $this->doAction(function () use ($groupId, $objectiveId, $data) {
+            $this->compacts['data'] = $this->objectiveRepository->updateObjectiveActual($groupId, $objectiveId, $data);
+            $this->compacts['description'] = translate('success.update');
+        });
     }
 
     /**
@@ -113,6 +119,5 @@ class ObjectiveController extends ApiController
      */
     public function destroy($id)
     {
-        //
     }
 }

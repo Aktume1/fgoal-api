@@ -23,6 +23,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function create($groupId, $data)
     {
+        $this->setGuard('fauth');
+        if (!$this->user->isGroupManager($groupId)) {
+            throw new UnknownException(translate('http_message.unauthorized'));
+        }
         if (!isset($data['parent_id'])) {
             $data['parent_id'] = null;
             $data['objective_type'] = 'Objective';
@@ -55,6 +59,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     }
     /**
      * Get Objective and key by Group Id
+     * @param int $groupId
      */
     public function getObjective($groupId)
     {
@@ -77,5 +82,37 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function getObjectiveByQuarter($groupId, $quarterId)
     {
         return $this->getObjective($groupId)->where('quarter_id', $quarterId)->get();
+    }
+
+    /**
+     * Update Key Result's Actual
+     * @param int $groupId
+     * @param int $objectiveId
+     * @param array $data
+     * @return Objective
+     */
+    public function updateObjectiveActual($groupId, $objectiveId, $data)
+    {
+        $this->setGuard('fauth');
+        if (!$this->user->isGroupManager($groupId)) {
+            throw new UnknownException(translate('http_message.unauthorized'));
+        }
+        $objective = $this->where('id', $objectiveId)->where('group_id', $groupId)->firstOrFail();
+        $objective->update(['actual' => $data['actual']]);
+    
+        return $this->caculateObjectiveFromChild($objective->id);
+    }
+
+    public function caculateObjectiveFromChild($objectiveId)
+    {
+        $objective = $this->find($objectiveId);
+        $parentObjective = $objective->parentObjective;
+        if (!$parentObjective) {
+            return $objective;
+        }
+        $estimate = (int)($parentObjective->childObjective->sum('actual')/ $parentObjective->childObjective->count());
+        $parentObjective->update(['estimate' => $estimate]);
+
+        return $parentObjective;
     }
 }
