@@ -1,32 +1,21 @@
 <?php
 
+use Faker\Generator as Faker;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
 |--------------------------------------------------------------------------
 |
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
+| This directory should contain each of the model factory definitions for
+| your application. Factories provide a convenient way to generate new
+| model instances for testing / seeding your application's database.
 |
 */
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Eloquent\User::class, function (Faker\Generator $faker) {
-    static $levelIds;
+
+$factory->define(App\Eloquent\Unit::class, function (Faker $faker) {
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '123456',
-        'code' => $faker->isbn10,
-        'birthday' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'gender' => rand(0, 2),
-        'phone' => $faker->phoneNumber,
-        'mission' => $faker->name,
-        'manager_id' => rand(0, 20),
-        'location' => $faker->cityPrefix,
-        'avatar' => $faker->imageUrl($width = 640, $height = 480),
-        'token_verification' => bcrypt(str_random(5)),
-        'status' => $faker->randomElement(config('model.user.status')),
+        'unit' => $faker->name,
     ];
 });

@@ -2,6 +2,7 @@
 
 
 use Illuminate\Database\Seeder;
+use App\Eloquent\Unit;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
-    }
+        // Unit
+        factory(Unit::class, 5)->create();
+        sleep(2);
+        factory(Unit::class)->create([
+            'unit' => '%',
+        ]);
+
+	}
 }
