@@ -12,7 +12,7 @@ class QuarterController extends ApiController
     /**
      * Create a new controller instance.
      * @return void
-    **/
+     **/
     public function __construct(QuarterRepository $quarterRepository)
     {
         parent::__construct();
@@ -26,8 +26,6 @@ class QuarterController extends ApiController
      */
     public function index()
     {
-        $this->quarterRepository->getQuarter();
-
         return $this->getData(function () {
             $this->compacts['data'] = $this->quarterRepository->getQuarter();
         });
@@ -45,7 +43,7 @@ class QuarterController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,7 +53,7 @@ class QuarterController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -65,7 +63,7 @@ class QuarterController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,8 +73,8 @@ class QuarterController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -86,7 +84,7 @@ class QuarterController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
