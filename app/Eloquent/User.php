@@ -71,11 +71,13 @@ class User extends Authenticatable
     /**
      * Check if user is group's manager
      * @param int $groupId
-     * @return boolean true|false
      */
-    public function isGroupManager($groupId)
+    public function checkUserIsGroupManager($groupId)
     {
-        return $this->groups()->where('group_id', $groupId)->firstOrFail()
-                    ->pivot->manager;
+        if (!$this->groups()->where('group_id', $groupId)->exists() ||
+            !$this->groups()->where('group_id', $groupId)->firstOrFail()->pivot->manager) {
+            return false;
+        }
+        return true;
     }
 }

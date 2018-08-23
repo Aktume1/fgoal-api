@@ -12,19 +12,19 @@ class UnitsTableSeeder extends Seeder
     public function run()
     {
         DB::table('units')->insert([
-            'name' => '%',
+            'unit' => '%',
         ]);
 
         DB::table('units')->insert([
-            'name' => 'kg',
+            'unit' => 'kg',
         ]);
 
         DB::table('units')->insert([
-            'name' => 'g',
+            'unit' => 'g',
         ]);
 
         DB::table('units')->insert([
-            'name' => 'vnd',
+            'unit' => 'vnd',
         ]);
     }
 }

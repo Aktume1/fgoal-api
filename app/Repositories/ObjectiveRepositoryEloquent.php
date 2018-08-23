@@ -24,7 +24,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function create($groupId, $data)
     {
         $this->setGuard('fauth');
-        if (!$this->user->isGroupManager($groupId)) {
+        if (!$this->user->checkUserIsGroupManager($groupId)) {
             throw new UnknownException(translate('http_message.unauthorized'));
         }
         if (!isset($data['parent_id'])) {
@@ -49,14 +49,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return $this->find($objective->id);
     }
 
-    /**
-     * Get Objective
-     * @return Objective
-     */
-    public function isObjective()
-    {
-        return $this->where('objectiveable_type', 'Objective');
-    }
     /**
      * Get Objective and key by Group Id
      * @param int $groupId
@@ -85,7 +77,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     }
 
     /**
-     * Update Key Result's Actual
+     * Update Objective's Actual
      * @param int $groupId
      * @param int $objectiveId
      * @param array $data
@@ -94,15 +86,24 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function updateObjectiveActual($groupId, $objectiveId, $data)
     {
         $this->setGuard('fauth');
-        if (!$this->user->isGroupManager($groupId)) {
+        if (!$this->user->checkUserIsGroupManager($groupId)) {
             throw new UnknownException(translate('http_message.unauthorized'));
         }
-        $objective = $this->where('id', $objectiveId)->where('group_id', $groupId)->firstOrFail();
+        $objective = $this->where('id', $objectiveId)
+                        ->where('group_id', $groupId)->firstOrFail();
         $objective->update(['actual' => $data['actual']]);
-    
+        if ($objective->status != Objective::APPROVE) {
+            return $objective;
+        }
+        
         return $this->caculateObjectiveFromChild($objective->id);
     }
 
+    /**
+     * Caculate Objective's Actual
+     * @param int $objectiveId
+     * @return Objective
+     */
     public function caculateObjectiveFromChild($objectiveId)
     {
         $objective = $this->find($objectiveId);
@@ -110,9 +111,37 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         if (!$parentObjective) {
             return $objective;
         }
-        $estimate = (int)($parentObjective->childObjective->sum('actual')/ $parentObjective->childObjective->count());
+        $sum = $parentObjective->childObjective->sum(function ($objective) {
+            return $objective->actual * $objective->weight;
+        });
+        $estimate = (int)($sum / $parentObjective->childObjective->count());
         $parentObjective->update(['estimate' => $estimate]);
 
         return $parentObjective;
+    }
+    
+    /**
+     * Link Objective To Key Result
+     * @param int $objectiveId
+     * @param array $data
+     * @return Objective
+     */
+    public function linkObjectiveToKeyResult($groupId, $data)
+    {
+        $this->setGuard('fauth');
+        if (!$this->user->checkUserIsGroupManager($groupId)) {
+            throw new UnknownException(translate('http_message.unauthorized'));
+        }
+
+        $objective = $this->isObjective()->where('id', $data['objectiveId'])
+                        ->where('group_id', $groupId)->firstOrFail();
+        $keyResult = $this->isKeyResult()->where('id', $data['keyResultId'])
+                        ->firstOrFail();
+        $objective->update([
+            'parent_id' => $keyResult->id,
+            'status' => Objective::WAITING,
+        ]);
+        
+        return $objective;
     }
 }
