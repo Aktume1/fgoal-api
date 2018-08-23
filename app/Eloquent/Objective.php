@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Objective extends Model
 {
+    const APPROVE = 0;
+    const WAITING = 1;
+    const CANCEL = 2;
+
     protected $fillable = [
         'is_private',
         'name',
@@ -59,5 +63,20 @@ class Objective extends Model
     public function quarter()
     {
         return $this->belongsTo(Quarter::class, 'quarter_id', 'id');
+    }
+
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('objectiveable_type', $type);
+    }
+
+    public function scopeIsObjective($query)
+    {
+        return $this->ofType('Objective');
+    }
+
+    public function scopeIsKeyResult($query)
+    {
+        return $this->ofType('Key Result');
     }
 }

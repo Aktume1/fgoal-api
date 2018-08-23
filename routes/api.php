@@ -22,9 +22,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
     Route::group(['middleware' => 'fapi'], function () {
         Route::resource('groups', 'GroupController');
         Route::resource('groups.objectives', 'ObjectiveController');
-        Route::resource('quarter', 'QuarterController');
+        Route::resource('quarters', 'QuarterController');
         Route::resource('units', 'UnitController');
         Route::get('groups/{id}/parent_of_group', 'GroupController@getParentByGroupId');
         Route::get('groups/{userId}/parents_of_user', 'GroupController@getParentByUserId');
+        Route::post('groups/{groupId}/objectives/link_objective', 'ObjectiveController@linkObjective');
     });
 });
