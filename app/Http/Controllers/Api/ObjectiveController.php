@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\Objective\UpdateContentRequest;
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\ObjectiveRepository;
 use App\Http\Requests\Api\Objective\UpdateObjectiveRequest;
@@ -15,7 +16,7 @@ class ObjectiveController extends ApiController
     /**
      * Create a new controller instance.
      * @return void
-    **/
+     **/
     public function __construct(ObjectiveRepository $objectiveRepository)
     {
         parent::__construct();
@@ -24,7 +25,7 @@ class ObjectiveController extends ApiController
 
     /**
      * Display a listing of the resource by group id
-     * @param  int  $groupId
+     * @param  int $groupId
      * @return \Illuminate\Http\Response
      */
     public function index($groupId, Request $request)
@@ -54,8 +55,8 @@ class ObjectiveController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Api\Objective\reateObjectiveRequest  $request
-     * @param  int  $groupId
+     * @param  \App\Http\Requests\Api\Objective\reateObjectiveRequest $request
+     * @param  int $groupId
      */
     public function store($groupId, CreateObjectiveRequest $request)
     {
@@ -76,7 +77,7 @@ class ObjectiveController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -86,7 +87,7 @@ class ObjectiveController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -96,8 +97,8 @@ class ObjectiveController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Api\Objective\UpdateObjectiveRequest  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Api\Objective\UpdateObjectiveRequest $request
+     * @param  int $id
      * @param int $groupId
      * @param int $objectiveId
      */
@@ -114,9 +115,28 @@ class ObjectiveController extends ApiController
     }
 
     /**
+     * @param UpdateContentRequest $request
+     * @param $objectiveId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\ActionException
+     * @throws \App\Exceptions\Api\NotFoundException
+     * @throws \App\Exceptions\Api\NotOwnerException
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function updateContent(UpdateContentRequest $request, $groupId, $objectiveId)
+    {
+        $data = $request->name;
+
+        return $this->doAction(function () use ($objectiveId, $groupId, $data) {
+            $this->compacts['data'] = $this->objectiveRepository->updateContent($objectiveId, $groupId, $data);
+            $this->compacts['description'] = translate('success.update');
+        });
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -126,7 +146,7 @@ class ObjectiveController extends ApiController
     /**
      * Link Objective To Parent Group's Key Result
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function linkObjective(LinkObjectiveRequest $request, $groupId)
