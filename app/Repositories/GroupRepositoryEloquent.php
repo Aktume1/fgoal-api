@@ -39,5 +39,24 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         
         return $list;
     }
+
+    /**
+     * Get Infomation Group
+     *
+     * @param  integer  $groupId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getInfomationGroup($groupId)
+    {
+        return $this->infomationGroup()
+        ->with([
+            'childGroup' => function ($q) {
+                $q->infomationGroup();
+            },
+        ])
+        ->whereId($groupId)
+        ->firstOrFail();
+    }
+
 }
 

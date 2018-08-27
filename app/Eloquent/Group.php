@@ -38,4 +38,14 @@ class Group extends Model
     {
         return $this->hasMany(Group::class, 'parent_id', 'code');
     }
+
+    public function scopeInfomationGroup($query)
+    {
+        return $query->select('id', 'name', 'code', 'parent_id')
+        ->with([
+            'users' => function ($q) {
+                $q->select('users.id', 'name')->whereStatus(true);
+            },
+        ]);
+    }
 }
