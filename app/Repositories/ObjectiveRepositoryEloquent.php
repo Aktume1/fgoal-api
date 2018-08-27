@@ -15,6 +15,16 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return app(Objective::class);
     }
 
+    public function checkUserIsGroupManager($groupId)
+    {
+        $this->setGuard('fauth');
+        if (!$this->user->isGroupManager($groupId)) {
+            throw new UnknownException(translate('http_message.unauthorized'));
+        }
+
+        return;
+    }
+
     /**
      * Create Objective
      * @param int $groupId
@@ -23,10 +33,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function create($groupId, $data)
     {
-        $this->setGuard('fauth');
-        if (!$this->user->checkUserIsGroupManager($groupId)) {
-            throw new UnknownException(translate('http_message.unauthorized'));
-        }
+        $this->checkUserIsGroupManager($groupId);
+
         if (!isset($data['parent_id'])) {
             $data['parent_id'] = null;
             $data['objective_type'] = 'Objective';
@@ -85,10 +93,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function updateObjectiveActual($groupId, $objectiveId, $data)
     {
-        $this->setGuard('fauth');
-        if (!$this->user->checkUserIsGroupManager($groupId)) {
-            throw new UnknownException(translate('http_message.unauthorized'));
-        }
+        $this->checkUserIsGroupManager($groupId);
+
         $objective = $this->where('id', $objectiveId)
                         ->where('group_id', $groupId)->firstOrFail();
         $objective->update(['actual' => $data['actual']]);
@@ -128,10 +134,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function linkObjectiveToKeyResult($groupId, $data)
     {
-        $this->setGuard('fauth');
-        if (!$this->user->checkUserIsGroupManager($groupId)) {
-            throw new UnknownException(translate('http_message.unauthorized'));
-        }
+        $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->isObjective()->where('id', $data['objectiveId'])
                         ->where('group_id', $groupId)->firstOrFail();
@@ -142,6 +145,26 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'status' => Objective::WAITING,
         ]);
         
+        return $objective;
+    }
+
+    /**
+     * Match Actual With Estimate
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return Objective
+     */
+    public function matchActualWithEstimate($groupId, $objectiveId)
+    {
+        $this->checkUserIsGroupManager($groupId);
+
+        $objective = $this->where('id', $objectiveId)
+            ->where('group_id', $groupId)->firstOrFail();
+
+        $objective->update([
+            'actual' => $objective->estimate,
+        ]);
+
         return $objective;
     }
 }
