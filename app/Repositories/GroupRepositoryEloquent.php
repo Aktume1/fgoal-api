@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Contracts\Repositories\GroupRepository;
 use App\Eloquent\Group;
 use App\Eloquent\User;
+use App\Exceptions\Api\NotFoundException;
 
 class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements GroupRepository
 {
@@ -19,7 +20,13 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
      */
     public function getParentOfGroup($groupId)
     {
-        return $this->where('id', $groupId)->first();
+        $group = $this->where('id', $groupId)->first();
+        $list = $group->parentGroup;
+        if(!$list){
+            throw new NotFoundException();
+        }
+        
+        return $list;
     }
 
     /**
@@ -28,7 +35,9 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
      */
     public function getParentsOfUser($userId)
     {
-        return User::findOrFail($userId)->groups()->get();
+        $list = User::findOrFail($userId)->groups()->get();
+        
+        return $list;
     }
 }
 
