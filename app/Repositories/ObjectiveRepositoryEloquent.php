@@ -96,12 +96,12 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->where('id', $objectiveId)
-                        ->where('group_id', $groupId)->firstOrFail();
+            ->where('group_id', $groupId)->firstOrFail();
         $objective->update(['actual' => $data['actual']]);
         if ($objective->status != Objective::APPROVE) {
             return $objective;
         }
-        
+
         return $this->caculateObjectiveFromChild($objective->id);
     }
 
@@ -125,7 +125,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         return $parentObjective;
     }
-    
+
     /**
      * Link Objective To Key Result
      * @param int $objectiveId
@@ -137,14 +137,32 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->isObjective()->where('id', $data['objectiveId'])
-                        ->where('group_id', $groupId)->firstOrFail();
+            ->where('group_id', $groupId)->firstOrFail();
         $keyResult = $this->isKeyResult()->where('id', $data['keyResultId'])
-                        ->firstOrFail();
+            ->firstOrFail();
         $objective->update([
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
         ]);
-        
+
+        return $objective;
+    }
+
+    /**
+     * Update content objective
+     * @param $objectiveId
+     * @param $data
+     * @return mixed
+     */
+    public function updateContent($objectiveId, $groupId, $data)
+    {
+        $this->checkUserIsGroupManager($groupId);
+
+        $objective = $this->where('group_id', $groupId)->findOrFail($objectiveId);
+        $objective->update([
+            'name' => $data,
+        ]);
+
         return $objective;
     }
 

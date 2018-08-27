@@ -21,4 +21,6 @@ interface ObjectiveRepository extends AbstractRepository
     public function linkObjectiveToKeyResult($groupId, $data);
 
     public function matchActualWithEstimate($groupId, $objectiveId);
+
+    public function updateContent($objectiveId, $groupId, $data);
 }
