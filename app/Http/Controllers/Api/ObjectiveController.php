@@ -141,4 +141,19 @@ class ObjectiveController extends ApiController
             $this->compacts['description'] = translate('success.update');
         });
     }
+
+
+    /**
+     * Match Objective's Actual With Estimate
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function matchActualWithEstimate($groupId, $objectiveId)
+    {
+        return $this->doAction(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->matchActualWithEstimate($groupId, $objectiveId);
+            $this->compacts['description'] = translate('success.update');
+        });
+    }
 }

@@ -6,6 +6,8 @@ interface ObjectiveRepository extends AbstractRepository
 {
     public function create($groupId, $data);
 
+    public function checkUserIsGroupManager($groupId);
+
     public function getObjective($groupId);
 
     public function getObjectiveByGroup($groupId);
@@ -17,4 +19,6 @@ interface ObjectiveRepository extends AbstractRepository
     public function caculateObjectiveFromChild($objectiveId);
 
     public function linkObjectiveToKeyResult($groupId, $data);
+
+    public function matchActualWithEstimate($groupId, $objectiveId);
 }
