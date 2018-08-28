@@ -185,4 +185,23 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         return $objective;
     }
+
+    /**
+     * Delete Objective
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return void
+     */
+
+    public function deleteObjective($groupId, $objectiveId)
+    {
+        $this->checkUserIsGroupManager($groupId);
+
+        $objective = $this->where('id', $objectiveId)
+            ->where('group_id', $groupId)->firstOrFail();
+
+        $this->caculateObjectiveFromChild($objective->id);
+        
+        $objective->delete();
+    }
 }
