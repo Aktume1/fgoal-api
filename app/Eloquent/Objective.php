@@ -55,9 +55,8 @@ class Objective extends Model
         return $this->hasMany(Objective::class, 'parent_id', 'id');
     }
 
-    public function comments()
-    {
-        return $this->belongsToMany(User::class, 'comments', 'objective_id', 'user_id');
+    public function comments(){
+        return $this->hasMany(Comment::class, 'objective_id', 'id');
     }
 
     public function quarter()
