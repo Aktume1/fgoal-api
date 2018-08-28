@@ -139,8 +139,12 @@ class ObjectiveController extends ApiController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($groupId, $objectiveId)
     {
+        return $this->doAction(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->deleteObjective($groupId, $objectiveId);
+            $this->compacts['description'] = translate('success.delete');
+        });
     }
 
     /**
