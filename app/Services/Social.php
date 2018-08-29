@@ -111,6 +111,7 @@ class Social implements SocialInterface
                     [
                         'name' => $group['name'],
                         'parent_id' => $parentGroupCode,
+                        'type' => Group::DEFAULT_GROUP,
                     ]
                 );
                 $parentGroupCode = $group->code;
@@ -123,10 +124,13 @@ class Social implements SocialInterface
                 [
                     'name' => $groupInfo['name'],
                     'parent_id' => $parentGroupCode,
+                    'type' => Group::DEFAULT_GROUP,
                 ]
             );
+            
             $listGroup[] = $groupUser->id;
         }
+        
         $listGroup[] = $this->createGroupWithLoginUser($userFromAuthServer);
 
         return $listGroup;
