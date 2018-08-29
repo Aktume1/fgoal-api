@@ -7,6 +7,7 @@ use App\Contracts\Repositories\ObjectiveRepository;
 use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\UnknownException;
 use Auth;
+use App\Eloquent\Comment;
 
 class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements ObjectiveRepository
 {
@@ -200,8 +201,24 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)->firstOrFail();
 
-        $this->caculateObjectiveFromChild($objective->id);
-        
-        $objective->delete();
+        if ($this->checkParentObjective($objectiveId)) {
+            $childObject = $objective->childObjective;
+            foreach ($childObject as $child) {
+                $child->delete();
+            }
+
+            $objective->delete();
+        }
+    }
+
+    public function checkParentObjective($objectiveId)
+    {
+        $parentId = $this->pluck('parent_id')->toArray();
+        if (in_array($objectiveId, $parentId)) {
+            return $objectiveId;
+        }
+
+        return false;
     }
 }
+

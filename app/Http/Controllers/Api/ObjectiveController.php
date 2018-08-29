@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\Objective\CommentObjectiveRequest;
 use App\Http\Requests\Api\Objective\UpdateContentRequest;
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\ObjectiveRepository;
@@ -170,7 +171,7 @@ class ObjectiveController extends ApiController
     /**
      * Match Objective's Actual With Estimate
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function matchActualWithEstimate($groupId, $objectiveId)

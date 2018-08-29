@@ -27,6 +27,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Contracts\Repositories\QuarterRepository::class,
             \App\Repositories\QuarterRepositoryEloquent::class,
         ],
+        'comment' => [
+            \App\Contracts\Repositories\CommentRepository::class,
+            \App\Repositories\CommentRepositoryEloquent::class,
+        ],
     ];
 
     /**
