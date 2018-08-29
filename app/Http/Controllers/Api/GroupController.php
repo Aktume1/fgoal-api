@@ -128,4 +128,17 @@ class GroupController extends ApiController
             $this->compacts['data'] = $this->repository->getInfomationGroup($groupId);
         });
     }
+
+    /**
+     * @param $groupId
+     * @param $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteUserFromGroup($groupId, $userId)
+    {
+        return $this->doAction(function () use ($groupId, $userId) {
+            $this->compacts['data'] = $this->repository->deleteUserFromGroup($groupId, $userId);
+            $this->compacts['description'] = translate('success.delete');
+        });
+    }
 }

@@ -2,16 +2,28 @@
 
 namespace App\Repositories;
 
-use App\Contracts\Repositories\GroupRepository;
 use App\Eloquent\Group;
 use App\Eloquent\User;
+use App\Contracts\Repositories\GroupRepository;
 use App\Exceptions\Api\NotFoundException;
+use App\Exceptions\Api\UnknownException;
+use Auth;
 
 class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements GroupRepository
 {
     public function model()
     {
         return app(Group::class);
+    }
+
+    public function checkUserIsGroupManager($groupId)
+    {
+        $this->setGuard('fauth');
+        if (!$this->user->isGroupManager($groupId)) {
+            throw new UnknownException(translate('http_message.unauthorized'));
+        }
+
+        return;
     }
 
     /**
@@ -58,5 +70,18 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         ->firstOrFail();
     }
 
+    /**
+     * Delete User From Group
+     *
+     * @param  integer  $userId
+     * @param integer $groupId
+     * @return void
+     */
+    public function deleteUserFromGroup($groupId, $userId){
+        $this->checkUserIsGroupManager($groupId);
+        $group = $this->find($groupId);
+
+        $group->users()->detach($userId);
+    }
 }
 
