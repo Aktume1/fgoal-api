@@ -11,12 +11,16 @@ class Group extends Model
         'code',
         'name',
         'parent_id',
+        'type',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+
+    const DEFAULT_GROUP = 0;
+    const USER_GROUP = 1;
 
     public function users()
     {
