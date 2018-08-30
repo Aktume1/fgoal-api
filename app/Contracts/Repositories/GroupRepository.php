@@ -6,8 +6,6 @@ interface GroupRepository extends AbstractRepository
 {
     public function getParentOfGroup($groupId);
 
-    public function getParentsOfUser($userId);
-
 	public function getInfomationGroup($groupId);
 
 	public function deleteUserFromGroup($groupId, $userId);
