@@ -63,6 +63,12 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             $item->setAttribute('parent_final', $this->showLink($parents, $item->name));
         }
 
+        $group = $this->where('id', $groupId)->first();
+        $list = $group->parentGroup;
+        if (!$list) {
+            throw new NotFoundException();
+        }
+
         return $list;
     }
 
@@ -124,5 +130,11 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         $group->users()->detach($userId);
     }
-}
 
+    public function getUserWithPer($groupId)
+    {
+        $users = $this->findOrFail($groupId)->users()->get();
+
+        return $users;
+    }
+}
