@@ -113,11 +113,12 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function caculateObjectiveFromChild($objectiveId)
     {
-        $objective = $this->onlyTrashed()->find($objectiveId);
+        $objective = $this->withTrashed()->find($objectiveId);
         $parentObjective = $objective->parentObjective;
         if (!$parentObjective) {
             return $objective;
         }
+
         $sum = $parentObjective->childObjective->sum(function ($objective) {
             return $objective->actual * $objective->weight;
         });
