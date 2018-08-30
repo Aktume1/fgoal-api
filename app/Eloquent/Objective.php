@@ -3,9 +3,12 @@
 namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Objective extends Model
 {
+    use SoftDeletes;
+
     const APPROVE = 0;
     const WAITING = 1;
     const CANCEL = 2;
@@ -27,7 +30,10 @@ class Objective extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function group()
     {

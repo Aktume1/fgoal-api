@@ -113,7 +113,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function caculateObjectiveFromChild($objectiveId)
     {
-        $objective = $this->find($objectiveId);
+        $objective = $this->onlyTrashed()->find($objectiveId);
         $parentObjective = $objective->parentObjective;
         if (!$parentObjective) {
             return $objective;
@@ -193,7 +193,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      * @param int $objectiveId
      * @return void
      */
-
     public function deleteObjective($groupId, $objectiveId)
     {
         $this->checkUserIsGroupManager($groupId);
@@ -201,24 +200,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)->firstOrFail();
 
-        if ($this->checkParentObjective($objectiveId)) {
-            $childObject = $objective->childObjective;
-            foreach ($childObject as $child) {
-                $child->delete();
+        if ($objective->isObjective()) {
+            foreach ($objective->childObjective as $key) {
+                $key->delete();
             }
-
-            $objective->delete();
         }
-    }
-
-    public function checkParentObjective($objectiveId)
-    {
-        $parentId = $this->pluck('parent_id')->toArray();
-        if (in_array($objectiveId, $parentId)) {
-            return $objectiveId;
-        }
-
-        return false;
+        
+        $objective->delete();
+        $this->caculateObjectiveFromChild($objective->id);
     }
 }
-
