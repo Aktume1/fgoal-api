@@ -108,17 +108,6 @@ class GroupController extends ApiController
     }
 
     /**
-     * @param $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getParentByUserId($userId)
-    {
-        return $this->getData(function () use ($userId) {
-            $this->compacts['data'] = $this->repository->getParentsOfUser($userId);
-        });
-    }
-
-    /**
      * @param $groupId
      * @return \Illuminate\Http\JsonResponse
      */

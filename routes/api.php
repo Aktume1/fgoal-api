@@ -24,8 +24,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::resource('groups.objectives', 'ObjectiveController');
         Route::resource('quarters', 'QuarterController');
         Route::resource('units', 'UnitController');
-        Route::get('groups/{id}/parent_of_group', 'GroupController@getParentByGroupId');
-        Route::get('groups/{userId}/parents_of_user', 'GroupController@getParentByUserId');
+        Route::get('groups/{groupId}/parents', 'GroupController@getParentByGroupId');
         Route::post('groups/{groupId}/objectives/link_objective', 'ObjectiveController@linkObjective');
         Route::get('groups/{groupId}/infomation', 'GroupController@getInfomationGroup');
         Route::patch('groups/{groupId}/objectives/{id}/match_actual', 'ObjectiveController@matchActualWithEstimate');

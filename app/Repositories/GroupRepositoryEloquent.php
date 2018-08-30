@@ -28,46 +28,62 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
     /**
      * @param $groupId
-     * @return mixed
+     * @return $list parent group
+     * @throws NotFoundException
      */
     public function getParentOfGroup($groupId)
     {
-        $group = $this->where('id', $groupId)->first();
-        $list = $group->parentGroup;
-        if(!$list){
-            throw new NotFoundException();
+        $group = $this->findOrFail($groupId);
+        $type = $group->type;
+
+        if ($type == Group::DEFAULT_GROUP) {
+            $parent = $group->parentGroup;
+            $list = $parent;
+            $this->getlinkParent($parent, $list);
+
+            return $list;
         }
-        
+
+        $userCode = $group->code;
+        $userId = User::where('code', $userCode)->firstOrFail()->id;
+        $list = User::findOrFail($userId)->groups()->get();
+
+        foreach ($list as $item) {
+            $listGroup = $item;
+            $this->getlinkParent($item, $listGroup);
+        }
+
         return $list;
     }
 
-    /**
-     * @param $userId
-     * @return mixed
-     */
-    public function getParentsOfUser($userId)
+    public function getlinkParent($group, $list)
     {
-        $list = User::findOrFail($userId)->groups()->get();
-        
-        return $list;
+        $path = [];
+
+        while ($group->parentGroup) {
+            $path[] = $group->parentGroup->only(['id', 'name']);
+            $group = $group->parentGroup;
+        }
+
+        return $list->setAttribute('parent_path', $path);
     }
 
     /**
      * Get Infomation Group
      *
-     * @param  integer  $groupId
+     * @param  integer $groupId
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getInfomationGroup($groupId)
     {
         return $this->infomationGroup()
-        ->with([
-            'childGroup' => function ($q) {
-                $q->infomationGroup();
-            },
-        ])
-        ->whereId($groupId)
-        ->firstOrFail();
+            ->with([
+                'childGroup' => function ($q) {
+                    $q->infomationGroup();
+                },
+            ])
+            ->whereId($groupId)
+            ->firstOrFail();
     }
 
     /**
