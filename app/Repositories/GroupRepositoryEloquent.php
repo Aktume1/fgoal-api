@@ -38,10 +38,15 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         if ($type == Group::DEFAULT_GROUP) {
             $parent = $group->parentGroup;
+            $parentName = $group->parentGroup->name;
             $list = $parent;
             $this->getlinkParent($parent, $list);
 
-            return $list;
+            $parents = $list['parent_path'];
+
+            $pathFinal = [];
+
+            return $list->setAttribute('parent_final', $this->showLink($parents, $parentName));
         }
 
         $userCode = $group->code;
@@ -51,6 +56,11 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         foreach ($list as $item) {
             $listGroup = $item;
             $this->getlinkParent($item, $listGroup);
+
+            $parents = $item['parent_path'];
+            $pathFinal = [];
+
+            $item->setAttribute('parent_final', $this->showLink($parents, $item->name));
         }
 
         return $list;
@@ -66,6 +76,20 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         }
 
         return $list->setAttribute('parent_path', $path);
+    }
+
+    public function showLink($parents, $parentName)
+    {
+        $string = '';
+        $count = count($parents);
+        for ($i = $count - 1; $i >= 0; $i--) {
+            $string .= $parents[$i]['name'] . '/';
+        }
+
+        $string .= $parentName;
+        $pathFinal[] = $string;
+
+        return $pathFinal;
     }
 
     /**
@@ -89,11 +113,12 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     /**
      * Delete User From Group
      *
-     * @param  integer  $userId
+     * @param  integer $userId
      * @param integer $groupId
      * @return void
      */
-    public function deleteUserFromGroup($groupId, $userId){
+    public function deleteUserFromGroup($groupId, $userId)
+    {
         $this->checkUserIsGroupManager($groupId);
         $group = $this->find($groupId);
 

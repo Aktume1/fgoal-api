@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contracts\Repositories\CommentRepository;
+use App\Eloquent\Objective;
 use Auth;
 use App\Eloquent\Comment;
 use App\Exceptions\Api\NotFoundException;
@@ -29,6 +30,13 @@ class CommentRepositoryEloquent extends AbstractRepositoryEloquent implements Co
         ]);
 
         return $comment;
+    }
+
+    public function getCommentObjective($objectiveId)
+    {
+        $objective = Objective::findOrFail($objectiveId);
+
+        return $objective->comments;
     }
 }
 

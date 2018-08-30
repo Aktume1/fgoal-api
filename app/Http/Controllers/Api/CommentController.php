@@ -38,7 +38,7 @@ class CommentController extends ApiController
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -62,6 +62,12 @@ class CommentController extends ApiController
         });
     }
 
+    public function getCommentsObjective($objectiveId)
+    {
+        return $this->doAction(function () use ($objectiveId) {
+            $this->compacts['data'] = $this->commentRepository->getCommentObjective($objectiveId);
+        });
+    }
     /**
      * Display the specified resource.
      *
