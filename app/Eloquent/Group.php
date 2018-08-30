@@ -27,7 +27,7 @@ class Group extends Model
         return $this->belongsToMany(User::class, 'group_user', 'group_id', 'user_id')
                     ->withPivot('manager');
     }
-    
+
     public function objectives()
     {
         return $this->hasMany(Objective::class, 'group_id', 'id');

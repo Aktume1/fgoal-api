@@ -130,4 +130,11 @@ class GroupController extends ApiController
             $this->compacts['description'] = translate('success.delete');
         });
     }
+
+    public function getUserWithPer($groupId)
+    {
+        return $this->getData(function () use ($groupId) {
+            $this->compacts['data'] = $this->repository->getUserWithPer($groupId);
+        });
+    }
 }
