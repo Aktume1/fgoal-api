@@ -61,7 +61,8 @@ class Objective extends Model
         return $this->hasMany(Objective::class, 'parent_id', 'id');
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class, 'objective_id', 'id');
     }
 

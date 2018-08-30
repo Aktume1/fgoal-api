@@ -31,5 +31,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::patch('groups/{groupId}/objectives/{objectiveId}/name', 'ObjectiveController@updateContent');
         Route::delete('groups/{groupId}/{userId}/delete_user', 'GroupController@deleteUserFromGroup');
         Route::resource('objectives.comment', 'CommentController');
+        Route::get('objectives/{objectiveId}/comments', 'CommentController@getCommentsObjective');
     });
 });
