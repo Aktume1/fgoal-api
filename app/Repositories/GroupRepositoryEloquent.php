@@ -38,15 +38,19 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         if ($type == Group::DEFAULT_GROUP) {
             $parent = $group->parentGroup;
+            $listGroup = $parent;
             $parentName = $group->parentGroup->name;
-            $list = $parent;
-            $this->getlinkParent($parent, $list);
 
-            $parents = $list['parent_path'];
+            $this->getlinkParent($parent, $listGroup);
 
-            $pathFinal = [];
+            $parents = $listGroup['parent_path'];
+            $listGroup->setAttribute('link', $this->showLink($parents, $parentName));
 
-            return $list->setAttribute('parent_final', $this->showLink($parents, $parentName));
+            $listGroup->makeHidden('parent_path');
+
+            $list[] = (object)($listGroup);
+
+            return $list;
         }
 
         $userCode = $group->code;
@@ -55,18 +59,13 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         foreach ($list as $item) {
             $listGroup = $item;
+
             $this->getlinkParent($item, $listGroup);
 
             $parents = $item['parent_path'];
-            $pathFinal = [];
+            $item->setAttribute('link', $this->showLink($parents, $item->name));
 
-            $item->setAttribute('parent_final', $this->showLink($parents, $item->name));
-        }
-
-        $group = $this->where('id', $groupId)->first();
-        $list = $group->parentGroup;
-        if (!$list) {
-            throw new NotFoundException();
+            $item->makeHidden('parent_path');
         }
 
         return $list;
