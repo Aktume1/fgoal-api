@@ -27,7 +27,6 @@ class CustomUser
     {
         return $this->user;
     }
-
     /**
     * Get ID of the currently authenticated user.
     *
