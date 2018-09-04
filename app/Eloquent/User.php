@@ -67,6 +67,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id')
                     ->withPivot('manager');
     }
+
+    public function workspaces()
+    {
+        return $this->belongsToMany(Workspace::class);
+    }
     
     /**
      * Check if user is group's manager

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Update02ObjectiveTable extends Migration
+class CreateUserWorkspaceTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class Update02ObjectiveTable extends Migration
      */
     public function up()
     {
-        Schema::table('objectives', function (Blueprint $table) {
-            $table->float('weight')->default(1)->change();
+        Schema::create('user_workspace', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('workspace_id')->unsigned()->index();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class Update02ObjectiveTable extends Migration
      */
     public function down()
     {
-        Schema::table('objectives', function (Blueprint $table) {
-            $table->integer('weight')->nullable();
-        });
+        Schema::dropIfExists('user_workspace');
     }
 }

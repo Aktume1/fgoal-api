@@ -4,12 +4,14 @@ namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Quarter extends Model
+class Workspace extends Model
 {
     protected $fillable = [
         'name',
-        'start_date',
-        'end_date',
+        'description',
+        'open_time',
+        'close_time',
+        'timezone'
     ];
 
     protected $hidden = [
@@ -17,8 +19,8 @@ class Quarter extends Model
         'updated_at',
     ];
 
-    public function objectives()
+    public function users()
     {
-        return $this->hasMany(Objective::class, 'quarter_id', 'id');
+        return $this->belongsToMany(User::class);
     }
 }
