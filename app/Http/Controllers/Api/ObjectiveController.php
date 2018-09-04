@@ -181,4 +181,17 @@ class ObjectiveController extends ApiController
             $this->compacts['description'] = translate('success.update');
         });
     }
+
+    /**
+     * List Objective log
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function logObjective($objectiveId)
+    {
+        return $this->getData(function () use ($objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->getObjectiveLogById($objectiveId);
+        });
+    }
 }

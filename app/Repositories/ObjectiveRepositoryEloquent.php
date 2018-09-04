@@ -118,7 +118,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         if (!$parentObjective) {
             return $objective;
         }
-
         $sum = $parentObjective->childObjective->sum(function ($objective) {
             return $objective->actual * $objective->weight;
         });
@@ -194,6 +193,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      * @param int $objectiveId
      * @return void
      */
+
     public function deleteObjective($groupId, $objectiveId)
     {
         $this->checkUserIsGroupManager($groupId);
@@ -201,13 +201,35 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)->firstOrFail();
 
-        if ($objective->isObjective()) {
-            foreach ($objective->childObjective as $key) {
-                $key->delete();
+        if ($this->checkParentObjective($objectiveId)) {
+            $childObject = $objective->childObjective;
+            foreach ($childObject as $child) {
+                $child->delete();
             }
+
+            $objective->delete();
         }
+    }
+
+    public function checkParentObjective($objectiveId)
+    {
+        $parentId = $this->pluck('parent_id')->toArray();
+        if (in_array($objectiveId, $parentId)) {
+            return $objectiveId;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get list Objective log
+     * @param int $groupId
+     * @return Objective
+     */
+    public function getObjectiveLogById($objectiveId)
+    {
+        $objective = $this->findOrFail($objectiveId)->audits;
         
-        $objective->delete();
-        $this->caculateObjectiveFromChild($objective->id);
+        return $objective;
     }
 }

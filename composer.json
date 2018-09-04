@@ -9,11 +9,12 @@
         "barryvdh/laravel-debugbar": "^3.1",
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "^4.0",
+        "framgia/fauth-php": "dev-develop",
         "laravel/framework": "5.6.*",
         "laravel/passport": "^4.0",
-        "framgia/fauth-php": "dev-develop",
         "laravel/tinker": "^1.0",
-        "nesbot/carbon": "1.25.*"
+        "nesbot/carbon": "1.25.*",
+        "owen-it/laravel-auditing": "^8.0"
     },
     "repositories": [{
         "url": "https://github.com/framgia/fauth-php",

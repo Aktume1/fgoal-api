@@ -25,4 +25,8 @@ interface ObjectiveRepository extends AbstractRepository
     public function updateContent($objectiveId, $groupId, $data);
 
     public function deleteObjective($groupId, $objectiveId);
+
+    public function checkParentObjective($objectiveId);
+
+    public function getObjectiveLogById($objectiveId);
 }
