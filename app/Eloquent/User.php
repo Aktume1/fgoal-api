@@ -54,7 +54,7 @@ class User extends Authenticatable
     public function objectives()
     {
         return $this->belongsToMany(Objective::class, 'objective_user', 'user_id', 'objective_id')
-                    ->withPivot('progress')->withTimestamps();
+            ->withPivot('progress')->withTimestamps();
     }
 
     public function comments()
@@ -65,14 +65,14 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id')
-                    ->withPivot('manager');
+            ->withPivot('manager');
     }
 
     public function workspaces()
     {
         return $this->belongsToMany(Workspace::class);
     }
-    
+
     /**
      * Check if user is group's manager
      * @param int $groupId

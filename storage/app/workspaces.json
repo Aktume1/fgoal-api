@@ -1,0 +1,74 @@
+{
+  "0": {
+    "id": 1,
+    "name": "Handico Office",
+    "description": "Toong Office",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "1": {
+    "id": 2,
+    "name": "Tran Khat Chan",
+    "description": "Tran Khat Chan",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "2": {
+    "id": 3,
+    "name": "HCMC Office",
+    "description": "HCMC Office",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "3": {
+    "id": 4,
+    "name": "Da Nang Office",
+    "description": "Da Nang Office",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "4": {
+    "id": 5,
+    "name": "Hanoi Office",
+    "description": "Hanoi Office",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "5": {
+    "id": 18,
+    "name": "TEST",
+    "description": "TEST",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "6": {
+    "id": 19,
+    "name": "Thao",
+    "description": "Thao",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "7": {
+    "id": 35,
+    "name": "Korea",
+    "description": "123456789",
+    "open_time": "17:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  },
+  "8": {
+    "id": 40,
+    "name": "Huong Test",
+    "description": "HH Office 1",
+    "open_time": "00:01",
+    "close_time": "16:01",
+    "timezone": "Hanoi"
+  }
+}
