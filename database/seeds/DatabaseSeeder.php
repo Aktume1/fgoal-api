@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Eloquent\Group;
+use App\Eloquent\User;
+use App\Eloquent\Quarter;
+use App\Eloquent\Unit;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::query()->truncate();
+        Group::query()->truncate();
+        Quarter::query()->truncate();
+        Unit::query()->truncate();
+
+        $this->call(UsersTableSeeder::class);
+        $this->call(WorkspacesTableSeeder::class);
         $this->call(QuartersTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
     }
