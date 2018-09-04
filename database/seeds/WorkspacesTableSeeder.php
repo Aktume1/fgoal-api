@@ -18,13 +18,13 @@ class WorkspacesTableSeeder extends Seeder
         $data = json_decode($json, true);
 
         foreach ($data as $obj){
-            Workspace::create(array(
+            Workspace::create([
                 'name' => $obj['name'],
                 'description' => $obj['description'],
                 'open_time' => $obj['open_time'],
                 'close_time' => $obj['close_time'],
                 'timezone' => $obj['timezone'],
-            ));
+            ]);
         }
     }
 }

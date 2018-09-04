@@ -21,14 +21,14 @@ class UsersTableSeeder extends Seeder
 
         $data = json_decode($json, true);
 
-        foreach ($data as $obj){
+        foreach ($data as $obj) {
             $listGroup = $this->getGroupDetail($obj);
 
             $listWorkspace = $obj['workspaces'];
 
             $birthday = Carbon::parse($obj['birthday'])->toDateString();
 
-            $user = User::create(array(
+            $user = User::create([
                 'email' => $obj['email'],
                 'name' => $obj['name'],
                 'code' => $obj['employee_code'],
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
                 'gender' => array_get(config('model.user.gender'), $obj['gender']),
                 'status' => array_get(config('model.user.status'), $obj['status']),
                 'token_verification' => str_random(60),
-            ));
+            ]);
 
             $user->groups()->syncWithoutDetaching($listGroup);
             $user->workspaces()->syncWithoutDetaching($listWorkspace);
