@@ -158,7 +158,8 @@ class ObjectiveController extends ApiController
     {
         $data = $request->only(
             'objectiveId',
-            'keyResultId'
+            'keyResultId',
+            'link'
         );
 
         return $this->doAction(function () use ($groupId, $data) {

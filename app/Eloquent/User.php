@@ -25,7 +25,6 @@ class User extends Authenticatable
         'phone',
         'mission',
         'manager_id',
-        'location',
         'avatar',
         'token_verification',
         'status',

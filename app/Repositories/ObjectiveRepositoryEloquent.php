@@ -98,7 +98,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)->firstOrFail();
+
         $objective->update(['actual' => $data['actual']]);
+
         if ($objective->status != Objective::APPROVE) {
             return $objective;
         }
@@ -144,6 +146,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective->update([
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
+            'link' => $data['link']
         ]);
 
         return $objective;
@@ -229,7 +232,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function getObjectiveLogById($objectiveId)
     {
         $objective = $this->findOrFail($objectiveId)->audits;
-        
+
         return $objective;
     }
 }
