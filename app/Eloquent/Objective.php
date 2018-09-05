@@ -10,9 +10,9 @@ class Objective extends Model implements Auditable
 {
     use SoftDeletes, \OwenIt\Auditing\Auditable;
 
-    const APPROVE = 0;
+    const CANCEL = 0;
     const WAITING = 1;
-    const CANCEL = 2;
+    const APPROVE = 2;
 
     protected $fillable = [
         'is_private',
@@ -24,6 +24,7 @@ class Objective extends Model implements Auditable
         'estimate',
         'parent_id',
         'unit_id',
+        'link',
         'group_id',
         'quarter_id',
     ];
@@ -44,14 +45,14 @@ class Objective extends Model implements Auditable
     public function users()
     {
         return $this->belongsToMany(User::class, 'objective_user', 'objective_id', 'user_id')
-                    ->withPivot('progress')->withTimestamps();
+            ->withPivot('progress')->withTimestamps();
     }
 
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
-    
+
     public function parentObjective()
     {
         return $this->belongsTo(Objective::class, 'parent_id', 'id');

@@ -19,7 +19,7 @@ class Social implements SocialInterface
     {
         $this->userRepository = $userRepository;
     }
-    
+
     /**
      * Get User Info From WSM By Password
      * @param email
@@ -59,10 +59,15 @@ class Social implements SocialInterface
     public function getUserInfo($accessToken)
     {
         $userFromAuthServer = Fauth::driver(config('settings.default_provider'))->getUserByToken($accessToken);
-        //Get Group ID
+        //Get array workspaces
+        $workspaces = $userFromAuthServer['workspaces'];
+        $spaces = [];
+        foreach ($workspaces as $row) {
+            $spaces[] = $row['id'];
+        }
+
         $listGroup = $this->getGroupDetail($userFromAuthServer);
         //Get Workspace from Auth Sever
-        $workspaceInfo = $userFromAuthServer['workspaces'][0] ? : null;
         $birthday = Carbon::parse($userFromAuthServer['birthday'])->toDateString();
         $currentUser = $this->userRepository->updateOrCreate(
             [
@@ -72,7 +77,6 @@ class Social implements SocialInterface
                 'name' => $userFromAuthServer['name'],
                 'code' => $userFromAuthServer['employee_code'],
                 'birthday' => $birthday,
-                'location' => $workspaceInfo['name'],
                 'avatar' => $userFromAuthServer['avatar'],
                 'mission' => $userFromAuthServer['position']['name'],
                 'gender' => array_get(config('model.user.gender'), $userFromAuthServer['gender']),
@@ -83,7 +87,8 @@ class Social implements SocialInterface
         //Sync Group With User And Set Role to Loggin User's Group
         $currentUser->groups()->syncWithoutDetaching($listGroup);
         $currentUser->groups()->updateExistingPivot(last($listGroup), ['manager' => true]);
-    
+        $currentUser->workspaces()->syncWithoutDetaching($spaces);
+
         //Return user from database
         return $this->userRepository->where('id', $currentUser->id)->with('groups')->first();
     }
@@ -127,10 +132,10 @@ class Social implements SocialInterface
                     'type' => Group::DEFAULT_GROUP,
                 ]
             );
-            
+
             $listGroup[] = $groupUser->id;
         }
-        
+
         $listGroup[] = $this->createGroupWithLoginUser($userFromAuthServer);
 
         return $listGroup;
@@ -147,7 +152,7 @@ class Social implements SocialInterface
         if (isset($response['error'])) {
             throw new NotFoundException($response['error'], 404);
         }
-        
+
         return $response;
     }
 
@@ -180,7 +185,7 @@ class Social implements SocialInterface
                 'name' => $userFromAuthServer['name'],
             ]
         );
-        
+
         return $groupUser->id;
     }
 }

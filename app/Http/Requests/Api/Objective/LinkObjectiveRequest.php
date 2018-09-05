@@ -26,6 +26,7 @@ class LinkObjectiveRequest extends AbstractRequest
         return [
             'objectiveId' => 'required|integer|min:1',
             'keyResultId' => 'required|integer|min:1',
+            'link' => 'required|string|max:255',
         ];
     }
 }

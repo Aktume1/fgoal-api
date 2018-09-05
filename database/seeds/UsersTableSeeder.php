@@ -33,7 +33,6 @@ class UsersTableSeeder extends Seeder
                 'name' => $obj['name'],
                 'code' => $obj['employee_code'],
                 'birthday' => $birthday,
-                'location' => json_encode($listWorkspace),
                 'avatar' => $obj['avatar'],
                 'mission' => $obj['position'],
                 'gender' => array_get(config('model.user.gender'), $obj['gender']),
