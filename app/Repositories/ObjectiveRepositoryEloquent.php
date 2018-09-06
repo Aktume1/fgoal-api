@@ -146,7 +146,26 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective->update([
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
-            'link' => $data['link']
+            'link' => $data['link'],
+        ]);
+
+        return $objective;
+    }
+
+    public function removeLinkedObjective($groupId, $objectiveId)
+    {
+        $this->checkUserIsGroupManager($groupId);
+
+        $objective = $this->findOrFail($objectiveId);
+
+        if ($objective->status == Objective::APPROVE) {
+            return $objective;
+        }
+
+        $objective->update([
+            'status' => Objective::CANCEL,
+            'parent_id' => null,
+            'link' => null,
         ]);
 
         return $objective;

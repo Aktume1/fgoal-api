@@ -28,13 +28,15 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
 
         Route::resource('groups.objectives', 'ObjectiveController');
         Route::post('groups/{groupId}/objectives/link_objective', 'ObjectiveController@linkObjective');
+        Route::patch('groups/{groupId}/objectives/{objectiveId}/remove_link', 'ObjectiveController@removeLinkObjective');
         Route::get('objectives/{id}/log', 'ObjectiveController@logObjective');
         Route::patch('groups/{groupId}/objectives/{id}/match_actual', 'ObjectiveController@matchActualWithEstimate');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/name', 'ObjectiveController@updateContent');
 
         Route::resource('quarters', 'QuarterController');
+
         Route::resource('units', 'UnitController');
-        
+
         Route::resource('objectives.comment', 'CommentController');
         Route::get('objectives/{objectiveId}/comments', 'CommentController@getCommentsObjective');
 
