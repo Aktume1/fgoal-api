@@ -22,10 +22,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
     Route::group(['middleware' => 'fapi'], function () {
         Route::resource('groups', 'GroupController');
         Route::get('groups/{id}/user_with_per', 'GroupController@getUserWithPer');
-        Route::get('groups/{groupId}/infomation', 'GroupController@getInfomationGroup');
+        Route::get('groups/{groupId}/information', 'GroupController@getInfomationGroup');
         Route::get('groups/{groupId}/parents', 'GroupController@getParentByGroupId');
         Route::delete('groups/{groupId}/{userId}/delete_user', 'GroupController@deleteUserFromGroup');
-
         Route::resource('groups.objectives', 'ObjectiveController');
         Route::post('groups/{groupId}/objectives/link_objective', 'ObjectiveController@linkObjective');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/remove_link', 'ObjectiveController@removeLinkObjective');

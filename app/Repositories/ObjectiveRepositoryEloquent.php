@@ -101,11 +101,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective->update(['actual' => $data['actual']]);
 
-        if ($objective->status != Objective::APPROVE) {
-            return $objective;
-        }
-
-        return $this->caculateObjectiveFromChild($objective->id);
+        return $this->caculateObjectiveFromChild($groupId, $objective->id);
     }
 
     /**
@@ -113,18 +109,28 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      * @param int $objectiveId
      * @return Objective
      */
-    public function caculateObjectiveFromChild($objectiveId)
+    public function caculateObjectiveFromChild($groupId, $objectiveId)
     {
         $objective = $this->withTrashed()->find($objectiveId);
         $parentObjective = $objective->parentObjective;
         if (!$parentObjective) {
             return $objective;
         }
+
         $sum = $parentObjective->childObjective->sum(function ($objective) {
             return $objective->actual * $objective->weight;
         });
+
         $estimate = (int)($sum / $parentObjective->childObjective->count());
-        $parentObjective->update(['estimate' => $estimate]);
+
+        if ($parentObjective->match != Objective::MATCH) {
+            $parentObjective->update(['estimate' => $estimate]);
+
+            return $parentObjective;
+
+        }
+
+        $parentObjective->update(['estimate' => $estimate, 'actual' => $estimate]);
 
         return $parentObjective;
     }
@@ -204,6 +210,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective->update([
             'actual' => $objective->estimate,
+            'match' => Objective::MATCH,
         ]);
 
         return $objective;

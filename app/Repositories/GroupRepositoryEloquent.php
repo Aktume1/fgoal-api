@@ -55,7 +55,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         $userCode = $group->code;
         $userId = User::where('code', $userCode)->firstOrFail()->id;
-        $list = User::findOrFail($userId)->groups()->get();
+        // get list group of group has id = $groupId except it
+        $list = User::findOrFail($userId)->groups()->get()->except($groupId);
 
         foreach ($list as $item) {
             $listGroup = $item;
@@ -83,6 +84,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         return $list->setAttribute('parent_path', $path);
     }
 
+    //create link parent
     public function showLink($parents, $parentName)
     {
         $string = '';

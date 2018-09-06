@@ -48,7 +48,7 @@ class Group extends Model
         return $query->select('id', 'name', 'code', 'parent_id')
         ->with([
             'users' => function ($q) {
-                $q->select('users.id', 'name')->whereStatus(true);
+                $q->select('users.id', 'name', 'email', 'mission', 'avatar', 'status')->whereStatus(true);
             },
         ]);
     }
