@@ -16,7 +16,7 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function updateObjectiveActual($groupId, $objectiveId, $data);
 
-    public function caculateObjectiveFromChild($objectiveId);
+    public function caculateObjectiveFromChild($groupId, $objectiveId);
 
     public function linkObjectiveToKeyResult($groupId, $data);
 

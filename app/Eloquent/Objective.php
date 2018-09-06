@@ -13,12 +13,14 @@ class Objective extends Model implements Auditable
     const CANCEL = 0;
     const WAITING = 1;
     const APPROVE = 2;
+    const MATCH = 1;
 
     protected $fillable = [
         'is_private',
         'name',
         'description',
         'status',
+        'match',
         'objectiveable_type',
         'actual',
         'estimate',
