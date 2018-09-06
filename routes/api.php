@@ -39,7 +39,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
 
         Route::resource('objectives.comment', 'CommentController');
         Route::get('objectives/{objectiveId}/comments', 'CommentController@getCommentsObjective');
-
-        Route::post('webhook/wsm', 'WebhookController@handleWebhookWSM')->middleware('webhookWSM');
     });
+
+    Route::post('webhook/wsm', 'WebhookController@handleWebhookWSM')->middleware('webhookWSM');
 });
