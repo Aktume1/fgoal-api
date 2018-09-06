@@ -222,15 +222,15 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)->firstOrFail();
+        
 
         if ($this->checkParentObjective($objectiveId)) {
             $childObject = $objective->childObjective;
             foreach ($childObject as $child) {
                 $child->delete();
             }
-
-            $objective->delete();
         }
+        $objective->delete();
     }
 
     public function checkParentObjective($objectiveId)
