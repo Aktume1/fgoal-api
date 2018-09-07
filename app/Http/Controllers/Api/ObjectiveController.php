@@ -31,7 +31,7 @@ class ObjectiveController extends ApiController
      */
     public function index($groupId, Request $request)
     {
-        $quarter = $request->query('quarter');
+        $quarter = $request->quarter;
 
         if (isset($quarter)) {
             return $this->doAction(function () use ($groupId, $quarter) {
