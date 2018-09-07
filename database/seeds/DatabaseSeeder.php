@@ -5,6 +5,7 @@ use App\Eloquent\Group;
 use App\Eloquent\User;
 use App\Eloquent\Quarter;
 use App\Eloquent\Unit;
+use App\Eloquent\Objective;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         Group::query()->truncate();
         Quarter::query()->truncate();
         Unit::query()->truncate();
+        Objective::query()->truncate();
 
         $this->call(UsersTableSeeder::class);
         $this->call(WorkspacesTableSeeder::class);
