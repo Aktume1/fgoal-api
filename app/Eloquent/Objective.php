@@ -15,6 +15,9 @@ class Objective extends Model implements Auditable
     const APPROVE = 2;
     const MATCH = 1;
 
+    const OBJECTIVE = 'Objective';
+    const KEYRESULT = 'Key Result';
+
     protected $fillable = [
         'is_private',
         'name',

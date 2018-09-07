@@ -24,6 +24,8 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function matchActualWithEstimate($groupId, $objectiveId);
 
+    public function showObjectiveDetail($groupId, $objectiveId);
+
     public function updateContent($objectiveId, $groupId, $data);
 
     public function deleteObjective($groupId, $objectiveId);

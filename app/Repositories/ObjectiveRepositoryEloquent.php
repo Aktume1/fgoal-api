@@ -127,7 +127,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $parentObjective->update(['estimate' => $estimate]);
 
             return $parentObjective;
-
         }
 
         $parentObjective->update(['estimate' => $estimate, 'actual' => $estimate]);
@@ -217,6 +216,19 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     }
 
     /**
+     * Show detail Objective
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return void
+     */
+    public function showObjectiveDetail($groupId, $objectiveId)
+    {
+        $objective = $this->with('childObjective')->where('id', $objectiveId)
+                ->where('group_id', $groupId)->firstOrFail();
+        
+        return $objective;
+    }
+    /**
      * Delete Objective
      * @param int $groupId
      * @param int $objectiveId
@@ -230,14 +242,18 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)->firstOrFail();
         
-
         if ($this->checkParentObjective($objectiveId)) {
             $childObject = $objective->childObjective;
             foreach ($childObject as $child) {
                 $child->delete();
             }
         }
+
         $objective->delete();
+    
+        if ($objective->objectiveable_type != Objective::OBJECTIVE) {
+            $this->caculateObjectiveFromChild($objective->id);
+        }
     }
 
     public function checkParentObjective($objectiveId)
