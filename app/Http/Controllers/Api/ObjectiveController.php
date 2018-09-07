@@ -81,8 +81,11 @@ class ObjectiveController extends ApiController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showObjective($groupId, $objectiveId)
     {
+        return $this->getData(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->showObjectiveDetail($groupId, $objectiveId);
+        });
     }
 
     /**
