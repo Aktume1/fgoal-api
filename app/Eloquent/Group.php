@@ -47,10 +47,10 @@ class Group extends Model
     public function scopeInfomationGroup($query)
     {
         return $query->select('id', 'name', 'code', 'parent_id')
-            ->with([
-                'users' => function ($q) {
-                    $q->select('users.id', 'name', 'email', 'mission', 'avatar', 'status')->whereStatus(true);
-                },
-            ]);
+        ->with([
+            'users' => function ($q) {
+                $q->select('users.id', 'name', 'email', 'code', 'mission', 'avatar', 'status')->whereStatus(true);
+            },
+        ]);
     }
 }
