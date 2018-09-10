@@ -31,9 +31,9 @@ class ObjectiveController extends ApiController
      */
     public function index($groupId, Request $request)
     {
-        $quarter = $request->quarter;
+        $quarter = isset($request->quarter) ? $request->quarter : null;
 
-        if (isset($quarter)) {
+        if ($quarter != null) {
             return $this->doAction(function () use ($groupId, $quarter) {
                 $this->compacts['data'] = $this->objectiveRepository->getObjectiveByQuarter($groupId, $quarter);
             });
