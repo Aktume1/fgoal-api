@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::get('groups/{groupId}/information', 'GroupController@getInfomationGroup');
         Route::get('groups/{groupId}/parents', 'GroupController@getParentByGroupId');
         Route::delete('groups/{groupId}/{userId}/delete_user', 'GroupController@deleteUserFromGroup');
+        Route::get('groups/{code}/informationbycode', 'GroupController@getGroupByCode');
 
         Route::resource('groups.objectives', 'ObjectiveController');
         Route::get('groups/{groupId}/objectives/{objectiveId}/detail', 'ObjectiveController@showObjective');
@@ -43,7 +44,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::get('objectives/{objectiveId}/comments', 'CommentController@getCommentsObjective');
 
         Route::resource('users', 'UserController');
-        Route::get('users/{code}/information', 'UserController@getUserByCode');
     });
 
     Route::post('webhook/wsm', 'WebhookController@handleWebhookWSM')->middleware('webhookWSM');

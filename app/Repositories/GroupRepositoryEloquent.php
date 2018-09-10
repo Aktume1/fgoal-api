@@ -149,4 +149,11 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         $group->users()->detach($user);
         $group->users()->attach($user, ['manager' => $data['role']]);
     }
+
+    public function getGroupByCode($employeeCode)
+    {
+        $groupUser = $this->where('code', $employeeCode)->firstOrFail();
+
+        return $groupUser;
+    }
 }

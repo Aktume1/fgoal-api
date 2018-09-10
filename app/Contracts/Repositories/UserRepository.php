@@ -9,6 +9,4 @@ interface UserRepository extends AbstractRepository
     public function getUserByEmail($email, array $dataSelect = ['*']);
 
     public function getUserByToken($token);
-
-    public function getUserByCode($code);
 }
