@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\UserRepository;
 use App\Eloquent\User;
-use App\Eloquent\Group;
 
 class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserRepository
 {
@@ -28,13 +27,5 @@ class UserRepositoryEloquent extends AbstractRepositoryEloquent implements UserR
     public function getUserByToken($token)
     {
         return $this->model()->where('token_verification', $token)->first();
-    }
-
-    public function getUserByCode($code)
-    {
-        $user = $this->where('code', $code)->firstOrFail();
-        $user['group_user'] = Group::where('code', $user['code'])->firstOrFail();
-        
-        return $user;
     }
 }

@@ -13,4 +13,6 @@ interface GroupRepository extends AbstractRepository
     public function getUserWithPer($groupId);
 
     public function addMember($groupId, $data);
+
+    public function getGroupByCode($code);
 }

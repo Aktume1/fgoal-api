@@ -151,4 +151,11 @@ class GroupController extends ApiController
             $this->compacts['description'] = translate('success.create');
         });
     }
+
+    public function getGroupByCode($code)
+    {
+        return $this->getData(function () use ($code) {
+            $this->compacts['data'] = $this->repository->getGroupByCode($code);
+        });
+    }
 }

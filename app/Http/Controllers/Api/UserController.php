@@ -94,11 +94,4 @@ class UserController extends ApiController
     {
         //
     }
-
-    public function getUserByCode($code)
-    {
-        return $this->getData(function () use ($code) {
-            $this->compacts['data'] = $this->userRepository->getUserByCode($code);
-        });
-    }
 }
