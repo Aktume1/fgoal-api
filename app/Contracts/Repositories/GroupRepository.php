@@ -11,4 +11,6 @@ interface GroupRepository extends AbstractRepository
     public function deleteUserFromGroup($groupId, $userId);
 
     public function getUserWithPer($groupId);
+
+    public function addMember($groupId, $data);
 }

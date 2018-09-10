@@ -32,6 +32,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::get('objectives/{id}/log', 'ObjectiveController@logObjective');
         Route::patch('groups/{groupId}/objectives/{id}/match_actual', 'ObjectiveController@matchActualWithEstimate');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/name', 'ObjectiveController@updateContent');
+        Route::post('groups/{groupId}/add_member', 'GroupController@addMemberGroup');
 
         Route::resource('quarters', 'QuarterController');
 
