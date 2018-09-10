@@ -138,4 +138,15 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         return $users;
     }
+
+    public function addMember($groupId, $data)
+    {
+        $group = $this->findOrFail($groupId);
+
+        $email = $data['email'];
+        $user = User::where('email', $email)->get();
+
+        $group->users()->detach($user);
+        $group->users()->attach($user, ['manager' => $data['role']]);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\Group\AddMemberRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contracts\Repositories\GroupRepository;
@@ -135,6 +136,19 @@ class GroupController extends ApiController
     {
         return $this->getData(function () use ($groupId) {
             $this->compacts['data'] = $this->repository->getUserWithPer($groupId);
+        });
+    }
+
+    public function addMemberGroup(AddMemberRequest $request, $groupId)
+    {
+        $data = $request->only(
+            'email',
+            'role'
+        );
+
+        return $this->doAction(function () use ($groupId, $data) {
+            $this->compacts['data'] = $this->repository->addMember($groupId, $data);
+            $this->compacts['description'] = translate('success.create');
         });
     }
 }

@@ -12,4 +12,10 @@ return [
             'female' => 1,
         ],
     ],
+    'group' => [
+        'role' => [
+            'manager' => 1,
+            'member' => 0,
+        ]
+    ]
 ];

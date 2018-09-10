@@ -25,7 +25,8 @@ class Group extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'group_user', 'group_id', 'user_id')
-                    ->withPivot('manager');
+            ->withPivot('manager')
+            ->withTimestamps();
     }
 
     public function objectives()
@@ -46,10 +47,10 @@ class Group extends Model
     public function scopeInfomationGroup($query)
     {
         return $query->select('id', 'name', 'code', 'parent_id')
-        ->with([
-            'users' => function ($q) {
-                $q->select('users.id', 'name', 'email', 'mission', 'avatar', 'status')->whereStatus(true);
-            },
-        ]);
+            ->with([
+                'users' => function ($q) {
+                    $q->select('users.id', 'name', 'email', 'mission', 'avatar', 'status')->whereStatus(true);
+                },
+            ]);
     }
 }
