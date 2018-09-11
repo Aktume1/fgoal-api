@@ -111,8 +111,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function caculateObjectiveFromChild($groupId, $objectiveId)
     {
-        $objective = $this->withTrashed()->find($objectiveId);
+        $objective = $this->withTrashed()->findOrFail($objectiveId);
+
         $parentObjective = $objective->parentObjective;
+
         if (!$parentObjective) {
             return $objective;
         }
@@ -121,7 +123,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             return $objective->actual * $objective->weight;
         });
 
-        $estimate = (int)($sum / $parentObjective->childObjective->count());
+        $childObjectiveCount = $parentObjective->childObjective->count();
+
+        if ($childObjectiveCount == 0) {
+            $estimate = 0;
+        } else {
+            $estimate = (int)($sum / $parentObjective->childObjective->count());
+        }
 
         if ($parentObjective->match != Objective::MATCH) {
             $parentObjective->update(['estimate' => $estimate]);
@@ -242,6 +250,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)->firstOrFail();
         
+        
         if ($this->checkParentObjective($objectiveId)) {
             $childObject = $objective->childObjective;
             foreach ($childObject as $child) {
@@ -250,7 +259,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         }
 
         $objective->delete();
-    
+            
         if ($objective->objectiveable_type != Objective::OBJECTIVE) {
             $this->caculateObjectiveFromChild($groupId, $objectiveId);
         }
