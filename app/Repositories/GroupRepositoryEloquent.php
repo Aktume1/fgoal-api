@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Eloquent\Group;
+use App\Eloquent\Objective;
 use App\Eloquent\User;
 use App\Contracts\Repositories\GroupRepository;
 use App\Exceptions\Api\NotFoundException;
@@ -155,5 +156,32 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         $groupUser = $this->where('code', $employeeCode)->firstOrFail();
 
         return $groupUser;
+    }
+
+    public function getProcessById($groupId)
+    {
+        $off = $inprocess = $done = 0;
+
+        $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
+
+        foreach ($objectives as $objective) {
+            if ($objective->process == config('model.objective.process.off')) {
+                $off += 1;
+            } elseif ($objective->process == config('model.objective.process.inprocess')) {
+                $inprocess += 1;
+            } else {
+                $done += 1;
+            }
+        }
+
+        $totalObjectives = $objectives->count();
+
+        $off = $off / $totalObjectives;
+        $inprocess = $inprocess / $totalObjectives;
+        $done = $done / $totalObjectives;
+
+        $process = [$off, $inprocess, $done];
+
+        return $process;
     }
 }
