@@ -17,5 +17,12 @@ return [
             'manager' => 1,
             'member' => 0,
         ]
+    ],
+    'objective' => [
+        'process' => [
+            'off' => 0,
+            'inprocess' => 1,
+            'done' => 2,
+        ]
     ]
 ];

@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::get('groups/{groupId}/parents', 'GroupController@getParentByGroupId');
         Route::delete('groups/{groupId}/{userId}/delete_user', 'GroupController@deleteUserFromGroup');
         Route::get('groups/{code}/informationbycode', 'GroupController@getGroupByCode');
+        Route::get('groups/{groupId}/process', 'GroupController@getProcessByGroupId');
 
         Route::resource('groups.objectives', 'ObjectiveController');
         Route::get('groups/{groupId}/objectives/{objectiveId}/detail', 'ObjectiveController@showObjective');
@@ -35,6 +36,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::patch('groups/{groupId}/objectives/{id}/match_actual', 'ObjectiveController@matchActualWithEstimate');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/name', 'ObjectiveController@updateContent');
         Route::post('groups/{groupId}/add_member', 'GroupController@addMemberGroup');
+
 
         Route::resource('quarters', 'QuarterController');
 
