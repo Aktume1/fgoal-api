@@ -38,6 +38,7 @@
     "get_data": "Get data successful",
     "update": "Update Successful",
     "create": "Create Successful",
-    "delete": "Delete Successful"
+    "delete": "Delete Successful",
+    "verify_link": "Verify Successful"
   }
 }

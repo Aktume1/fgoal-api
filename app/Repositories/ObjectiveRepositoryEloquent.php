@@ -97,9 +97,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->where('id', $objectiveId)
-            ->where('group_id', $groupId)->firstOrFail();
+            ->where('group_id', $groupId)
+            ->firstOrFail();
 
-        $objective->update(['actual' => $data['actual']]);
+        $objective->update([
+            'actual' => $data['actual'],
+            'match' => Objective::UNMATCH,
+        ]);
 
         return $this->caculateObjectiveFromChild($groupId, $objective->id);
     }
@@ -132,30 +136,38 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         }
 
         if ($parentObjective->match != Objective::MATCH) {
-            $parentObjective->update(['estimate' => $estimate]);
+            $parentObjective->update([
+                'estimate' => $estimate
+            ]);
 
             return $parentObjective;
         }
 
-        $parentObjective->update(['estimate' => $estimate, 'actual' => $estimate]);
+        $parentObjective->update([
+            'estimate' => $estimate,
+            'actual' => $estimate,
+        ]);
 
         return $parentObjective;
     }
 
     /**
      * Link Objective To Key Result
+     *
      * @param int $objectiveId
      * @param array $data
      * @return Objective
      */
     public function linkObjectiveToKeyResult($groupId, $data)
     {
-        $this->checkUserIsGroupManager($groupId);
-
-        $objective = $this->isObjective()->where('id', $data['objectiveId'])
-            ->where('group_id', $groupId)->firstOrFail();
-        $keyResult = $this->isKeyResult()->where('id', $data['keyResultId'])
+        $objective = $this->isObjective()
+            ->where('id', $data['objectiveId'])
             ->firstOrFail();
+
+        $keyResult = $this->isKeyResult()
+            ->where('id', $data['keyResultId'])
+            ->firstOrFail();
+
         $objective->update([
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
@@ -165,6 +177,37 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return $objective;
     }
 
+    /**
+     * Manger verify objective linked
+     *
+     * @param int $groupId
+     * @param in t$objectiveId
+     * @return Objetive
+     * @throws UnknownException
+     */
+    public function verifyLink($groupId, $objectiveId)
+    {
+        $this->checkUserIsGroupManager($groupId);
+
+        $objective = $this->findOrFail($objectiveId);
+
+        $objective->update([
+            'status' => Objective::APPROVE,
+        ]);
+
+        $this->caculateObjectiveFromChild($groupId, $objectiveId);
+
+        return $objective->parentObjective;
+    }
+
+    /**
+     * Update link objective to null
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return Objective
+     * @throws UnknownException
+     */
     public function removeLinkedObjective($groupId, $objectiveId)
     {
         $this->checkUserIsGroupManager($groupId);
@@ -186,15 +229,18 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
     /**
      * Update content objective
-     * @param $objectiveId
-     * @param $data
-     * @return mixed
+     *
+     * @param int $objectiveId
+     * @param int $data
+     * @return Objective
      */
     public function updateContent($objectiveId, $groupId, $data)
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $objective = $this->where('group_id', $groupId)->findOrFail($objectiveId);
+        $objective = $this->where('group_id', $groupId)
+            ->findOrFail($objectiveId);
+
         $objective->update([
             'name' => $data,
         ]);
@@ -213,7 +259,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->where('id', $objectiveId)
-            ->where('group_id', $groupId)->firstOrFail();
+            ->where('group_id', $groupId)
+            ->firstOrFail();
 
         $objective->update([
             'actual' => $objective->estimate,
@@ -231,26 +278,29 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function showObjectiveDetail($groupId, $objectiveId)
     {
-        $objective = $this->with('childObjective')->where('id', $objectiveId)
-                ->where('group_id', $groupId)->firstOrFail();
-        
+        $objective = $this->with('childObjective')
+            ->where('id', $objectiveId)
+            ->where('group_id', $groupId)
+            ->firstOrFail();
+
         return $objective;
     }
+
     /**
      * Delete Objective
      * @param int $groupId
      * @param int $objectiveId
      * @return void
      */
-
     public function deleteObjective($groupId, $objectiveId)
     {
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->where('id', $objectiveId)
-            ->where('group_id', $groupId)->firstOrFail();
-        
-        
+            ->where('group_id', $groupId)
+            ->firstOrFail();
+
+
         if ($this->checkParentObjective($objectiveId)) {
             $childObject = $objective->childObjective;
             foreach ($childObject as $child) {
@@ -259,7 +309,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         }
 
         $objective->delete();
-            
+
         if ($objective->objectiveable_type != Objective::OBJECTIVE) {
             $this->caculateObjectiveFromChild($groupId, $objectiveId);
         }
@@ -283,9 +333,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function getObjectiveLogById($groupId, $objectiveId)
     {
         $objective = $this->where('id', $objectiveId)
-                    ->where('group_id', $groupId)
-                    ->firstOrFail()
-                    ->audits;
+            ->where('group_id', $groupId)
+            ->firstOrFail()
+            ->audits;
 
         return $objective;
     }

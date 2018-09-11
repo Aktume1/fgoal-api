@@ -171,6 +171,17 @@ class ObjectiveController extends ApiController
         });
     }
 
+    /**
+     * Add link on objective
+     *
+     * @param $groupId
+     * @param $objectiveId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\ActionException
+     * @throws \App\Exceptions\Api\NotFoundException
+     * @throws \App\Exceptions\Api\NotOwnerException
+     * @throws \App\Exceptions\Api\UnknownException
+     */
     public function removeLinkObjective($groupId, $objectiveId)
     {
         return $this->doAction(function () use ($groupId, $objectiveId) {
@@ -205,4 +216,21 @@ class ObjectiveController extends ApiController
             $this->compacts['data'] = $this->objectiveRepository->getObjectiveLogById($groupId, $objectiveId);
         });
     }
+
+    /**
+     * Manager verify link objective
+     *
+     * @param $groupId
+     * @param $objectiveId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function verifyLinkObjective($groupId, $objectiveId)
+    {
+        return $this->doAction(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->verifyLink($groupId, $objectiveId);
+            $this->compacts['description'] = translate('success.verify_link');
+        });
+    }
 }
+

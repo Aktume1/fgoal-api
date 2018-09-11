@@ -36,7 +36,19 @@ class CommentRepositoryEloquent extends AbstractRepositoryEloquent implements Co
     {
         $objective = Objective::findOrFail($objectiveId);
 
-        return $objective->comments;
+        $comments = $objective->comments;
+        foreach ($comments as $row) {
+            $name = $row->user->name;
+            $avatar = $row->user->avatar;
+
+            $row->setAttribute('user_name', $name);
+
+            $row->setAttribute('user_avatar', $avatar);
+
+            $row->makeHidden('user');
+        }
+
+        return $comments;
     }
 }
 
