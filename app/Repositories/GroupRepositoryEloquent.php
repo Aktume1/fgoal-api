@@ -142,6 +142,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
     public function addMember($groupId, $data)
     {
+        $this->checkUserIsGroupManager($groupId);
+
         $group = $this->findOrFail($groupId);
 
         $email = $data['email'];
@@ -149,6 +151,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         $group->users()->detach($user);
         $group->users()->attach($user, ['manager' => $data['role']]);
+
+        return $group;
     }
 
     public function getGroupByCode($employeeCode)
