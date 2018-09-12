@@ -280,9 +280,12 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      * @param int $groupId
      * @return Objective
      */
-    public function getObjectiveLogById($objectiveId)
+    public function getObjectiveLogById($groupId, $objectiveId)
     {
-        $objective = $this->findOrFail($objectiveId)->audits;
+        $objective = $this->where('id', $objectiveId)
+                    ->where('group_id', $groupId)
+                    ->firstOrFail()
+                    ->audits;
 
         return $objective;
     }

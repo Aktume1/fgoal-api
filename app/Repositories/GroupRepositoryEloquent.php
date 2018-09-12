@@ -184,4 +184,12 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         return $process;
     }
+    
+    public function getLogGroup($groupId)
+    {
+        $group = $this->findOrFail($groupId)
+                    ->audits;
+
+        return $group;
+    }
 }

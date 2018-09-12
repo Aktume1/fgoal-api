@@ -158,11 +158,17 @@ class GroupController extends ApiController
             $this->compacts['data'] = $this->repository->getGroupByCode($code);
         });
     }
-
     public function getProcessByGroupId($groupId)
     {
         return $this->getData(function () use ($groupId) {
             $this->compacts['data'] = $this->repository->getProcessById($groupId);
+        });
+    }
+    
+    public function getLogGroup($groupId)
+    {
+        return $this->getData(function () use ($groupId) {
+            $this->compacts['data'] = $this->repository->getLogGroup($groupId);
         });
     }
 }
