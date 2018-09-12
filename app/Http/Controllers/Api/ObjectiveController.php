@@ -199,10 +199,10 @@ class ObjectiveController extends ApiController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function logObjective($objectiveId)
+    public function logObjective($groupId, $objectiveId)
     {
-        return $this->getData(function () use ($objectiveId) {
-            $this->compacts['data'] = $this->objectiveRepository->getObjectiveLogById($objectiveId);
+        return $this->getData(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->getObjectiveLogById($groupId, $objectiveId);
         });
     }
 }

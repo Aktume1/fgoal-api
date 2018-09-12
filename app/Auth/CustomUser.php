@@ -27,6 +27,17 @@ class CustomUser
     {
         return $this->user;
     }
+
+    /**
+     * Check user is loggin
+     *
+     * @return true|false
+     */
+    public function check()
+    {
+        return ! is_null($this->user());
+    }
+    
     /**
     * Get ID of the currently authenticated user.
     *
