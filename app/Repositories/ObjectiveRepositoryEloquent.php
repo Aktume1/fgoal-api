@@ -144,7 +144,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
     /**
      * Link Objective To Key Result
-     *
      * @param int $objectiveId
      * @param array $data
      * @return Objective
@@ -154,11 +153,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->isObjective()->where('id', $data['objectiveId'])
-            ->firstOrFail();
-
+            ->where('group_id', $groupId)->firstOrFail();
         $keyResult = $this->isKeyResult()->where('id', $data['keyResultId'])
             ->firstOrFail();
-            
         $objective->update([
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
@@ -168,37 +165,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return $objective;
     }
 
-    /**
-     * Manger verify objective linked
-     *
-     * @param int $groupId
-     * @param in t$objectiveId
-     * @return Objetive
-     * @throws UnknownException
-     */
-    public function verifyLink($groupId, $objectiveId)
-    {
-        $this->checkUserIsGroupManager($groupId);
-
-        $objective = $this->findOrFail($objectiveId);
-
-        $objective->update([
-            'status' => Objective::APPROVE,
-        ]);
-
-        $this->caculateObjectiveFromChild($groupId, $objectiveId);
-
-        return $objective->parentObjective;
-    }
-
-    /**
-     * Update link objective to null
-     *
-     * @param int $groupId
-     * @param int $objectiveId
-     * @return Objective
-     * @throws UnknownException
-     */
     public function removeLinkedObjective($groupId, $objectiveId)
     {
         $this->checkUserIsGroupManager($groupId);
@@ -220,18 +186,15 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
     /**
      * Update content objective
-     *
-     * @param int $objectiveId
-     * @param int $data
-     * @return Objective
+     * @param $objectiveId
+     * @param $data
+     * @return mixed
      */
     public function updateContent($objectiveId, $groupId, $data)
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $objective = $this->where('group_id', $groupId)
-            ->findOrFail($objectiveId);
-
+        $objective = $this->where('group_id', $groupId)->findOrFail($objectiveId);
         $objective->update([
             'name' => $data,
         ]);
