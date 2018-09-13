@@ -55,6 +55,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => $data['parent_id'],
         ]);
 
+        if ($data['objective_type'] != Objective::OBJECTIVE) {
+            $this->caculateObjectiveFromChild($groupId, $objective->id);
+        }
+
         return $this->find($objective->id);
     }
 
@@ -112,7 +116,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function caculateObjectiveFromChild($groupId, $objectiveId)
     {
         $objective = $this->withTrashed()->findOrFail($objectiveId);
-
         $parentObjective = $objective->parentObjective;
 
         if (!$parentObjective) {
@@ -124,7 +127,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         });
 
         $childObjectiveCount = $parentObjective->childObjective->count();
-
         if ($childObjectiveCount == 0) {
             $estimate = 0;
         } else {
