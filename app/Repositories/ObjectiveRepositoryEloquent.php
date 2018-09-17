@@ -139,7 +139,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         if ($parentObjective->match != Objective::MATCH) {
             $parentObjective->update([
-                'estimate' => $estimate
+                'estimate' => $estimate,
             ]);
 
             return $parentObjective;
