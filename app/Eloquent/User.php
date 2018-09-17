@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function comments()
     {
-        return $this->belongsToMany(Objective::class, 'comments', 'user_id', 'objective_id');
+        return $this->hasMany(Objective::class, 'comments');
     }
 
     public function groups()

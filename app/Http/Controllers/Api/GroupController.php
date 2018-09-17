@@ -139,6 +139,14 @@ class GroupController extends ApiController
         });
     }
 
+    /**
+     * Add member to group
+     *
+     * @param AddMemberRequest $request
+     * @param $groupId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
     public function addMemberGroup(AddMemberRequest $request, $groupId)
     {
         $data = $request->only(
@@ -152,12 +160,27 @@ class GroupController extends ApiController
         });
     }
 
+    /**
+     * Get group by user code
+     *
+     * @param $code
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
     public function getGroupByCode($code)
     {
         return $this->getData(function () use ($code) {
             $this->compacts['data'] = $this->repository->getGroupByCode($code);
         });
     }
+
+    /**
+     * Get process of group
+     *
+     * @param $groupId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
     public function getProcessByGroupId($groupId)
     {
         return $this->getData(function () use ($groupId) {
@@ -172,3 +195,4 @@ class GroupController extends ApiController
         });
     }
 }
+

@@ -13,7 +13,9 @@ class Objective extends Model implements Auditable
     const CANCEL = 0;
     const WAITING = 1;
     const APPROVE = 2;
+
     const MATCH = 1;
+    const UNMATCH = 0;
 
     const OBJECTIVE = 'Objective';
     const KEYRESULT = 'Key Result';

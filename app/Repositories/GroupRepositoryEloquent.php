@@ -28,7 +28,9 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     }
 
     /**
-     * @param $groupId
+     * Get parent of group or list parent of user
+     *
+     * @param int $groupId
      * @return $list parent group
      * @throws NotFoundException
      */
@@ -140,8 +142,18 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         return $users;
     }
 
+    /**
+     * Add member to group
+     *
+     * @param $groupId
+     * @param $data
+     * @return mixed
+     * @throws UnknownException
+     */
     public function addMember($groupId, $data)
     {
+        $this->checkUserIsGroupManager($groupId);
+
         $group = $this->findOrFail($groupId);
 
         $email = $data['email'];
@@ -149,8 +161,16 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         $group->users()->detach($user);
         $group->users()->attach($user, ['manager' => $data['role']]);
+
+        return $group;
     }
 
+    /**
+     * Get group by emloyee code
+     *
+     * @param string $employeeCode
+     * @return $groupUser
+     */
     public function getGroupByCode($employeeCode)
     {
         $groupUser = $this->where('code', $employeeCode)->firstOrFail();
@@ -158,6 +178,12 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         return $groupUser;
     }
 
+    /**
+     * Get process of group
+     *
+     * @param int $groupId
+     * @return array
+     */
     public function getProcessById($groupId)
     {
         $off = $inprocess = $done = 0;
@@ -184,11 +210,17 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         return $process;
     }
-    
+
+    /**
+     * Get log of group
+     *
+     * @param int $groupId
+     * @return $group
+     */
     public function getLogGroup($groupId)
     {
         $group = $this->findOrFail($groupId)
-                    ->audits;
+            ->audits;
 
         return $group;
     }
