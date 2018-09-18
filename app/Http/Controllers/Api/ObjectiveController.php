@@ -218,22 +218,6 @@ class ObjectiveController extends ApiController
     }
 
     /**
-     * Manager verify link objective
-     *
-     * @param $groupId
-     * @param $objectiveId
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \App\Exceptions\Api\UnknownException
-     */
-    public function verifyLinkObjective($groupId, $objectiveId)
-    {
-        return $this->doAction(function () use ($groupId, $objectiveId) {
-            $this->compacts['data'] = $this->objectiveRepository->verifyLink($groupId, $objectiveId);
-            $this->compacts['description'] = translate('success.verify_link');
-        });
-    }
-
-    /**
      * Admin verify link objective
      *
      * @param $groupId
