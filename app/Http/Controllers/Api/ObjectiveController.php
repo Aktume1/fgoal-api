@@ -219,7 +219,6 @@ class ObjectiveController extends ApiController
 
     /**
      * Admin verify link objective
-     *
      * @param $groupId
      * @param $objectiveId
      * @return \Illuminate\Http\JsonResponse

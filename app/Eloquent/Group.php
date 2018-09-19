@@ -13,6 +13,7 @@ class Group extends Model implements Auditable
         'code',
         'name',
         'parent_id',
+        'parent_path',
         'type',
     ];
 
