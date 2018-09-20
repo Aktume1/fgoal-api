@@ -5,10 +5,13 @@ namespace App\Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Eloquent\Group;
 
 class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
+
+    const ADMIN_ID = 1;
 
     /**
      * The attributes that are mass assignable.
@@ -78,10 +81,42 @@ class User extends Authenticatable
      */
     public function isGroupManager($groupId)
     {
-        if (!$this->groups()->where('group_id', $groupId)->exists() ||
-            !$this->groups()->where('group_id', $groupId)->firstOrFail()->pivot->manager) {
-            return false;
+        $group = Group::findOrFail($groupId);
+        $parentPath = $group->parent_path;
+        $userFromPath = $parentPath ? $this->getUserFromParentPath($parentPath) : null;
+
+        // Is group user
+        if ($group->type == Group::USER_GROUP && $group->code == $this->code) {
+            return true;
+
+        // Is if userId logged in array userId from parent_path
+        } elseif ($group->type != Group::USER_GROUP && isset($userFromPath) && in_array($this->id, $userFromPath)) {
+            return true;
+
+        // If userId logged is Admin
+        } elseif ($group->type != Group::USER_GROUP && !isset($userFromPath) && $this->id == User::ADMIN_ID) {
+            return true;
         }
-        return true;
+
+        return false;
+    }
+
+    public function getUserFromParentPath($parentPath)
+    {
+        $parentPathArr = explode('/', $parentPath);
+        $groupFromPath = [];
+
+        foreach ($parentPathArr as $pathValue) {
+            $groupFromPath[] = Group::where('code', $pathValue)->firstOrFail();
+        }
+
+        $userArr = [];
+        foreach ($groupFromPath as $groupValue) {
+            foreach ($groupValue->users as $value) {
+                $userArr[] = $value->id;
+            }
+        }
+
+        return $userArr;
     }
 }
