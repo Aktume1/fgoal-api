@@ -1,0 +1,5054 @@
+{
+  "0": {
+    "id": 1,
+    "name": "Software Development Division 1",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "1": {
+    "id": 2,
+    "name": "Section 1\r\n",
+    "description": "",
+    "parent_path": [
+      1
+    ],
+    "parent_id": 1
+  },
+  "2": {
+    "id": 3,
+    "name": "Infra Group",
+    "description": null,
+    "parent_path": [
+      1,
+      2
+    ],
+    "parent_id": 2
+  },
+  "3": {
+    "id": 4,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      3
+    ],
+    "parent_id": 3
+  },
+  "4": {
+    "id": 5,
+    "name": "Team 1 members 2222",
+    "description": "bcd",
+    "parent_path": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "parent_id": 4
+  },
+  "5": {
+    "id": 6,
+    "name": "Secretary",
+    "description": "",
+    "parent_path": [
+      1,
+      2
+    ],
+    "parent_id": 2
+  },
+  "6": {
+    "id": 7,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      6
+    ],
+    "parent_id": 6
+  },
+  "7": {
+    "id": 9,
+    "name": "Group1",
+    "description": "",
+    "parent_path": [
+      1,
+      2
+    ],
+    "parent_id": 2
+  },
+  "8": {
+    "id": 10,
+    "name": "Landers",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      9
+    ],
+    "parent_id": 9
+  },
+  "9": {
+    "id": 11,
+    "name": "Landers members",
+    "description": "",
+    "parent_path": [
+      1,
+      2,
+      9,
+      10
+    ],
+    "parent_id": 10
+  },
+  "10": {
+    "id": 12,
+    "name": "FullBrs",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      9
+    ],
+    "parent_id": 9
+  },
+  "11": {
+    "id": 13,
+    "name": "FullBrs members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      9,
+      12
+    ],
+    "parent_id": 12
+  },
+  "12": {
+    "id": 14,
+    "name": "Leo",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      9
+    ],
+    "parent_id": 9
+  },
+  "13": {
+    "id": 15,
+    "name": "Leo members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      9,
+      14
+    ],
+    "parent_id": 14
+  },
+  "14": {
+    "id": 16,
+    "name": "Group2",
+    "description": "",
+    "parent_path": [
+      1,
+      2
+    ],
+    "parent_id": 2
+  },
+  "15": {
+    "id": 17,
+    "name": "ES",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16
+    ],
+    "parent_id": 16
+  },
+  "16": {
+    "id": 18,
+    "name": "ES members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16,
+      17
+    ],
+    "parent_id": 17
+  },
+  "17": {
+    "id": 19,
+    "name": "I-OT",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16
+    ],
+    "parent_id": 16
+  },
+  "18": {
+    "id": 20,
+    "name": "I-OT members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16,
+      19
+    ],
+    "parent_id": 19
+  },
+  "19": {
+    "id": 21,
+    "name": "SkyRec",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16
+    ],
+    "parent_id": 16
+  },
+  "20": {
+    "id": 22,
+    "name": "SkyRec members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16,
+      21
+    ],
+    "parent_id": 21
+  },
+  "21": {
+    "id": 23,
+    "name": "Zinzin",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16
+    ],
+    "parent_id": 16
+  },
+  "22": {
+    "id": 24,
+    "name": "Zinzin members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16,
+      23
+    ],
+    "parent_id": 23
+  },
+  "23": {
+    "id": 25,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16
+    ],
+    "parent_id": 16
+  },
+  "24": {
+    "id": 26,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      16,
+      25
+    ],
+    "parent_id": 25
+  },
+  "25": {
+    "id": 27,
+    "name": "Group3",
+    "description": null,
+    "parent_path": [
+      1,
+      2
+    ],
+    "parent_id": 2
+  },
+  "26": {
+    "id": 28,
+    "name": "SpoLab",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      27
+    ],
+    "parent_id": 27
+  },
+  "27": {
+    "id": 29,
+    "name": "SpoLab members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      27,
+      28
+    ],
+    "parent_id": 28
+  },
+  "28": {
+    "id": 30,
+    "name": "SED",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      27
+    ],
+    "parent_id": 27
+  },
+  "29": {
+    "id": 31,
+    "name": "SED members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      27,
+      30
+    ],
+    "parent_id": 30
+  },
+  "30": {
+    "id": 32,
+    "name": "Richer",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      27
+    ],
+    "parent_id": 27
+  },
+  "31": {
+    "id": 33,
+    "name": "Richer members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      27,
+      32
+    ],
+    "parent_id": 32
+  },
+  "32": {
+    "id": 34,
+    "name": "Group4",
+    "description": null,
+    "parent_path": [
+      1,
+      2
+    ],
+    "parent_id": 2
+  },
+  "33": {
+    "id": 35,
+    "name": "IRON-MAN",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34
+    ],
+    "parent_id": 34
+  },
+  "34": {
+    "id": 36,
+    "name": "IRON-MAN members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34,
+      35
+    ],
+    "parent_id": 35
+  },
+  "35": {
+    "id": 37,
+    "name": "THOR",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34
+    ],
+    "parent_id": 34
+  },
+  "36": {
+    "id": 38,
+    "name": "THOR members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34,
+      37
+    ],
+    "parent_id": 37
+  },
+  "37": {
+    "id": 39,
+    "name": "LOKI",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34
+    ],
+    "parent_id": 34
+  },
+  "38": {
+    "id": 40,
+    "name": "LOKI members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34,
+      39
+    ],
+    "parent_id": 39
+  },
+  "39": {
+    "id": 41,
+    "name": "Section 2",
+    "description": null,
+    "parent_path": [
+      1
+    ],
+    "parent_id": 1
+  },
+  "40": {
+    "id": 42,
+    "name": "Group1",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34
+    ],
+    "parent_id": 34
+  },
+  "41": {
+    "id": 43,
+    "name": "FjkLab",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34,
+      42
+    ],
+    "parent_id": 42
+  },
+  "42": {
+    "id": 44,
+    "name": "FjkLab members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34,
+      42,
+      43
+    ],
+    "parent_id": 43
+  },
+  "43": {
+    "id": 45,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34,
+      42
+    ],
+    "parent_id": 42
+  },
+  "44": {
+    "id": 46,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      1,
+      2,
+      34,
+      42,
+      45
+    ],
+    "parent_id": 45
+  },
+  "45": {
+    "id": 47,
+    "name": "Group2",
+    "description": null,
+    "parent_path": [
+      1,
+      41
+    ],
+    "parent_id": 41
+  },
+  "46": {
+    "id": 48,
+    "name": "Ultra Team",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      47
+    ],
+    "parent_id": 47
+  },
+  "47": {
+    "id": 49,
+    "name": "Ultra Team members",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      47,
+      48
+    ],
+    "parent_id": 48
+  },
+  "48": {
+    "id": 50,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      47
+    ],
+    "parent_id": 47
+  },
+  "49": {
+    "id": 51,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      47,
+      50
+    ],
+    "parent_id": 50
+  },
+  "50": {
+    "id": 52,
+    "name": "Group3",
+    "description": null,
+    "parent_path": [
+      1,
+      41
+    ],
+    "parent_id": 41
+  },
+  "51": {
+    "id": 53,
+    "name": "Spring",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      52
+    ],
+    "parent_id": 52
+  },
+  "52": {
+    "id": 54,
+    "name": "Spring members",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      52,
+      53
+    ],
+    "parent_id": 53
+  },
+  "53": {
+    "id": 55,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      52
+    ],
+    "parent_id": 52
+  },
+  "54": {
+    "id": 56,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      52,
+      55
+    ],
+    "parent_id": 55
+  },
+  "55": {
+    "id": 57,
+    "name": "Group4",
+    "description": null,
+    "parent_path": [
+      1,
+      41
+    ],
+    "parent_id": 41
+  },
+  "56": {
+    "id": 58,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      57
+    ],
+    "parent_id": 57
+  },
+  "57": {
+    "id": 59,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      57,
+      58
+    ],
+    "parent_id": 58
+  },
+  "58": {
+    "id": 60,
+    "name": "Team 2",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      57
+    ],
+    "parent_id": 57
+  },
+  "59": {
+    "id": 61,
+    "name": "Team 2 members",
+    "description": null,
+    "parent_path": [
+      1,
+      41,
+      57,
+      60
+    ],
+    "parent_id": 60
+  },
+  "60": {
+    "id": 62,
+    "name": "Software Development Division HIGH",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "61": {
+    "id": 63,
+    "name": "Section 1",
+    "description": "",
+    "parent_path": [
+      62
+    ],
+    "parent_id": 62
+  },
+  "62": {
+    "id": 64,
+    "name": "Group2",
+    "description": null,
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "63": {
+    "id": 65,
+    "name": "SINGA",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64
+    ],
+    "parent_id": 64
+  },
+  "64": {
+    "id": 66,
+    "name": "SINGA members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64,
+      65
+    ],
+    "parent_id": 65
+  },
+  "65": {
+    "id": 67,
+    "name": "DOLA",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64
+    ],
+    "parent_id": 64
+  },
+  "66": {
+    "id": 68,
+    "name": "DOLA members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64,
+      67
+    ],
+    "parent_id": 67
+  },
+  "67": {
+    "id": 69,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64
+    ],
+    "parent_id": 64
+  },
+  "68": {
+    "id": 70,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64,
+      69
+    ],
+    "parent_id": 69
+  },
+  "69": {
+    "id": 71,
+    "name": "CARLSBERG",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64
+    ],
+    "parent_id": 64
+  },
+  "70": {
+    "id": 72,
+    "name": "CARLSBERG members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64,
+      71
+    ],
+    "parent_id": 71
+  },
+  "71": {
+    "id": 73,
+    "name": "PENDULUM",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64
+    ],
+    "parent_id": 64
+  },
+  "72": {
+    "id": 74,
+    "name": "PENDULUM members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      64,
+      73
+    ],
+    "parent_id": 73
+  },
+  "73": {
+    "id": 75,
+    "name": "Group3",
+    "description": null,
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "74": {
+    "id": 76,
+    "name": "SPEED",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75
+    ],
+    "parent_id": 75
+  },
+  "75": {
+    "id": 77,
+    "name": "SPEED members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75,
+      76
+    ],
+    "parent_id": 76
+  },
+  "76": {
+    "id": 78,
+    "name": "TIGER",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75
+    ],
+    "parent_id": 75
+  },
+  "77": {
+    "id": 79,
+    "name": "TIGER members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75,
+      78
+    ],
+    "parent_id": 78
+  },
+  "78": {
+    "id": 80,
+    "name": "BORDEAUX",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75
+    ],
+    "parent_id": 75
+  },
+  "79": {
+    "id": 81,
+    "name": "BORDEAUX members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75,
+      80
+    ],
+    "parent_id": 80
+  },
+  "80": {
+    "id": 82,
+    "name": "RUM",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75
+    ],
+    "parent_id": 75
+  },
+  "81": {
+    "id": 83,
+    "name": "RUM members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75,
+      82
+    ],
+    "parent_id": 82
+  },
+  "82": {
+    "id": 84,
+    "name": "JEANS TONIC",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75
+    ],
+    "parent_id": 75
+  },
+  "83": {
+    "id": 85,
+    "name": "JEANS TONIC members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      75,
+      84
+    ],
+    "parent_id": 84
+  },
+  "84": {
+    "id": 86,
+    "name": "Group4",
+    "description": null,
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "85": {
+    "id": 87,
+    "name": "TEQUILA",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86
+    ],
+    "parent_id": 86
+  },
+  "86": {
+    "id": 88,
+    "name": "TEQUILA members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86,
+      87
+    ],
+    "parent_id": 87
+  },
+  "87": {
+    "id": 89,
+    "name": "WHISKEY",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86
+    ],
+    "parent_id": 86
+  },
+  "88": {
+    "id": 90,
+    "name": "WHISKEY members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86,
+      89
+    ],
+    "parent_id": 89
+  },
+  "89": {
+    "id": 91,
+    "name": "HENIKEN",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86
+    ],
+    "parent_id": 86
+  },
+  "90": {
+    "id": 92,
+    "name": "HENIKEN members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86,
+      91
+    ],
+    "parent_id": 91
+  },
+  "91": {
+    "id": 93,
+    "name": "IWAO",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86
+    ],
+    "parent_id": 86
+  },
+  "92": {
+    "id": 94,
+    "name": "IWAO members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      86,
+      93
+    ],
+    "parent_id": 93
+  },
+  "93": {
+    "id": 95,
+    "name": "Group5",
+    "description": null,
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "94": {
+    "id": 96,
+    "name": "VODKA",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      95
+    ],
+    "parent_id": 95
+  },
+  "95": {
+    "id": 97,
+    "name": "VODKA members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      95,
+      96
+    ],
+    "parent_id": 96
+  },
+  "96": {
+    "id": 98,
+    "name": "BAUDA",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      95
+    ],
+    "parent_id": 95
+  },
+  "97": {
+    "id": 99,
+    "name": "BAUDA members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      95,
+      98
+    ],
+    "parent_id": 98
+  },
+  "98": {
+    "id": 100,
+    "name": "BALENTINE",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      95
+    ],
+    "parent_id": 95
+  },
+  "99": {
+    "id": 101,
+    "name": "BALENTINE members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      95,
+      100
+    ],
+    "parent_id": 100
+  },
+  "100": {
+    "id": 102,
+    "name": "Group6",
+    "description": null,
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "101": {
+    "id": 103,
+    "name": "COGNAC",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102
+    ],
+    "parent_id": 102
+  },
+  "102": {
+    "id": 104,
+    "name": "COGNAC members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102,
+      103
+    ],
+    "parent_id": 103
+  },
+  "103": {
+    "id": 105,
+    "name": "ROCK",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102
+    ],
+    "parent_id": 102
+  },
+  "104": {
+    "id": 106,
+    "name": "ROCK members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102,
+      105
+    ],
+    "parent_id": 105
+  },
+  "105": {
+    "id": 107,
+    "name": "SYRAH",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102
+    ],
+    "parent_id": 102
+  },
+  "106": {
+    "id": 108,
+    "name": "SYRAH members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102,
+      107
+    ],
+    "parent_id": 107
+  },
+  "107": {
+    "id": 109,
+    "name": "BUNKAJIN",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102
+    ],
+    "parent_id": 102
+  },
+  "108": {
+    "id": 110,
+    "name": "BUNKAJIN members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102,
+      109
+    ],
+    "parent_id": 109
+  },
+  "109": {
+    "id": 111,
+    "name": "CHIVAS",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102
+    ],
+    "parent_id": 102
+  },
+  "110": {
+    "id": 112,
+    "name": "CHIVAS members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102,
+      111
+    ],
+    "parent_id": 111
+  },
+  "111": {
+    "id": 113,
+    "name": "MARTINIS",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102
+    ],
+    "parent_id": 102
+  },
+  "112": {
+    "id": 114,
+    "name": "MARTINIS members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      102,
+      113
+    ],
+    "parent_id": 113
+  },
+  "113": {
+    "id": 115,
+    "name": "QA1",
+    "description": null,
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "114": {
+    "id": 116,
+    "name": "CAMUS",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115
+    ],
+    "parent_id": 115
+  },
+  "115": {
+    "id": 117,
+    "name": "CAMUS members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115,
+      116
+    ],
+    "parent_id": 116
+  },
+  "116": {
+    "id": 118,
+    "name": "SAN CLEMENTE",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115
+    ],
+    "parent_id": 115
+  },
+  "117": {
+    "id": 119,
+    "name": "SAN CLEMENTE members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115,
+      118
+    ],
+    "parent_id": 118
+  },
+  "118": {
+    "id": 120,
+    "name": "ROYAL SALUTE",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115
+    ],
+    "parent_id": 115
+  },
+  "119": {
+    "id": 121,
+    "name": "ROYAL SALUTE members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115,
+      120
+    ],
+    "parent_id": 120
+  },
+  "120": {
+    "id": 122,
+    "name": "SOB",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115
+    ],
+    "parent_id": 115
+  },
+  "121": {
+    "id": 123,
+    "name": "SOB members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115,
+      122
+    ],
+    "parent_id": 122
+  },
+  "122": {
+    "id": 124,
+    "name": "GOLD LABEL",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115
+    ],
+    "parent_id": 115
+  },
+  "123": {
+    "id": 125,
+    "name": "GOLD LABEL members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115,
+      124
+    ],
+    "parent_id": 124
+  },
+  "124": {
+    "id": 126,
+    "name": "NẾP MỚI",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115
+    ],
+    "parent_id": 115
+  },
+  "125": {
+    "id": 127,
+    "name": "NẾP MỚI members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      115,
+      126
+    ],
+    "parent_id": 126
+  },
+  "126": {
+    "id": 128,
+    "name": "QA2",
+    "description": null,
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "127": {
+    "id": 129,
+    "name": "HENNESSY",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128
+    ],
+    "parent_id": 128
+  },
+  "128": {
+    "id": 130,
+    "name": "HENNESSY members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128,
+      129
+    ],
+    "parent_id": 129
+  },
+  "129": {
+    "id": 131,
+    "name": "KAKEYA",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128
+    ],
+    "parent_id": 128
+  },
+  "130": {
+    "id": 132,
+    "name": "KAKEYA members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128,
+      131
+    ],
+    "parent_id": 131
+  },
+  "131": {
+    "id": 133,
+    "name": "MOJITO",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128
+    ],
+    "parent_id": 128
+  },
+  "132": {
+    "id": 134,
+    "name": "MOJITO members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128,
+      133
+    ],
+    "parent_id": 133
+  },
+  "133": {
+    "id": 135,
+    "name": "MARGARITA",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128
+    ],
+    "parent_id": 128
+  },
+  "134": {
+    "id": 136,
+    "name": "MARGARITA members",
+    "description": null,
+    "parent_path": [
+      62,
+      63,
+      128,
+      135
+    ],
+    "parent_id": 135
+  },
+  "135": {
+    "id": 137,
+    "name": "Section2",
+    "description": null,
+    "parent_path": [
+      62
+    ],
+    "parent_id": 62
+  },
+  "136": {
+    "id": 138,
+    "name": "Group1",
+    "description": null,
+    "parent_path": [
+      62,
+      137
+    ],
+    "parent_id": 137
+  },
+  "137": {
+    "id": 139,
+    "name": "NO-COMMENT",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      138
+    ],
+    "parent_id": 138
+  },
+  "138": {
+    "id": 140,
+    "name": "NO-COMMENT members",
+    "description": "",
+    "parent_path": [
+      62,
+      137,
+      138,
+      139
+    ],
+    "parent_id": 139
+  },
+  "139": {
+    "id": 141,
+    "name": "HUDA",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      138
+    ],
+    "parent_id": 138
+  },
+  "140": {
+    "id": 142,
+    "name": "HUDA members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      138,
+      141
+    ],
+    "parent_id": 141
+  },
+  "141": {
+    "id": 143,
+    "name": "BUDWEISER",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      138
+    ],
+    "parent_id": 138
+  },
+  "142": {
+    "id": 144,
+    "name": "BUDWEISER members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      138,
+      143
+    ],
+    "parent_id": 143
+  },
+  "143": {
+    "id": 145,
+    "name": "Group2",
+    "description": null,
+    "parent_path": [
+      62,
+      137
+    ],
+    "parent_id": 137
+  },
+  "144": {
+    "id": 146,
+    "name": "HEINEKEN",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      145
+    ],
+    "parent_id": 145
+  },
+  "145": {
+    "id": 147,
+    "name": "HEINEKEN members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      145,
+      146
+    ],
+    "parent_id": 146
+  },
+  "146": {
+    "id": 148,
+    "name": "SINGLETON",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      145
+    ],
+    "parent_id": 145
+  },
+  "147": {
+    "id": 149,
+    "name": "SINGLETON members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      145,
+      148
+    ],
+    "parent_id": 148
+  },
+  "148": {
+    "id": 150,
+    "name": "JACKDANIELS",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      145
+    ],
+    "parent_id": 145
+  },
+  "149": {
+    "id": 151,
+    "name": "JACKDANIELS members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      145,
+      150
+    ],
+    "parent_id": 150
+  },
+  "150": {
+    "id": 152,
+    "name": "Group3",
+    "description": null,
+    "parent_path": [
+      62,
+      137
+    ],
+    "parent_id": 137
+  },
+  "151": {
+    "id": 153,
+    "name": "MACALLAN",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      152
+    ],
+    "parent_id": 152
+  },
+  "152": {
+    "id": 154,
+    "name": "MACALLAN members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      152,
+      153
+    ],
+    "parent_id": 153
+  },
+  "153": {
+    "id": 155,
+    "name": "GRANTS",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      152
+    ],
+    "parent_id": 152
+  },
+  "154": {
+    "id": 156,
+    "name": "GRANTS members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      152,
+      155
+    ],
+    "parent_id": 155
+  },
+  "155": {
+    "id": 157,
+    "name": "MERLOT",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      152
+    ],
+    "parent_id": 152
+  },
+  "156": {
+    "id": 158,
+    "name": "MERLOT members",
+    "description": null,
+    "parent_path": [
+      62,
+      137,
+      152,
+      157
+    ],
+    "parent_id": 157
+  },
+  "157": {
+    "id": 159,
+    "name": "Software Development Division 3",
+    "description": null,
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "158": {
+    "id": 160,
+    "name": "Section 1 ",
+    "description": null,
+    "parent_path": [
+      159
+    ],
+    "parent_id": 159
+  },
+  "159": {
+    "id": 161,
+    "name": "Group 1",
+    "description": null,
+    "parent_path": [
+      159,
+      160
+    ],
+    "parent_id": 160
+  },
+  "160": {
+    "id": 162,
+    "name": "AK47",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161
+    ],
+    "parent_id": 161
+  },
+  "161": {
+    "id": 163,
+    "name": "AK47 members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161,
+      162
+    ],
+    "parent_id": 162
+  },
+  "162": {
+    "id": 164,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161
+    ],
+    "parent_id": 161
+  },
+  "163": {
+    "id": 165,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161,
+      164
+    ],
+    "parent_id": 164
+  },
+  "164": {
+    "id": 166,
+    "name": "Combat",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161
+    ],
+    "parent_id": 161
+  },
+  "165": {
+    "id": 167,
+    "name": "Combat members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161,
+      166
+    ],
+    "parent_id": 166
+  },
+  "166": {
+    "id": 168,
+    "name": "MapiVR",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161
+    ],
+    "parent_id": 161
+  },
+  "167": {
+    "id": 169,
+    "name": "MapiVR members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161,
+      168
+    ],
+    "parent_id": 168
+  },
+  "168": {
+    "id": 170,
+    "name": "Temo",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161
+    ],
+    "parent_id": 161
+  },
+  "169": {
+    "id": 171,
+    "name": "Temo members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      161,
+      170
+    ],
+    "parent_id": 170
+  },
+  "170": {
+    "id": 172,
+    "name": "Group 2",
+    "description": null,
+    "parent_path": [
+      159,
+      160
+    ],
+    "parent_id": 160
+  },
+  "171": {
+    "id": 173,
+    "name": "Non-Stop",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172
+    ],
+    "parent_id": 172
+  },
+  "172": {
+    "id": 174,
+    "name": "Non-Stop members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172,
+      173
+    ],
+    "parent_id": 173
+  },
+  "173": {
+    "id": 175,
+    "name": "TaSpead",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172
+    ],
+    "parent_id": 172
+  },
+  "174": {
+    "id": 176,
+    "name": "TaSpead members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172,
+      175
+    ],
+    "parent_id": 175
+  },
+  "175": {
+    "id": 177,
+    "name": "DMWar",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172
+    ],
+    "parent_id": 172
+  },
+  "176": {
+    "id": 178,
+    "name": "DMWar members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172,
+      177
+    ],
+    "parent_id": 177
+  },
+  "177": {
+    "id": 179,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172
+    ],
+    "parent_id": 172
+  },
+  "178": {
+    "id": 180,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      172,
+      179
+    ],
+    "parent_id": 179
+  },
+  "179": {
+    "id": 181,
+    "name": "Group 3",
+    "description": null,
+    "parent_path": [
+      159,
+      160
+    ],
+    "parent_id": 160
+  },
+  "180": {
+    "id": 182,
+    "name": "KRkac",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181
+    ],
+    "parent_id": 181
+  },
+  "181": {
+    "id": 183,
+    "name": "KRkac members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181,
+      182
+    ],
+    "parent_id": 182
+  },
+  "182": {
+    "id": 184,
+    "name": "Capy",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181
+    ],
+    "parent_id": 181
+  },
+  "183": {
+    "id": 185,
+    "name": "Capy members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181,
+      184
+    ],
+    "parent_id": 184
+  },
+  "184": {
+    "id": 186,
+    "name": "Mina",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181
+    ],
+    "parent_id": 181
+  },
+  "185": {
+    "id": 187,
+    "name": "Mina members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181,
+      186
+    ],
+    "parent_id": 186
+  },
+  "186": {
+    "id": 188,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181
+    ],
+    "parent_id": 181
+  },
+  "187": {
+    "id": 189,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      181,
+      188
+    ],
+    "parent_id": 188
+  },
+  "188": {
+    "id": 190,
+    "name": "Group 4",
+    "description": null,
+    "parent_path": [
+      159,
+      160
+    ],
+    "parent_id": 160
+  },
+  "189": {
+    "id": 191,
+    "name": "XMas",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190
+    ],
+    "parent_id": 190
+  },
+  "190": {
+    "id": 192,
+    "name": "XMas members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190,
+      191
+    ],
+    "parent_id": 191
+  },
+  "191": {
+    "id": 193,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190
+    ],
+    "parent_id": 190
+  },
+  "192": {
+    "id": 194,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190,
+      193
+    ],
+    "parent_id": 193
+  },
+  "193": {
+    "id": 195,
+    "name": "Legal Max",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190
+    ],
+    "parent_id": 190
+  },
+  "194": {
+    "id": 196,
+    "name": "Legal Max members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190,
+      195
+    ],
+    "parent_id": 195
+  },
+  "195": {
+    "id": 197,
+    "name": "ShaLab",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190
+    ],
+    "parent_id": 190
+  },
+  "196": {
+    "id": 198,
+    "name": "ShaLab members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190,
+      197
+    ],
+    "parent_id": 197
+  },
+  "197": {
+    "id": 199,
+    "name": "ShawisLab",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190
+    ],
+    "parent_id": 190
+  },
+  "198": {
+    "id": 200,
+    "name": "ShawisLab members",
+    "description": null,
+    "parent_path": [
+      159,
+      160,
+      190,
+      199
+    ],
+    "parent_id": 199
+  },
+  "199": {
+    "id": 201,
+    "name": "Section 2",
+    "description": null,
+    "parent_path": [
+      159
+    ],
+    "parent_id": 159
+  },
+  "200": {
+    "id": 202,
+    "name": "Group 1",
+    "description": null,
+    "parent_path": [
+      159,
+      201
+    ],
+    "parent_id": 201
+  },
+  "201": {
+    "id": 203,
+    "name": "MapiGO",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      202
+    ],
+    "parent_id": 202
+  },
+  "202": {
+    "id": 204,
+    "name": "MapiGO members",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      202,
+      203
+    ],
+    "parent_id": 203
+  },
+  "203": {
+    "id": 205,
+    "name": "MapiCompany",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      202
+    ],
+    "parent_id": 202
+  },
+  "204": {
+    "id": 206,
+    "name": "MapiCompany members",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      202,
+      205
+    ],
+    "parent_id": 205
+  },
+  "205": {
+    "id": 207,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      202
+    ],
+    "parent_id": 202
+  },
+  "206": {
+    "id": 208,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      202,
+      207
+    ],
+    "parent_id": 207
+  },
+  "207": {
+    "id": 209,
+    "name": "Group 2",
+    "description": null,
+    "parent_path": [
+      159,
+      201
+    ],
+    "parent_id": 201
+  },
+  "208": {
+    "id": 210,
+    "name": "Rise up",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      209
+    ],
+    "parent_id": 209
+  },
+  "209": {
+    "id": 211,
+    "name": "Rise up members",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      209,
+      210
+    ],
+    "parent_id": 210
+  },
+  "210": {
+    "id": 212,
+    "name": "TBD",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      209
+    ],
+    "parent_id": 209
+  },
+  "211": {
+    "id": 213,
+    "name": "TBD members",
+    "description": null,
+    "parent_path": [
+      159,
+      201,
+      209,
+      212
+    ],
+    "parent_id": 212
+  },
+  "212": {
+    "id": 214,
+    "name": "Design & Marketing Division",
+    "description": null,
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "213": {
+    "id": 215,
+    "name": "Design & Marketing Section",
+    "description": null,
+    "parent_path": [
+      214
+    ],
+    "parent_id": 214
+  },
+  "214": {
+    "id": 216,
+    "name": "UI/UX Group 1",
+    "description": null,
+    "parent_path": [
+      214,
+      215
+    ],
+    "parent_id": 215
+  },
+  "215": {
+    "id": 217,
+    "name": "Hi-five",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      216
+    ],
+    "parent_id": 216
+  },
+  "216": {
+    "id": 218,
+    "name": "Hi-five members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      216,
+      217
+    ],
+    "parent_id": 217
+  },
+  "217": {
+    "id": 219,
+    "name": "Hi-five",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      216
+    ],
+    "parent_id": 216
+  },
+  "218": {
+    "id": 220,
+    "name": "Hi-five members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      216,
+      219
+    ],
+    "parent_id": 219
+  },
+  "219": {
+    "id": 221,
+    "name": "UI/UX Group 2",
+    "description": null,
+    "parent_path": [
+      214,
+      215
+    ],
+    "parent_id": 215
+  },
+  "220": {
+    "id": 222,
+    "name": "Fighting",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      221
+    ],
+    "parent_id": 221
+  },
+  "221": {
+    "id": 223,
+    "name": "Fighting members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      221,
+      222
+    ],
+    "parent_id": 222
+  },
+  "222": {
+    "id": 224,
+    "name": "Blossom",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      221
+    ],
+    "parent_id": 221
+  },
+  "223": {
+    "id": 225,
+    "name": "Blossom members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      221,
+      224
+    ],
+    "parent_id": 224
+  },
+  "224": {
+    "id": 226,
+    "name": "UP!",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      221
+    ],
+    "parent_id": 221
+  },
+  "225": {
+    "id": 227,
+    "name": "UP! members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      221,
+      226
+    ],
+    "parent_id": 226
+  },
+  "226": {
+    "id": 228,
+    "name": "Creative Group",
+    "description": null,
+    "parent_path": [
+      214,
+      215
+    ],
+    "parent_id": 215
+  },
+  "227": {
+    "id": 229,
+    "name": "Branding",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      228
+    ],
+    "parent_id": 228
+  },
+  "228": {
+    "id": 230,
+    "name": "Branding members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      228,
+      229
+    ],
+    "parent_id": 229
+  },
+  "229": {
+    "id": 231,
+    "name": "PR",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      228
+    ],
+    "parent_id": 228
+  },
+  "230": {
+    "id": 232,
+    "name": "PR members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      228,
+      231
+    ],
+    "parent_id": 231
+  },
+  "231": {
+    "id": 233,
+    "name": "Front End Group",
+    "description": null,
+    "parent_path": [
+      214,
+      215
+    ],
+    "parent_id": 215
+  },
+  "232": {
+    "id": 234,
+    "name": "Front End",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233
+    ],
+    "parent_id": 233
+  },
+  "233": {
+    "id": 235,
+    "name": "Front End members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233,
+      234
+    ],
+    "parent_id": 234
+  },
+  "234": {
+    "id": 236,
+    "name": "Front End",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233
+    ],
+    "parent_id": 233
+  },
+  "235": {
+    "id": 237,
+    "name": "Front End members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233,
+      236
+    ],
+    "parent_id": 236
+  },
+  "236": {
+    "id": 238,
+    "name": "Firebird",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233
+    ],
+    "parent_id": 233
+  },
+  "237": {
+    "id": 239,
+    "name": "Firebird members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233,
+      238
+    ],
+    "parent_id": 238
+  },
+  "238": {
+    "id": 240,
+    "name": "Front End",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233
+    ],
+    "parent_id": 233
+  },
+  "239": {
+    "id": 241,
+    "name": "Front End members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      233,
+      240
+    ],
+    "parent_id": 240
+  },
+  "240": {
+    "id": 242,
+    "name": "Office Design",
+    "description": null,
+    "parent_path": [
+      214,
+      215
+    ],
+    "parent_id": 215
+  },
+  "241": {
+    "id": 243,
+    "name": "Office Design",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      242
+    ],
+    "parent_id": 242
+  },
+  "242": {
+    "id": 244,
+    "name": "Office Design members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      242,
+      243
+    ],
+    "parent_id": 243
+  },
+  "243": {
+    "id": 245,
+    "name": "Marketing Group",
+    "description": null,
+    "parent_path": [
+      214,
+      215
+    ],
+    "parent_id": 215
+  },
+  "244": {
+    "id": 246,
+    "name": "Sales",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      245
+    ],
+    "parent_id": 245
+  },
+  "245": {
+    "id": 247,
+    "name": "Sales members",
+    "description": null,
+    "parent_path": [
+      214,
+      215,
+      245,
+      246
+    ],
+    "parent_id": 246
+  },
+  "246": {
+    "id": 248,
+    "name": "CEO's Office",
+    "description": null,
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "247": {
+    "id": 249,
+    "name": "Human Resource & Communication Section",
+    "description": null,
+    "parent_path": [
+      248
+    ],
+    "parent_id": 248
+  },
+  "248": {
+    "id": 250,
+    "name": "Human Resource (HR)",
+    "description": null,
+    "parent_path": [
+      248,
+      249,
+      253
+    ],
+    "parent_id": 253
+  },
+  "249": {
+    "id": 251,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      248,
+      249,
+      253,
+      250
+    ],
+    "parent_id": 250
+  },
+  "250": {
+    "id": 252,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      248,
+      249,
+      253,
+      250,
+      251
+    ],
+    "parent_id": 251
+  },
+  "251": {
+    "id": 253,
+    "name": "Internal Communication (IC)",
+    "description": null,
+    "parent_path": [
+      248,
+      249
+    ],
+    "parent_id": 249
+  },
+  "252": {
+    "id": 254,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      248,
+      249,
+      253
+    ],
+    "parent_id": 253
+  },
+  "253": {
+    "id": 255,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      248,
+      249,
+      253,
+      254
+    ],
+    "parent_id": 254
+  },
+  "254": {
+    "id": 256,
+    "name": "R&D Lab",
+    "description": null,
+    "parent_path": [
+      248,
+      249,
+      253
+    ],
+    "parent_id": 253
+  },
+  "255": {
+    "id": 257,
+    "name": "Secretary",
+    "description": null,
+    "parent_path": [
+      248
+    ],
+    "parent_id": 248
+  },
+  "256": {
+    "id": 258,
+    "name": "Human Development Division",
+    "description": null,
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "257": {
+    "id": 259,
+    "name": "Business Promotion Section",
+    "description": null,
+    "parent_path": [
+      258
+    ],
+    "parent_id": 258
+  },
+  "258": {
+    "id": 260,
+    "name": "Product Development",
+    "description": null,
+    "parent_path": [
+      258,
+      259
+    ],
+    "parent_id": 259
+  },
+  "259": {
+    "id": 261,
+    "name": "Viblo123",
+    "description": "",
+    "parent_path": [
+      258,
+      259,
+      260
+    ],
+    "parent_id": 260
+  },
+  "260": {
+    "id": 262,
+    "name": "Viblo members",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      260,
+      261
+    ],
+    "parent_id": 261
+  },
+  "261": {
+    "id": 263,
+    "name": "Awesome",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      260
+    ],
+    "parent_id": 260
+  },
+  "262": {
+    "id": 264,
+    "name": "Awesome members",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      260,
+      263
+    ],
+    "parent_id": 263
+  },
+  "263": {
+    "id": 265,
+    "name": "Junior BrSE",
+    "description": null,
+    "parent_path": [
+      258,
+      259
+    ],
+    "parent_id": 259
+  },
+  "264": {
+    "id": 266,
+    "name": "Junior BrSE",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      265
+    ],
+    "parent_id": 265
+  },
+  "265": {
+    "id": 267,
+    "name": "Junior BrSE members",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      265,
+      266
+    ],
+    "parent_id": 266
+  },
+  "266": {
+    "id": 268,
+    "name": "Talent Consulting (TC)",
+    "description": null,
+    "parent_path": [
+      258,
+      259
+    ],
+    "parent_id": 259
+  },
+  "267": {
+    "id": 269,
+    "name": "TC",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      268
+    ],
+    "parent_id": 268
+  },
+  "268": {
+    "id": 270,
+    "name": "TC members",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      268,
+      269
+    ],
+    "parent_id": 269
+  },
+  "269": {
+    "id": 271,
+    "name": "Japanese Teacher",
+    "description": null,
+    "parent_path": [
+      258,
+      259
+    ],
+    "parent_id": 259
+  },
+  "270": {
+    "id": 272,
+    "name": "Teacher Team",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      271
+    ],
+    "parent_id": 271
+  },
+  "271": {
+    "id": 273,
+    "name": "Teacher Team members",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      271,
+      272
+    ],
+    "parent_id": 272
+  },
+  "272": {
+    "id": 274,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      271
+    ],
+    "parent_id": 271
+  },
+  "273": {
+    "id": 275,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      258,
+      259,
+      271,
+      274
+    ],
+    "parent_id": 274
+  },
+  "274": {
+    "id": 276,
+    "name": "Education Section",
+    "description": "",
+    "parent_path": [
+      258
+    ],
+    "parent_id": 258
+  },
+  "275": {
+    "id": 277,
+    "name": "Group 1",
+    "description": null,
+    "parent_path": [
+      258,
+      276
+    ],
+    "parent_id": 276
+  },
+  "276": {
+    "id": 278,
+    "name": "Away",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277
+    ],
+    "parent_id": 277
+  },
+  "277": {
+    "id": 279,
+    "name": "Away members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277,
+      278
+    ],
+    "parent_id": 278
+  },
+  "278": {
+    "id": 280,
+    "name": "Java",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277
+    ],
+    "parent_id": 277
+  },
+  "279": {
+    "id": 281,
+    "name": "Java members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277,
+      280
+    ],
+    "parent_id": 280
+  },
+  "280": {
+    "id": 282,
+    "name": "Assistant",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277
+    ],
+    "parent_id": 277
+  },
+  "281": {
+    "id": 283,
+    "name": "Assistant members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277,
+      282
+    ],
+    "parent_id": 282
+  },
+  "282": {
+    "id": 284,
+    "name": "ISO",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277
+    ],
+    "parent_id": 277
+  },
+  "283": {
+    "id": 285,
+    "name": "ISO members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      277,
+      284
+    ],
+    "parent_id": 284
+  },
+  "284": {
+    "id": 286,
+    "name": "Group 2",
+    "description": "",
+    "parent_path": [
+      258,
+      276
+    ],
+    "parent_id": 276
+  },
+  "285": {
+    "id": 287,
+    "name": "QA",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "286": {
+    "id": 288,
+    "name": "QA members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      287
+    ],
+    "parent_id": 287
+  },
+  "287": {
+    "id": 289,
+    "name": "Android",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "288": {
+    "id": 290,
+    "name": "Android members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      289
+    ],
+    "parent_id": 289
+  },
+  "289": {
+    "id": 291,
+    "name": "IOS",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "290": {
+    "id": 292,
+    "name": "IOS members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      291
+    ],
+    "parent_id": 291
+  },
+  "291": {
+    "id": 293,
+    "name": "PHP",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "292": {
+    "id": 294,
+    "name": "PHP members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      293
+    ],
+    "parent_id": 293
+  },
+  "293": {
+    "id": 295,
+    "name": "WSM",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "294": {
+    "id": 296,
+    "name": "WSM members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      295
+    ],
+    "parent_id": 295
+  },
+  "295": {
+    "id": 297,
+    "name": "FCSP",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "296": {
+    "id": 298,
+    "name": "FCSP members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      297
+    ],
+    "parent_id": 297
+  },
+  "297": {
+    "id": 299,
+    "name": "FDMS",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "298": {
+    "id": 300,
+    "name": "FDMS members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      299
+    ],
+    "parent_id": 299
+  },
+  "299": {
+    "id": 301,
+    "name": "Ruby",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "300": {
+    "id": 302,
+    "name": "Ruby members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      301
+    ],
+    "parent_id": 301
+  },
+  "301": {
+    "id": 303,
+    "name": "Ruby",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "302": {
+    "id": 304,
+    "name": "Ruby members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      286,
+      303
+    ],
+    "parent_id": 303
+  },
+  "303": {
+    "id": 305,
+    "name": "Group 3",
+    "description": null,
+    "parent_path": [
+      258,
+      276
+    ],
+    "parent_id": 276
+  },
+  "304": {
+    "id": 306,
+    "name": "iShiper123",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "305": {
+    "id": 307,
+    "name": "iShiper members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      306
+    ],
+    "parent_id": 306
+  },
+  "306": {
+    "id": 308,
+    "name": "TMS",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "307": {
+    "id": 309,
+    "name": "TMS members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      308
+    ],
+    "parent_id": 308
+  },
+  "308": {
+    "id": 310,
+    "name": "Ruby",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "309": {
+    "id": 311,
+    "name": "Ruby members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      310
+    ],
+    "parent_id": 310
+  },
+  "310": {
+    "id": 312,
+    "name": "Ruby",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "311": {
+    "id": 313,
+    "name": "Ruby members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      312
+    ],
+    "parent_id": 312
+  },
+  "312": {
+    "id": 314,
+    "name": "Ruby",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "313": {
+    "id": 315,
+    "name": "Ruby members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      314
+    ],
+    "parent_id": 314
+  },
+  "314": {
+    "id": 316,
+    "name": "PHP",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "315": {
+    "id": 317,
+    "name": "PHP members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      316
+    ],
+    "parent_id": 316
+  },
+  "316": {
+    "id": 318,
+    "name": "Android Tutorial",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "317": {
+    "id": 319,
+    "name": "Android Tutorial members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      318
+    ],
+    "parent_id": 318
+  },
+  "318": {
+    "id": 320,
+    "name": "QA",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "319": {
+    "id": 321,
+    "name": "QA members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      320
+    ],
+    "parent_id": 320
+  },
+  "320": {
+    "id": 322,
+    "name": "Java",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305
+    ],
+    "parent_id": 305
+  },
+  "321": {
+    "id": 323,
+    "name": "Java members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      305,
+      322
+    ],
+    "parent_id": 322
+  },
+  "322": {
+    "id": 324,
+    "name": "Group 4",
+    "description": null,
+    "parent_path": [
+      258,
+      276
+    ],
+    "parent_id": 276
+  },
+  "323": {
+    "id": 325,
+    "name": "Android",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "324": {
+    "id": 326,
+    "name": "Andorid members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324,
+      325
+    ],
+    "parent_id": 325
+  },
+  "325": {
+    "id": 327,
+    "name": "Ruby",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "326": {
+    "id": 328,
+    "name": "Ruby members",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      324,
+      327
+    ],
+    "parent_id": 327
+  },
+  "327": {
+    "id": 329,
+    "name": "FCSP",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "328": {
+    "id": 330,
+    "name": "FCSP members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324,
+      329
+    ],
+    "parent_id": 329
+  },
+  "329": {
+    "id": 331,
+    "name": "WSM",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "330": {
+    "id": 332,
+    "name": "WSM members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324,
+      331
+    ],
+    "parent_id": 331
+  },
+  "331": {
+    "id": 333,
+    "name": "Ruby",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "332": {
+    "id": 334,
+    "name": "Ruby members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324,
+      333
+    ],
+    "parent_id": 333
+  },
+  "333": {
+    "id": 335,
+    "name": "FPOLL",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "334": {
+    "id": 336,
+    "name": "FPOLL members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324,
+      335
+    ],
+    "parent_id": 335
+  },
+  "335": {
+    "id": 337,
+    "name": "PHP",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "336": {
+    "id": 338,
+    "name": "PHP members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324,
+      337
+    ],
+    "parent_id": 337
+  },
+  "337": {
+    "id": 339,
+    "name": "Others",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324
+    ],
+    "parent_id": 324
+  },
+  "338": {
+    "id": 340,
+    "name": "Others members",
+    "description": null,
+    "parent_path": [
+      258,
+      276,
+      324,
+      339
+    ],
+    "parent_id": 339
+  },
+  "339": {
+    "id": 341,
+    "name": "Back Office",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "340": {
+    "id": 342,
+    "name": "Back Office",
+    "description": "",
+    "parent_path": [
+      341
+    ],
+    "parent_id": 341
+  },
+  "341": {
+    "id": 343,
+    "name": "Personel",
+    "description": null,
+    "parent_path": [
+      341,
+      342
+    ],
+    "parent_id": 342
+  },
+  "342": {
+    "id": 344,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      341,
+      342,
+      343
+    ],
+    "parent_id": 343
+  },
+  "343": {
+    "id": 346,
+    "name": "Accounting",
+    "description": null,
+    "parent_path": [
+      341,
+      342
+    ],
+    "parent_id": 342
+  },
+  "344": {
+    "id": 347,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      341,
+      342,
+      346
+    ],
+    "parent_id": 346
+  },
+  "345": {
+    "id": 348,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      341,
+      342,
+      346,
+      347
+    ],
+    "parent_id": 347
+  },
+  "346": {
+    "id": 349,
+    "name": "General Affairs",
+    "description": null,
+    "parent_path": [
+      341,
+      342
+    ],
+    "parent_id": 342
+  },
+  "347": {
+    "id": 350,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      341,
+      342,
+      349
+    ],
+    "parent_id": 349
+  },
+  "348": {
+    "id": 351,
+    "name": "Team 1 members",
+    "description": null,
+    "parent_path": [
+      341,
+      342,
+      349,
+      350
+    ],
+    "parent_id": 350
+  },
+  "349": {
+    "id": 352,
+    "name": "Legal",
+    "description": null,
+    "parent_path": [
+      341,
+      342
+    ],
+    "parent_id": 342
+  },
+  "350": {
+    "id": 353,
+    "name": "Team 1",
+    "description": null,
+    "parent_path": [
+      341,
+      342,
+      352
+    ],
+    "parent_id": 352
+  },
+  "351": {
+    "id": 355,
+    "name": "JAVA",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      324,
+      335,
+      336
+    ],
+    "parent_id": 336
+  },
+  "352": {
+    "id": 356,
+    "name": "JAVA members",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      324,
+      335,
+      336,
+      355
+    ],
+    "parent_id": 355
+  },
+  "353": {
+    "id": 357,
+    "name": "R&D Lab",
+    "description": "R&D Lab",
+    "parent_path": [
+      248,
+      249,
+      253,
+      256
+    ],
+    "parent_id": 256
+  },
+  "354": {
+    "id": 358,
+    "name": "Test_PhuongNT",
+    "description": "Nhóm này để test",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "355": {
+    "id": 359,
+    "name": "Test1",
+    "description": "",
+    "parent_path": [
+      358
+    ],
+    "parent_id": 358
+  },
+  "356": {
+    "id": 360,
+    "name": "test2",
+    "description": "",
+    "parent_path": [
+      358
+    ],
+    "parent_id": 358
+  },
+  "357": {
+    "id": 361,
+    "name": "DIV_TEST fgas",
+    "description": "test fgas",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "358": {
+    "id": 362,
+    "name": "DIV Test _ Sec 1",
+    "description": "a",
+    "parent_path": [
+      361
+    ],
+    "parent_id": 361
+  },
+  "359": {
+    "id": 363,
+    "name": "Group 1",
+    "description": "",
+    "parent_path": [
+      361,
+      362
+    ],
+    "parent_id": 362
+  },
+  "360": {
+    "id": 364,
+    "name": "Group 2",
+    "description": "",
+    "parent_path": [
+      361,
+      362
+    ],
+    "parent_id": 362
+  },
+  "361": {
+    "id": 365,
+    "name": "Team 1",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      363
+    ],
+    "parent_id": 363
+  },
+  "362": {
+    "id": 366,
+    "name": "Team 2",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      363
+    ],
+    "parent_id": 363
+  },
+  "363": {
+    "id": 367,
+    "name": "Team 3",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      364
+    ],
+    "parent_id": 364
+  },
+  "364": {
+    "id": 368,
+    "name": "Team 4",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      364
+    ],
+    "parent_id": 364
+  },
+  "365": {
+    "id": 369,
+    "name": "Team member\r\n",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      363,
+      365
+    ],
+    "parent_id": 365
+  },
+  "366": {
+    "id": 370,
+    "name": "Team member 123",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      363,
+      366
+    ],
+    "parent_id": 366
+  },
+  "367": {
+    "id": 371,
+    "name": "Team member",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      364,
+      367
+    ],
+    "parent_id": 367
+  },
+  "368": {
+    "id": 372,
+    "name": "Team member",
+    "description": "",
+    "parent_path": [
+      361,
+      362,
+      364,
+      368
+    ],
+    "parent_id": 368
+  },
+  "369": {
+    "id": 374,
+    "name": "Test_HienTT",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "370": {
+    "id": 375,
+    "name": "Group I.1",
+    "description": "",
+    "parent_path": [
+      374
+    ],
+    "parent_id": 374
+  },
+  "371": {
+    "id": 376,
+    "name": "Group I.2",
+    "description": "",
+    "parent_path": [
+      374,
+      375
+    ],
+    "parent_id": 375
+  },
+  "372": {
+    "id": 378,
+    "name": "Group I.1.1",
+    "description": "",
+    "parent_path": [
+      374
+    ],
+    "parent_id": 374
+  },
+  "373": {
+    "id": 391,
+    "name": "aaa",
+    "description": "27einhdw",
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "374": {
+    "id": 399,
+    "name": "Group I 1.2",
+    "description": "",
+    "parent_path": [
+      374,
+      378
+    ],
+    "parent_id": 378
+  },
+  "375": {
+    "id": 401,
+    "name": "Test",
+    "description": "",
+    "parent_path": [
+      358,
+      360
+    ],
+    "parent_id": 360
+  },
+  "376": {
+    "id": 407,
+    "name": "Hong_TEST",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "377": {
+    "id": 409,
+    "name": "Team 2",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "378": {
+    "id": 410,
+    "name": "Group 3",
+    "description": "",
+    "parent_path": [
+      374,
+      375,
+      376
+    ],
+    "parent_id": 376
+  },
+  "379": {
+    "id": 415,
+    "name": "Group test_2",
+    "description": "Group test_2",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "380": {
+    "id": 417,
+    "name": "Group Test 1.2",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "381": {
+    "id": 419,
+    "name": "Group 1.1.1",
+    "description": "Group 1.1.1",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "382": {
+    "id": 420,
+    "name": "Group Teste 2.1",
+    "description": "cvbn",
+    "parent_path": [
+      427,
+      428,
+      430
+    ],
+    "parent_id": 430
+  },
+  "383": {
+    "id": 423,
+    "name": "Group 2",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "384": {
+    "id": 424,
+    "name": "AB",
+    "description": "",
+    "parent_path": [
+      423
+    ],
+    "parent_id": 423
+  },
+  "385": {
+    "id": 427,
+    "name": "PhuongTT_TEST",
+    "description": "ptt",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "386": {
+    "id": 428,
+    "name": "PhuongTT_Group1",
+    "description": "",
+    "parent_path": [
+      427
+    ],
+    "parent_id": 427
+  },
+  "387": {
+    "id": 429,
+    "name": "PhuongTT_Group2",
+    "description": "",
+    "parent_path": [
+      427
+    ],
+    "parent_id": 427
+  },
+  "388": {
+    "id": 430,
+    "name": "PhuongTT_Group1.1",
+    "description": "",
+    "parent_path": [
+      427,
+      428
+    ],
+    "parent_id": 428
+  },
+  "389": {
+    "id": 432,
+    "name": "PTT_Group1.1.2",
+    "description": "",
+    "parent_path": [
+      427,
+      428,
+      430,
+      420
+    ],
+    "parent_id": 420
+  },
+  "390": {
+    "id": 442,
+    "name": "DEV_TEST1.1.1.1.1.1.1..1.1.1.1.1.",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "391": {
+    "id": 443,
+    "name": "Hong_Section 1",
+    "description": "",
+    "parent_path": [
+      407
+    ],
+    "parent_id": 407
+  },
+  "392": {
+    "id": 444,
+    "name": "Hong_Section 2",
+    "description": "",
+    "parent_path": [
+      407
+    ],
+    "parent_id": 407
+  },
+  "393": {
+    "id": 445,
+    "name": "Hong_Group 1",
+    "description": "",
+    "parent_path": [
+      407,
+      443
+    ],
+    "parent_id": 443
+  },
+  "394": {
+    "id": 446,
+    "name": "Hong_Group 2\r\n",
+    "description": "",
+    "parent_path": [
+      407,
+      444
+    ],
+    "parent_id": 444
+  },
+  "395": {
+    "id": 447,
+    "name": "Hong_Team 1\r\n",
+    "description": "",
+    "parent_path": [
+      407,
+      443,
+      445
+    ],
+    "parent_id": 445
+  },
+  "396": {
+    "id": 449,
+    "name": "H1",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "397": {
+    "id": 450,
+    "name": "H2",
+    "description": "",
+    "parent_path": [
+      449
+    ],
+    "parent_id": 449
+  },
+  "398": {
+    "id": 451,
+    "name": "test fgas123 ahihi 123\r\n",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "399": {
+    "id": 454,
+    "name": "test fgas",
+    "description": "",
+    "parent_path": [
+      62,
+      63
+    ],
+    "parent_id": 63
+  },
+  "400": {
+    "id": 455,
+    "name": "test new group\r\n",
+    "description": "",
+    "parent_path": [
+      62,
+      63,
+      128,
+      131,
+      132
+    ],
+    "parent_id": 132
+  },
+  "401": {
+    "id": 456,
+    "name": "vfv",
+    "description": "",
+    "parent_path": [
+      62,
+      63,
+      95,
+      100,
+      101
+    ],
+    "parent_id": 101
+  },
+  "402": {
+    "id": 457,
+    "name": "test new group\r\n",
+    "description": "",
+    "parent_path": [
+      62,
+      63,
+      102,
+      103,
+      104
+    ],
+    "parent_id": 104
+  },
+  "403": {
+    "id": 458,
+    "name": "test",
+    "description": "",
+    "parent_path": [
+      62,
+      63,
+      95
+    ],
+    "parent_id": 95
+  },
+  "404": {
+    "id": 461,
+    "name": "PTT normal",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "405": {
+    "id": 462,
+    "name": "PTT normal 2",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "406": {
+    "id": 463,
+    "name": "DIV 1\r\n",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "407": {
+    "id": 464,
+    "name": "SECTION 1",
+    "description": "",
+    "parent_path": [
+      463
+    ],
+    "parent_id": 463
+  },
+  "408": {
+    "id": 465,
+    "name": "SECTION 2",
+    "description": "",
+    "parent_path": [
+      463
+    ],
+    "parent_id": 463
+  },
+  "409": {
+    "id": 466,
+    "name": "GROUP 1\r\n",
+    "description": "",
+    "parent_path": [
+      463,
+      464
+    ],
+    "parent_id": 464
+  },
+  "410": {
+    "id": 467,
+    "name": "GROUP 2",
+    "description": "",
+    "parent_path": [
+      463,
+      464
+    ],
+    "parent_id": 464
+  },
+  "411": {
+    "id": 468,
+    "name": "GROUP 1\r\n",
+    "description": "",
+    "parent_path": [
+      463,
+      465
+    ],
+    "parent_id": 465
+  },
+  "412": {
+    "id": 469,
+    "name": "TEAM 1",
+    "description": "",
+    "parent_path": [
+      463,
+      464,
+      466
+    ],
+    "parent_id": 466
+  },
+  "413": {
+    "id": 470,
+    "name": "MEMBER",
+    "description": "",
+    "parent_path": [
+      463,
+      464,
+      466,
+      469
+    ],
+    "parent_id": 469
+  },
+  "414": {
+    "id": 471,
+    "name": "SUPPORTER",
+    "description": "",
+    "parent_path": [
+      463,
+      464,
+      466,
+      469,
+      470
+    ],
+    "parent_id": 470
+  },
+  "415": {
+    "id": 472,
+    "name": "test_T",
+    "description": "rh",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "416": {
+    "id": 473,
+    "name": "T1",
+    "description": "",
+    "parent_path": [
+      472
+    ],
+    "parent_id": 472
+  },
+  "417": {
+    "id": 474,
+    "name": "T2",
+    "description": "",
+    "parent_path": [
+      472
+    ],
+    "parent_id": 472
+  },
+  "418": {
+    "id": 476,
+    "name": "Back office\r\n",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "419": {
+    "id": 477,
+    "name": "Hong_team1_1",
+    "description": "",
+    "parent_path": [
+      407,
+      443,
+      445,
+      447
+    ],
+    "parent_id": 447
+  },
+  "420": {
+    "id": 478,
+    "name": "test add sub-group fgas\r\n",
+    "description": "",
+    "parent_path": [
+      361
+    ],
+    "parent_id": 361
+  },
+  "421": {
+    "id": 479,
+    "name": "123",
+    "description": "",
+    "parent_path": [
+      361,
+      478
+    ],
+    "parent_id": 478
+  },
+  "422": {
+    "id": 480,
+    "name": "PTT_17/10",
+    "description": "none",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "423": {
+    "id": 481,
+    "name": "Section",
+    "description": "",
+    "parent_path": [
+      480
+    ],
+    "parent_id": 480
+  },
+  "424": {
+    "id": 482,
+    "name": "Member 1",
+    "description": "",
+    "parent_path": [
+      480,
+      481
+    ],
+    "parent_id": 481
+  },
+  "425": {
+    "id": 483,
+    "name": "HONGPTT",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "426": {
+    "id": 484,
+    "name": "FGAS test sub group mar 30",
+    "description": "ahihi",
+    "parent_path": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "parent_id": 5
+  },
+  "427": {
+    "id": 485,
+    "name": "SM",
+    "description": "",
+    "parent_path": [
+      483
+    ],
+    "parent_id": 483
+  },
+  "428": {
+    "id": 486,
+    "name": "FGAS test sub group 2",
+    "description": "ahihi",
+    "parent_path": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      484
+    ],
+    "parent_id": 484
+  },
+  "429": {
+    "id": 487,
+    "name": "FGAS test sub group 3",
+    "description": "",
+    "parent_path": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      484,
+      486
+    ],
+    "parent_id": 486
+  },
+  "430": {
+    "id": 488,
+    "name": "Member lower",
+    "description": "",
+    "parent_path": [
+      1,
+      2,
+      34,
+      42,
+      45,
+      46
+    ],
+    "parent_id": 46
+  },
+  "431": {
+    "id": 489,
+    "name": "Test group",
+    "description": "",
+    "parent_path": [
+      1,
+      41,
+      47,
+      50,
+      51
+    ],
+    "parent_id": 51
+  },
+  "432": {
+    "id": 490,
+    "name": "Tesst Fgas 142056",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "433": {
+    "id": 491,
+    "name": "tesst ă\r\n",
+    "description": "",
+    "parent_path": [
+      490
+    ],
+    "parent_id": 490
+  },
+  "434": {
+    "id": 492,
+    "name": "Front - child",
+    "description": "",
+    "parent_path": [
+      214,
+      215,
+      233,
+      240,
+      241
+    ],
+    "parent_id": 241
+  },
+  "435": {
+    "id": 495,
+    "name": "Pttt1",
+    "description": "",
+    "parent_path": [
+      62,
+      63,
+      128,
+      135,
+      136
+    ],
+    "parent_id": 136
+  },
+  "436": {
+    "id": 501,
+    "name": "test 3",
+    "description": "",
+    "parent_path": [
+      358
+    ],
+    "parent_id": 358
+  },
+  "437": {
+    "id": 502,
+    "name": "test fgas level 3",
+    "description": "",
+    "parent_path": [
+      358,
+      501
+    ],
+    "parent_id": 501
+  },
+  "438": {
+    "id": 503,
+    "name": "test fgas level 4",
+    "description": "",
+    "parent_path": [
+      358,
+      501,
+      502
+    ],
+    "parent_id": 502
+  },
+  "439": {
+    "id": 505,
+    "name": "PHuongTT2",
+    "description": "",
+    "parent_path": [
+      341,
+      342,
+      346,
+      347,
+      348
+    ],
+    "parent_id": 348
+  },
+  "440": {
+    "id": 510,
+    "name": "2410 PhuongTT 2",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "441": {
+    "id": 513,
+    "name": "PhuongDM",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "442": {
+    "id": 514,
+    "name": "Phuong SM",
+    "description": "",
+    "parent_path": [
+      513
+    ],
+    "parent_id": 513
+  },
+  "443": {
+    "id": 515,
+    "name": "Phuong member",
+    "description": "",
+    "parent_path": [
+      513,
+      514
+    ],
+    "parent_id": 514
+  },
+  "444": {
+    "id": 516,
+    "name": "PDM",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "445": {
+    "id": 517,
+    "name": "PSM",
+    "description": "",
+    "parent_path": [
+      516
+    ],
+    "parent_id": 516
+  },
+  "446": {
+    "id": 518,
+    "name": "PM",
+    "description": "",
+    "parent_path": [
+      516,
+      517
+    ],
+    "parent_id": 517
+  },
+  "447": {
+    "id": 519,
+    "name": " FGAS test 123",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "448": {
+    "id": 520,
+    "name": "FGAS-DEV",
+    "description": "",
+    "parent_path": [
+      519
+    ],
+    "parent_id": 519
+  },
+  "449": {
+    "id": 521,
+    "name": "FGAS-QA",
+    "description": "",
+    "parent_path": [
+      519
+    ],
+    "parent_id": 519
+  },
+  "450": {
+    "id": 522,
+    "name": "QA1",
+    "description": "",
+    "parent_path": [
+      519,
+      521
+    ],
+    "parent_id": 521
+  },
+  "451": {
+    "id": 524,
+    "name": "Leo level 5",
+    "description": "",
+    "parent_path": [
+      1,
+      2,
+      9,
+      14,
+      15
+    ],
+    "parent_id": 15
+  },
+  "452": {
+    "id": 526,
+    "name": "Academy",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      277
+    ],
+    "parent_id": 277
+  },
+  "453": {
+    "id": 527,
+    "name": "edu section - group 2 - new sub group, feb 21 2018",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      286
+    ],
+    "parent_id": 286
+  },
+  "454": {
+    "id": 528,
+    "name": "sub group",
+    "description": "",
+    "parent_path": [
+      258,
+      276,
+      286,
+      527
+    ],
+    "parent_id": 527
+  },
+  "455": {
+    "id": 529,
+    "name": "FGAS test sub group 4444",
+    "description": "",
+    "parent_path": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      484,
+      486,
+      487
+    ],
+    "parent_id": 487
+  },
+  "456": {
+    "id": 531,
+    "name": "FGAS test Mar 12 DM",
+    "description": "",
+    "parent_path": [
+
+    ],
+    "parent_id": null
+  },
+  "457": {
+    "id": 532,
+    "name": "FGAS test Mar 12 SM 1",
+    "description": "",
+    "parent_path": [
+      531
+    ],
+    "parent_id": 531
+  },
+  "458": {
+    "id": 533,
+    "name": "FGAS test Mar 12 GL 1",
+    "description": "",
+    "parent_path": [
+      531,
+      532
+    ],
+    "parent_id": 532
+  },
+  "459": {
+    "id": 535,
+    "name": "FGAS test Mar 14 GL 2",
+    "description": "",
+    "parent_path": [
+      531,
+      532
+    ],
+    "parent_id": 532
+  }
+}

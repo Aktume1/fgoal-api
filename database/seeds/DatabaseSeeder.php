@@ -21,10 +21,12 @@ class DatabaseSeeder extends Seeder
         Quarter::query()->truncate();
         Unit::query()->truncate();
         Objective::query()->truncate();
+        Group::query()->truncate();
 
         $this->call(UsersTableSeeder::class);
         $this->call(WorkspacesTableSeeder::class);
         $this->call(QuartersTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
+        $this->call(GroupsTableSeeder::class);
     }
 }
