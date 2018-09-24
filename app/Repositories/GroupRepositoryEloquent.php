@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Eloquent\Group;
+use App\Eloquent\Log;
 use App\Eloquent\Objective;
 use App\Eloquent\User;
 use App\Contracts\Repositories\GroupRepository;
@@ -110,14 +111,21 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
      */
     public function getInfomationGroup($groupId)
     {
-        return $this->infomationGroup()
-            ->with([
-                'childGroup' => function ($q) {
-                    $q->infomationGroup();
-                },
-            ])
-            ->whereId($groupId)
-            ->firstOrFail();
+        $group = $this->findOrFail($groupId);
+        $user = $group->users;
+        foreach ($user as $row) {
+            $checkManager = User::findOrFail($row->id)->isGroupManager($groupId);
+
+            if ($checkManager) {
+                $row->setAttribute('role', 'admin');
+            } else {
+                $row->setAttribute('role', 'member');
+            }
+        }
+
+        $group->setAttribute('childs_group', $group->childGroup);
+
+        return $group->setAttribute('users', $user);
     }
 
     /**
@@ -131,6 +139,13 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $this->checkUserIsGroupManager($groupId);
         $group = $this->find($groupId);
+
+        Log::create([
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'logable_id' => $userId,
+            'action' => Objective::DELETE,
+        ]);
 
         $group->users()->detach($userId);
     }
@@ -158,6 +173,13 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         $email = $data['email'];
         $user = User::where('email', $email)->get();
+
+        Log::create([
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'logable_id' => $user->id,
+            'action' => Objective::CREATE,
+        ]);
 
         $group->users()->detach($user);
         $group->users()->attach($user, ['manager' => $data['role']]);
@@ -223,5 +245,18 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             ->audits;
 
         return $group;
+    }
+
+    /**
+     * Get logs of group
+     *
+     * @param int $groupId
+     * @return $group
+     */
+    public function getLogsGroup($groupId)
+    {
+        $logs = Log::where('group_id', $groupId)->get();
+
+        return $logs;
     }
 }

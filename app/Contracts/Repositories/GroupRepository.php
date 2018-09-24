@@ -19,4 +19,6 @@ interface GroupRepository extends AbstractRepository
     public function getProcessById($groupId);
     
     public function getLogGroup($groupId);
+
+    public function getLogsGroup($groupId);
 }
