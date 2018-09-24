@@ -19,8 +19,8 @@ class Api
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -30,6 +30,7 @@ class Api
         if (!$userFromToken) {
             throw new UnknownException(translate('http_message.unauthorized'), 401);
         }
+
         Auth::guard('fauth')->setUser($userFromToken);
 
         return $next($request);

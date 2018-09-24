@@ -89,11 +89,11 @@ class User extends Authenticatable
         if ($group->type == Group::USER_GROUP && $group->code == $this->code) {
             return true;
 
-        // Is if userId logged in array userId from parent_path
+            // Is if userId logged in array userId from parent_path
         } elseif ($group->type != Group::USER_GROUP && isset($userFromPath) && in_array($this->id, $userFromPath)) {
             return true;
 
-        // If userId logged is Admin
+            // If userId logged is Admin
         } elseif ($group->type != Group::USER_GROUP && !isset($userFromPath) && $this->id == User::ADMIN_ID) {
             return true;
         }

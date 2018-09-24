@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Eloquent\ActivityLog;
+use App\Eloquent\Log;
 use App\Eloquent\Objective;
 use App\Contracts\Repositories\ObjectiveRepository;
 use App\Exceptions\Api\NotFoundException;
@@ -42,9 +44,11 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         } else {
             $data['objective_type'] = 'Key Result';
         }
+
         if (!isset($data['description'])) {
             $data['description'] = null;
         }
+
         $objective = $this->model()->create([
             'name' => $data['name'],
             'objectiveable_type' => $data['objective_type'],
@@ -55,9 +59,18 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => $data['parent_id'],
         ]);
 
+        Log::create([
+            'type' => Objective::OBJECTIVE,
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'logable_id' => $objective->id,
+            'action' => Objective::CREATE,
+        ]);
+
         if ($data['objective_type'] != Objective::OBJECTIVE) {
             $this->caculateObjectiveFromChild($groupId, $objective->id);
         }
+
 
         return $this->find($objective->id);
     }
@@ -104,9 +117,23 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             ->where('group_id', $groupId)
             ->firstOrFail();
 
+        $type = $this->checkTypeObjective($objective);
+        $oldActual = $objective->actual;
+
         $objective->update([
             'actual' => $data['actual'],
             'match' => Objective::UNMATCH,
+        ]);
+
+        Log::create([
+            'type' => $type,
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'property' => 'actual',
+            'logable_id' => $objective->id,
+            'action' => Objective::UPDATE,
+            'olds_value' => $oldActual,
+            'news_value' => $data['actual'],
         ]);
 
         return $this->caculateObjectiveFromChild($groupId, $objective->id);
@@ -243,12 +270,39 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('group_id', $groupId)
             ->findOrFail($objectiveId);
 
+        $oldName = $objective->name;
+
         $objective->update([
             'name' => $data,
         ]);
 
+        $type = $this->checkTypeObjective($objective);
+
+        Log::create([
+            'type' => $type,
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'property' => 'name',
+            'logable_id' => $objective->id,
+            'action' => Objective::UPDATE,
+            'olds_value' => $oldName,
+            'news_value' => $data,
+        ]);
+
         return $objective;
     }
+
+    public function checkTypeObjective($objective)
+    {
+        if ($objective->objectiveable_type == Objective::OBJECTIVE) {
+            $type = Objective::OBJECTIVE;
+        } else {
+            $type = Objective::KEYRESULT;
+        }
+
+        return $type;
+    }
+
 
     /**
      * Match Actual With Estimate
@@ -310,7 +364,18 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             }
         }
 
+        $type = $this->checkTypeObjective($objective);
+
+        Log::create([
+            'type' => $type,
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'logable_id' => $objective->id,
+            'action' => Objective::DELETE,
+        ]);
+
         $objective->delete();
+
 
         if ($objective->objectiveable_type != Objective::OBJECTIVE) {
             $this->caculateObjectiveFromChild($groupId, $objectiveId);
