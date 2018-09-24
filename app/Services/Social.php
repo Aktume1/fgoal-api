@@ -47,7 +47,7 @@ class Social implements SocialInterface
         if (isset($response['error'])) {
             throw new NotFoundException($response['error'], 404);
         }
-
+        
         return $response;
     }
 
@@ -88,7 +88,7 @@ class Social implements SocialInterface
         $currentUser->groups()->syncWithoutDetaching($listGroup);
         $currentUser->groups()->updateExistingPivot(last($listGroup), ['manager' => true]);
         $currentUser->workspaces()->syncWithoutDetaching($spaces);
-
+        
         //Return user from database
         return $this->userRepository->where('id', $currentUser->id)->with('groups')->first();
     }

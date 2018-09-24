@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Eloquent\Group;
+use App\Eloquent\Workspace;
 
 class User extends Authenticatable
 {
@@ -32,6 +33,7 @@ class User extends Authenticatable
         'avatar',
         'token_verification',
         'status',
+        
     ];
 
     /**
@@ -73,7 +75,7 @@ class User extends Authenticatable
 
     public function workspaces()
     {
-        return $this->belongsToMany(Workspace::class);
+        return $this->belongsToMany(Workspace::class)->withPivot('is_manager');
     }
 
     /**
@@ -83,23 +85,39 @@ class User extends Authenticatable
     public function isGroupManager($groupId)
     {
         $group = Group::findOrFail($groupId);
+
         $parentPath = $group->parent_path;
+        $workSpaces = $this->workspaces;
+
         $userFromPath = $parentPath ? $this->getUserFromParentPath($parentPath) : null;
+        $userFromWorkspace = $workSpaces ? $this->getUserFromWorkspace($workSpaces) : null;
 
-        // Is group user
-        if ($group->type == Group::USER_GROUP && $group->code == $this->code) {
+        // If userId logged is Admin
+        if (isset($userFromWorkspace) && in_array($this->id, $userFromWorkspace)) {
             return true;
-
-            // Is if userId logged in array userId from parent_path
+        
+        // Is if userId logged in array userId from parent_path
         } elseif ($group->type != Group::USER_GROUP && isset($userFromPath) && in_array($this->id, $userFromPath)) {
             return true;
 
-            // If userId logged is Admin
-        } elseif ($group->type != Group::USER_GROUP && !isset($userFromPath) && $this->id == User::ADMIN) {
+        // Is group user
+        } elseif ($group->type == Group::USER_GROUP && !isset($userFromPath) && $group->code == $this->code) {
             return true;
         }
 
         return false;
+    }
+
+    public function getUserFromWorkspace($workSpaces)
+    {
+        $workspacesUserId = [];
+        foreach ($workSpaces as $workSpace) {
+            if ($workSpace->pivot->is_manager == config('model.workspace.is_manager')) {
+                $workspacesUserId[] = $workSpace->pivot->user_id;
+            }
+        }
+        
+        return $workspacesUserId;
     }
 
     public function getUserFromParentPath($parentPath)
@@ -113,8 +131,8 @@ class User extends Authenticatable
 
         $userArr = [];
         foreach ($groupFromPath as $groupValue) {
-            foreach ($groupValue->users as $value) {
-                $userArr[] = $value->id;
+            foreach ($groupValue->users as $userValue) {
+                $userArr[] = $userValue->id;
             }
         }
 
