@@ -126,8 +126,10 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             $groupUser = $this->where('code', $row->code)->first();
 
             foreach ($groupUser->objectives as $obj) {
-                $weight += $obj->weight;
-                $avg += $obj->actual * $obj->weight;
+                if ($obj->objectiveable_type == Objective::OBJECTIVE) {
+                    $weight += $obj->weight;
+                    $avg += $obj->actual * $obj->weight;
+                }
             }
 
             if (count($groupUser->objectives) == 0) {
