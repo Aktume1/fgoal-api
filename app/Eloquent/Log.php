@@ -13,8 +13,8 @@ class Log extends Model
         'logable_id',
         'action',
         'property',
-        'olds_value',
-        'news_value',
+        'old_value',
+        'new_value',
     ];
 
     protected $hidden = [

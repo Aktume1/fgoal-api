@@ -117,9 +117,9 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             $checkManager = User::findOrFail($row->id)->isGroupManager($groupId);
 
             if ($checkManager) {
-                $row->setAttribute('role', 'admin');
+                $row->setAttribute('role', User::ADMIN);
             } else {
-                $row->setAttribute('role', 'member');
+                $row->setAttribute('role', User::MEMBER);
             }
         }
 
@@ -256,6 +256,11 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     public function getLogsGroup($groupId)
     {
         $logs = Log::where('group_id', $groupId)->get();
+        foreach ($logs as $row) {
+            $objective = Objective::findOrFail($row->logable_id);
+            $name = $objective->name;
+            $row->setAttribute('objective_name', $name);
+        }
 
         return $logs;
     }
