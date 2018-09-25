@@ -195,10 +195,29 @@ class GroupController extends ApiController
         });
     }
 
+    /**
+     * Get logs group
+     *
+     * @param int $groupId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
     public function getLogsGroup($groupId)
     {
         return $this->getData(function () use ($groupId) {
             $this->compacts['data'] = $this->repository->getLogsGroup($groupId);
+        });
+    }
+
+    /**
+     * @param int $groupId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function checkAdminGroup($groupId, $userId)
+    {
+        return $this->getData(function () use ($groupId, $userId) {
+            $this->compacts['data'] = $this->repository->checkAdminGroup($groupId, $userId);
         });
     }
 }

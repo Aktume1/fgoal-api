@@ -113,6 +113,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $group = $this->findOrFail($groupId);
         $user = $group->users;
+        $weight = $avg = 0;
         foreach ($user as $row) {
             $checkManager = User::findOrFail($row->id)->isGroupManager($groupId);
 
@@ -120,6 +121,19 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
                 $row->setAttribute('role', User::ADMIN);
             } else {
                 $row->setAttribute('role', User::MEMBER);
+            }
+
+            $groupUser = $this->where('code', $row->code)->first();
+
+            foreach ($groupUser->objectives as $obj) {
+                $weight += $obj->weight;
+                $avg += $obj->actual * $obj->weight;
+            }
+
+            if (count($groupUser->objectives) == 0) {
+                $row->setAttribute('process', 0);
+            } else {
+                $row->setAttribute('process', $avg / $weight);
             }
         }
 
@@ -263,5 +277,14 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         }
 
         return $logs;
+    }
+
+    public function checkAdminGroup($groupId, $userId)
+    {
+        $user = User::findOrFail($userId);
+
+        $check = $user->isGroupManager($groupId);
+
+        return $check;
     }
 }
