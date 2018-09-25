@@ -132,8 +132,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'property' => 'actual',
             'logable_id' => $objective->id,
             'action' => Objective::UPDATE,
-            'olds_value' => $oldActual,
-            'news_value' => $data['actual'],
+            'old_value' => $oldActual,
+            'new_value' => $data['actual'],
         ]);
 
         return $this->caculateObjectiveFromChild($groupId, $objective->id);
@@ -285,8 +285,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'property' => 'name',
             'logable_id' => $objective->id,
             'action' => Objective::UPDATE,
-            'olds_value' => $oldName,
-            'news_value' => $data,
+            'old_value' => $oldName,
+            'new_value' => $data,
         ]);
 
         return $objective;

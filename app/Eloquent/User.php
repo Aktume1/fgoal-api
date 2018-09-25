@@ -11,7 +11,8 @@ class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
-    const ADMIN_ID = 1;
+    const ADMIN = 1;
+    const MEMBER = 0;
 
     /**
      * The attributes that are mass assignable.
@@ -94,7 +95,7 @@ class User extends Authenticatable
             return true;
 
             // If userId logged is Admin
-        } elseif ($group->type != Group::USER_GROUP && !isset($userFromPath) && $this->id == User::ADMIN_ID) {
+        } elseif ($group->type != Group::USER_GROUP && !isset($userFromPath) && $this->id == User::ADMIN) {
             return true;
         }
 
