@@ -20,6 +20,9 @@ class Objective extends Model implements Auditable
     const OBJECTIVE = 'Objective';
     const KEYRESULT = 'Key Result';
 
+    const PROCESS_OFF = 0;
+    const PROCESS_DONE = 100;
+
     const CREATE = 'Create';
     const UPDATE = 'Update';
     const DELETE = 'Delete';

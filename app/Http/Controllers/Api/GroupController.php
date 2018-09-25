@@ -220,5 +220,20 @@ class GroupController extends ApiController
             $this->compacts['data'] = $this->repository->checkAdminGroup($groupId, $userId);
         });
     }
+
+    /**
+     * Get link request
+     *
+     * @param int $groupId
+     * @param int $userId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function getLinkRequest($groupId)
+    {
+        return $this->getData(function () use ($groupId) {
+            $this->compacts['data'] = $this->repository->getLinkRequest($groupId);
+        });
+    }
 }
 

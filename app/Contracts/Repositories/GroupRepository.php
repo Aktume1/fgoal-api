@@ -23,4 +23,6 @@ interface GroupRepository extends AbstractRepository
     public function getLogsGroup($groupId);
 
     public function checkAdminGroup($groupId, $userId);
+
+    public function getLinkRequest($groupId);
 }

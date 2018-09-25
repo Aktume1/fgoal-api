@@ -18,13 +18,6 @@ return [
             'member' => 0,
         ],
     ],
-    'objective' => [
-        'process' => [
-            'off' => 0,
-            'inprocess' => 1,
-            'done' => 2,
-        ],
-    ],
     'workspace' => [
         'is_manager' => 1,
     ]

@@ -139,8 +139,6 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             }
         }
 
-        $group->setAttribute('childs_group', $group->childGroup);
-
         return $group->setAttribute('users', $user);
     }
 
@@ -225,26 +223,34 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     public function getProcessById($groupId)
     {
         $off = $inprocess = $done = 0;
+        $process = $totalObjectives = 0;
+
 
         $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
 
         foreach ($objectives as $objective) {
-            if ($objective->process == config('model.objective.process.off')) {
-                $off += 1;
-            } elseif ($objective->process == config('model.objective.process.inprocess')) {
-                $inprocess += 1;
-            } else {
-                $done += 1;
+            if ($objective->objectiveable_type == Objective::OBJECTIVE) {
+                $processObjective = $objective->actual;
+
+                if ($processObjective == Objective::PROCESS_OFF) {
+                    $off += 1;
+                } elseif ($processObjective == Objective::PROCESS_DONE) {
+                    $done += 1;
+                } else {
+                    $inprocess += 1;
+                }
+
+                $totalObjectives += 1;
             }
         }
 
-        $totalObjectives = $objectives->count();
+        if ($totalObjectives > 0) {
+            $off = $off / $totalObjectives;
+            $inprocess = $inprocess / $totalObjectives;
+            $done = $done / $totalObjectives;
 
-        $off = $off / $totalObjectives;
-        $inprocess = $inprocess / $totalObjectives;
-        $done = $done / $totalObjectives;
-
-        $process = [$off, $inprocess, $done];
+            $process = [$off, $inprocess, $done];
+        }
 
         return $process;
     }
@@ -288,5 +294,20 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         $check = $user->isGroupManager($groupId);
 
         return $check;
+    }
+
+    public function getLinkRequest($groupId)
+    {
+        $group = $this->findOrFail($groupId);
+
+        foreach ($group->objectives as $objective) {
+            if ($objective->objectiveable_type == Objective::KEYRESULT) {
+                $list[] = $objective->id;
+            }
+        }
+
+        $array = Objective::whereIn('parent_id', $list)->where('status', Objective::WAITING)->get();
+
+        return $array;
     }
 }
