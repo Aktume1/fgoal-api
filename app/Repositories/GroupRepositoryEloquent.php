@@ -321,6 +321,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
                 $array = Objective::where('parent_id', $objective->id)->where('status', Objective::WAITING)->get();
 
                 if (count($array) > 0) {
+                    $objective->setAttribute('parent_objective', $objective->parentObjective);
+
                     $list[] = $objective->setAttribute('link_request', $array);
                 }
             }
@@ -333,6 +335,6 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $group = $this->findOrFail($groupId);
         $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
-        
+
     }
 }
