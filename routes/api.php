@@ -31,6 +31,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::post('groups/{groupId}/add_member', 'GroupController@addMemberGroup');
         Route::get('groups/{groupId}/logs', 'GroupController@getLogsGroup');
         Route::get('groups/{groupId}/check_admin/{userId}', 'GroupController@checkAdminGroup');
+        Route::get('groups/{groupId}/get_request_link', 'GroupController@getLinkRequest');
 
         Route::resource('groups.objectives', 'ObjectiveController');
         Route::get('groups/{groupId}/objectives/{objectiveId}/detail', 'ObjectiveController@showObjective');
