@@ -119,6 +119,13 @@ class GroupController extends ApiController
         });
     }
 
+    public function getChildGroupsInfor($groupId)
+    {
+        return $this->getData(function () use ($groupId) {
+            $this->compacts['data'] = $this->repository->getChildGroups($groupId);
+        });
+    }
+
     /**
      * @param $groupId
      * @param $userId

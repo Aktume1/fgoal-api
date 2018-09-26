@@ -142,6 +142,13 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         return $group->setAttribute('users', $user);
     }
 
+    public function getChildGroups($groupId)
+    {
+        $group = $this->findOrFail($groupId);
+
+        return $group->setAttribute('child_group', $group->childGroup);
+    }
+
     /**
      * Delete User From Group
      *
@@ -223,8 +230,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     public function getProcessById($groupId)
     {
         $off = $inprocess = $done = 0;
-        $process = $totalObjectives = 0;
-
+        $totalObjectives = 0;
 
         $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
 
@@ -250,6 +256,9 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             $done = $done / $totalObjectives;
 
             $process = [$off, $inprocess, $done];
+        } else {
+            $noObjecitve = Objective::NO_OBJECTIVE;
+            $process = [$noObjecitve, $noObjecitve, $noObjecitve];
         }
 
         return $process;
