@@ -109,7 +109,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
      * @param  integer $groupId
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getInfomationGroup($groupId)
+    public function getInfomationGroup($groupId, $quarterId)
     {
         $group = $this->findOrFail($groupId);
         $user = $group->users;
@@ -126,7 +126,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             $groupUser = $this->where('code', $row->code)->first();
 
             foreach ($groupUser->objectives as $obj) {
-                if ($obj->objectiveable_type == Objective::OBJECTIVE) {
+
+                if ($obj->objectiveable_type == Objective::OBJECTIVE && $obj->quarter_id == $quarterId) {
                     $weight += $obj->weight;
                     $avg += $obj->actual * $obj->weight;
                 }
@@ -135,7 +136,11 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             if (count($groupUser->objectives) == 0) {
                 $row->setAttribute('process', 0);
             } else {
-                $row->setAttribute('process', $avg / $weight);
+                if ($weight == 0) {
+                    $row->setAttribute('process', 0);
+                } else {
+                    $row->setAttribute('process', $avg / $weight);
+                }
             }
         }
 
@@ -309,17 +314,25 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $group = $this->findOrFail($groupId);
 
+        $list = [];
         foreach ($group->objectives as $objective) {
 
             if ($objective->objectiveable_type == Objective::KEYRESULT) {
                 $array = Objective::where('parent_id', $objective->id)->where('status', Objective::WAITING)->get();
 
-                if(count($array) > 0){
+                if (count($array) > 0) {
                     $list[] = $objective->setAttribute('link_request', $array);
                 }
             }
         }
 
         return $list;
+    }
+
+    public function getTrackingByWeek($groupId)
+    {
+        $group = $this->findOrFail($groupId);
+        $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
+        
     }
 }

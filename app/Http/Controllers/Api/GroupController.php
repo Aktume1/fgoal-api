@@ -112,10 +112,12 @@ class GroupController extends ApiController
      * @param $groupId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getInfomationGroup($groupId)
+    public function getInfomationGroup(Request $request, $groupId)
     {
-        return $this->getData(function () use ($groupId) {
-            $this->compacts['data'] = $this->repository->getInfomationGroup($groupId);
+        $quarterId = $request->quarter;
+
+        return $this->getData(function () use ($groupId, $quarterId) {
+            $this->compacts['data'] = $this->repository->getInfomationGroup($groupId, $quarterId);
         });
     }
 
@@ -240,6 +242,18 @@ class GroupController extends ApiController
     {
         return $this->getData(function () use ($groupId) {
             $this->compacts['data'] = $this->repository->getLinkRequest($groupId);
+        });
+    }
+
+    /**
+     * @param $groupId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function getTracking($groupId)
+    {
+        return $this->getData(function () use ($groupId) {
+            $this->compacts['data'] = $this->repository->getTrackingByWeek($groupId);
         });
     }
 }

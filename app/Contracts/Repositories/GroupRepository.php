@@ -6,7 +6,7 @@ interface GroupRepository extends AbstractRepository
 {
     public function getParentOfGroup($groupId);
 
-    public function getInfomationGroup($groupId);
+    public function getInfomationGroup($groupId, $quarterId);
 
     public function deleteUserFromGroup($groupId, $userId);
 
@@ -27,4 +27,6 @@ interface GroupRepository extends AbstractRepository
     public function getLinkRequest($groupId);
 
     public function getChildGroups($groupId);
+
+    public function getTrackingByWeek($groupId);
 }
