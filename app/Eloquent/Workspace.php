@@ -11,7 +11,7 @@ class Workspace extends Model
         'description',
         'open_time',
         'close_time',
-        'timezone'
+        'timezone',
     ];
 
     protected $hidden = [

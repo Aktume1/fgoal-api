@@ -16,8 +16,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $json = Storage::disk('local')->get('users.json');
+        $jsonUserWorkspace = Storage::disk('local')->get('user_workspaces.json');
 
         $data = json_decode($json, true);
+        $dataUserWorkspace = json_decode($jsonUserWorkspace, true);
 
         foreach ($data as $obj) {
             $listGroup = $this->getGroupDetail($obj);
@@ -41,6 +43,12 @@ class UsersTableSeeder extends Seeder
             $user->groups()->syncWithoutDetaching($listGroup);
             $user->workspaces()->syncWithoutDetaching($listWorkspace);
             $user->groups()->updateExistingPivot(last($listGroup), ['manager' => true]);
+
+            foreach ($dataUserWorkspace as $userWorkSpaceValue) {
+                if ($userWorkSpaceValue['user_id'] == $user->id && $userWorkSpaceValue['is_manager'] == config('model.workspace.is_manager')) {
+                    $user->workspaces()->updateExistingPivot($userWorkSpaceValue['workspace_id'], ['is_manager' => config('model.workspace.is_manager')]);
+                }
+            }
         }
     }
 
