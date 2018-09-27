@@ -232,13 +232,15 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
      * @param int $groupId
      * @return array
      */
-    public function getProcessById($groupId)
+    public function getProcessById($groupId, $quarterId)
     {
         $off = $inprocess = $done = 0;
         $totalObjectives = 0;
 
-        $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
-
+        $objectives = Objective::isObjective()->where('group_id', $groupId)
+                    ->where('quarter_id', $quarterId)
+                    ->get();
+                    
         foreach ($objectives as $objective) {
             if ($objective->objectiveable_type == Objective::OBJECTIVE) {
                 $processObjective = $objective->actual;

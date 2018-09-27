@@ -190,10 +190,10 @@ class GroupController extends ApiController
      * @return \Illuminate\Http\JsonResponse
      * @throws \App\Exceptions\Api\UnknownException
      */
-    public function getProcessByGroupId($groupId)
+    public function getProcessByGroupId($groupId, $quarterId)
     {
-        return $this->getData(function () use ($groupId) {
-            $this->compacts['data'] = $this->repository->getProcessById($groupId);
+        return $this->getData(function () use ($groupId, $quarterId) {
+            $this->compacts['data'] = $this->repository->getProcessById($groupId, $quarterId);
         });
     }
     
