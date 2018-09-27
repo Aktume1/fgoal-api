@@ -16,7 +16,7 @@ interface GroupRepository extends AbstractRepository
 
     public function getGroupByCode($code);
 
-    public function getProcessById($groupId);
+    public function getProcessById($groupId, $quarterId);
     
     public function getLogGroup($groupId);
 
