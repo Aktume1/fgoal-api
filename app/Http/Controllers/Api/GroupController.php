@@ -253,7 +253,7 @@ class GroupController extends ApiController
     public function getTracking($groupId)
     {
         return $this->getData(function () use ($groupId) {
-            $this->compacts['data'] = $this->repository->getTrackingByWeek($groupId);
+            $this->compacts['data'] = $this->repository->getTrackingByWeek($groupId, 4);
         });
     }
 }

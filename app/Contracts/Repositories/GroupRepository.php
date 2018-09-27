@@ -28,5 +28,5 @@ interface GroupRepository extends AbstractRepository
 
     public function getChildGroups($groupId);
 
-    public function getTrackingByWeek($groupId);
+    public function getTrackingByWeek($groupId, $quarterId);
 }

@@ -5,11 +5,15 @@ namespace App\Repositories;
 use App\Eloquent\Group;
 use App\Eloquent\Log;
 use App\Eloquent\Objective;
+use App\Eloquent\Quarter;
+use App\Eloquent\Tracking;
 use App\Eloquent\User;
 use App\Contracts\Repositories\GroupRepository;
 use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\UnknownException;
 use Auth;
+use DB;
+use Carbon\Carbon;
 
 class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements GroupRepository
 {
@@ -318,12 +322,12 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         foreach ($group->objectives as $objective) {
 
             if ($objective->objectiveable_type == Objective::KEYRESULT) {
-                $array = Objective::where('parent_id', $objective->id)->where('status', Objective::WAITING)->get();
+                $array = Objective::where('parent_id', $objective->id)->where('status', Objective::WAITING)->with('group')->get();
 
                 if (count($array) > 0) {
                     $objective->setAttribute('parent_objective', $objective->parentObjective);
-
                     $list[] = $objective->setAttribute('link_request', $array);
+
                 }
             }
         }
@@ -331,10 +335,71 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         return $list;
     }
 
-    public function getTrackingByWeek($groupId)
+    public function getTrackingByWeek($groupId, $quarterId)
     {
-        $group = $this->findOrFail($groupId);
-        $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
+        $time = Quarter::where('id', $quarterId)->first();
+        $data = [];
 
+        $trackings = DB::table('group_tracking')
+            ->where('group_id', $groupId)
+            ->whereBetween('date', array($time['start_date'], $time['end_date']))
+            ->get();
+
+        foreach ($trackings as $row) {
+            $data[] = $row->actual;
+        }
+
+        return $data;
+    }
+
+    public function trackingByWeek()
+    {
+        $month = Carbon::today()->month;
+        if (0 < $month && $month < 4) {
+            $quarterId = 1;
+        } elseif (3 < $month && $month < 7) {
+            $quarterId = 2;
+        } elseif (6 < $month && $month < 10) {
+            $quarterId = 3;
+        } else {
+            $quarterId = 4;
+        }
+
+        $time = Quarter::where('id', $quarterId)->first();
+
+        $trackings = DB::table('group_tracking')->whereBetween('date',
+            array($time['start_date'], $time['end_date']))
+            ->get();
+
+        $groups = $this->where('type', Group::USER_GROUP)->get();
+        foreach ($groups as $group) {
+            $actual = $this->getActual($group->id);
+
+            $group->trackings()->attach(
+                count($trackings) + 1,
+                [
+                    'actual' => $actual,
+                    'date' => Carbon::today()->toDateString(),
+                ]);
+        }
+    }
+
+    public function getActual($groupId)
+    {
+        $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
+        $weight = $avg = $data = 0;
+        foreach ($objectives as $obj) {
+
+            if ($obj->objectiveable_type == Objective::OBJECTIVE) {
+                $weight += $obj->weight;
+                $avg += $obj->actual * $obj->weight;
+            }
+        }
+
+        if ($weight > 0) {
+            $data = $avg / $weight;
+        }
+
+        return $data;
     }
 }

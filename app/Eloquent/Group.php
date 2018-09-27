@@ -32,6 +32,13 @@ class Group extends Model implements Auditable
             ->withTimestamps();
     }
 
+    public function trackings()
+    {
+        return $this->belongsToMany(User::class, 'group_tracking', 'group_id', 'tracking_id')
+            ->withPivot('actual')
+            ->withPivot('date');
+    }
+
     public function objectives()
     {
         return $this->hasMany(Objective::class, 'group_id', 'id');
