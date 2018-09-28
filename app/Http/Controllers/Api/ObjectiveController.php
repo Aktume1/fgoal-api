@@ -231,5 +231,43 @@ class ObjectiveController extends ApiController
             $this->compacts['description'] = translate('success.verify_link');
         });
     }
+
+    /**
+     * Verify all links request
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\ActionException
+     * @throws \App\Exceptions\Api\NotFoundException
+     * @throws \App\Exceptions\Api\NotOwnerException
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function verifyAllLinkRequest($groupId, $objectiveId)
+    {
+        return $this->doAction(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->verifyAllLink($groupId, $objectiveId);
+            $this->compacts['description'] = translate('success.verify_link');
+        });
+    }
+
+    /**
+     * remove all links request
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\ActionException
+     * @throws \App\Exceptions\Api\NotFoundException
+     * @throws \App\Exceptions\Api\NotOwnerException
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function removeAllLinkRequest($groupId, $objectiveId)
+    {
+        return $this->doAction(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->removeAllLink($groupId, $objectiveId);
+            $this->compacts['description'] = translate('success.cancel_link');
+        });
+    }
 }
 
