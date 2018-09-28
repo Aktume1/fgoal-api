@@ -192,11 +192,11 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function linkObjectiveToKeyResult($groupId, $data)
     {
-        $this->checkUserIsGroupManager($groupId);
-
         $objective = $this->isObjective()
             ->where('id', $data['objectiveId'])
             ->firstOrFail();
+
+        $this->checkUserIsGroupManager($objective->group_id);
 
         $keyResult = $this->isKeyResult()
             ->where('id', $data['keyResultId'])
