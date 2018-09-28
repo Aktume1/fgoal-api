@@ -147,13 +147,16 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function caculateObjectiveFromChild($groupId, $objectiveId)
     {
         $objective = $this->withTrashed()->findOrFail($objectiveId);
+
         $parentObjective = $objective->parentObjective;
 
         if (!$parentObjective) {
             return $objective;
         }
 
-        $sum = $parentObjective->childObjective->sum(function ($objective) {
+        $childs = $parentObjective->childObjective()->where('status', '<>', Objective::WAITING)->get();
+
+        $sum = $childs->sum(function ($objective) {
             return $objective->actual * $objective->weight;
         });
 
@@ -161,7 +164,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         if ($childObjectiveCount == 0) {
             $estimate = 0;
         } else {
-            $estimate = (int)($sum / $parentObjective->childObjective->count());
+            $estimate = (int)($sum / $childs->count());
         }
 
         if ($parentObjective->match != Objective::MATCH) {
@@ -189,6 +192,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function linkObjectiveToKeyResult($groupId, $data)
     {
+        $this->checkUserIsGroupManager($groupId);
+
         $objective = $this->isObjective()
             ->where('id', $data['objectiveId'])
             ->firstOrFail();
@@ -215,7 +220,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function verifyLinkObj($groupId, $objectiveId)
     {
-//        $this->checkUserIsGroupManager($groupId);
+        $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->findOrFail($objectiveId);
 
