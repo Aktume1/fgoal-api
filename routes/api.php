@@ -34,7 +34,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::get('groups/{groupId}/check_admin/{userId}', 'GroupController@checkAdminGroup');
         Route::get('groups/{groupId}/get_request_link', 'GroupController@getLinkRequest');
         Route::get('groups/{groupId}/tracking', 'GroupController@getTracking');
-
+        Route::patch('groups/{groupId}/objectives/{objectiveId}/remove_all', 'ObjectiveController@removeAllLinkRequest');
         Route::resource('groups.objectives', 'ObjectiveController');
         Route::get('groups/{groupId}/objectives/{objectiveId}/detail', 'ObjectiveController@showObjective');
         Route::post('groups/{groupId}/objectives/link_objective', 'ObjectiveController@linkObjective');
@@ -43,6 +43,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::patch('groups/{groupId}/objectives/{id}/match_actual', 'ObjectiveController@matchActualWithEstimate');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/name', 'ObjectiveController@updateContent');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/verify_link', 'ObjectiveController@verifyLinkObjective');
+        Route::patch('groups/{groupId}/objectives/{objectiveId}/verify_all', 'ObjectiveController@verifyAllLinkRequest');
+
 
         Route::resource('quarters', 'QuarterController');
 

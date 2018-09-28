@@ -207,16 +207,15 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     }
 
     /**
-     * Manger verify objective linked
+     * Check verify common
      *
      * @param int $groupId
-     * @param in t$objectiveId
-     * @return Objetive
+     * @param int $objectiveId
      * @throws UnknownException
      */
-    public function verifyLink($groupId, $objectiveId)
+    public function verifyLinkObj($groupId, $objectiveId)
     {
-        $this->checkUserIsGroupManager($groupId);
+//        $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->findOrFail($objectiveId);
 
@@ -225,19 +224,52 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         ]);
 
         $this->caculateObjectiveFromChild($groupId, $objectiveId);
-
-        return $objective->parentObjective;
     }
 
     /**
-     * Update link objective to null
+     * Manger verify objective linked
      *
      * @param int $groupId
-     * @param int $objectiveId
+     * @param int t$objectiveId
      * @return Objective
      * @throws UnknownException
      */
-    public function removeLinkedObjective($groupId, $objectiveId)
+    public function verifyLink($groupId, $objectiveId)
+    {
+        $this->verifyLinkObj($groupId, $objectiveId);
+
+        return $this->findOrFail($objectiveId);
+    }
+
+    /**
+     * Verify all objectives link to keyresult
+     *
+     * @param int $groupId
+     * @param int $keyResultId
+     * @throws UnknownException
+     */
+    public function verifyAllLink($groupId, $keyResultId)
+    {
+        $keyResult = $this->findOrFail($keyResultId);
+
+        $objectivejLink = $keyResult->childObjective;
+
+        foreach ($objectivejLink as $objective) {
+            $this->verifyLinkObj($groupId, $objective->id);
+        }
+
+        return $keyResult;
+    }
+
+    /**
+     * Remove link common
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return mixed
+     * @throws UnknownException
+     */
+    public function removeLinkObj($groupId, $objectiveId)
     {
         $this->checkUserIsGroupManager($groupId);
 
@@ -252,8 +284,41 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => null,
             'link' => null,
         ]);
+    }
 
-        return $objective;
+    /**
+     * Update link objective to null
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return Objective
+     * @throws UnknownException
+     */
+    public function removeLinkedObjective($groupId, $objectiveId)
+    {
+        $this->removeLinkObj($groupId, $objectiveId);
+
+        return $this->findOrFail($objectiveId);
+    }
+
+    /**
+     * Remove all objectives link to keyresult
+     *
+     * @param int $groupId
+     * @param int $keyResultId
+     * @throws UnknownException
+     */
+    public function removeAllLink($groupId, $keyResultId)
+    {
+        $keyResult = $this->findOrFail($keyResultId);
+
+        $objectivejLink = $keyResult->childObjective;
+
+        foreach ($objectivejLink as $objective) {
+            $this->removeLinkObj($groupId, $objective->id);
+        }
+
+        return $this->findOrFail($keyResultId);
     }
 
     /**

@@ -22,6 +22,10 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function verifyLink($groupId, $objectiveId);
 
+    public function verifyAllLink($groupId, $keyResultId);
+
+    public function removeAllLink($groupId, $keyResultId);
+
     public function removeLinkedObjective($groupId, $objectiveId);
 
     public function matchActualWithEstimate($groupId, $objectiveId);
