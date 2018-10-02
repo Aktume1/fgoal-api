@@ -344,11 +344,11 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         $trackings = DB::table('group_tracking')
             ->where('group_id', $groupId)
-            ->whereBetween('date', array($time['start_date'], $time['end_date']))
+            ->whereBetween('date', [$time['start_date'], $time['end_date']])
             ->get();
 
-        foreach ($trackings as $row) {
-            $data[] = $row->actual;
+        foreach ($trackings as $tracking) {
+            $data[] = $tracking->actual;
         }
 
         return $data;
@@ -369,9 +369,9 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         $time = Quarter::where('id', $quarterId)->first();
 
-        $trackings = DB::table('group_tracking')->whereBetween('date',
-            array($time['start_date'], $time['end_date']))
-            ->get();
+        $trackings = DB::table('group_tracking')
+                ->whereBetween('date', [$time['start_date'], $time['end_date']])
+                ->get();
 
         $groups = $this->where('type', Group::USER_GROUP)->get();
         foreach ($groups as $group) {
@@ -382,7 +382,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
                 [
                     'actual' => $actual,
                     'date' => Carbon::today()->toDateString(),
-                ]);
+                ]
+            );
         }
     }
 
@@ -391,7 +392,6 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         $objectives = Objective::isObjective()->where('group_id', $groupId)->get();
         $weight = $avg = $data = 0;
         foreach ($objectives as $obj) {
-
             if ($obj->objectiveable_type == Objective::OBJECTIVE) {
                 $weight += $obj->weight;
                 $avg += $obj->actual * $obj->weight;

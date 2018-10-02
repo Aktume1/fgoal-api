@@ -250,11 +250,10 @@ class GroupController extends ApiController
      * @return \Illuminate\Http\JsonResponse
      * @throws \App\Exceptions\Api\UnknownException
      */
-    public function getTracking($groupId)
+    public function getTracking($groupId, $quarterId)
     {
         return $this->getData(function () use ($groupId) {
-            $this->compacts['data'] = $this->repository->getTrackingByWeek($groupId, 4);
+            $this->compacts['data'] = $this->repository->getTrackingByWeek($groupId, $quarterId);
         });
     }
 }
-
