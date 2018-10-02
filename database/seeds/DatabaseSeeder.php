@@ -6,6 +6,7 @@ use App\Eloquent\User;
 use App\Eloquent\Quarter;
 use App\Eloquent\Unit;
 use App\Eloquent\Objective;
+use App\Eloquent\Tracking;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,11 +23,13 @@ class DatabaseSeeder extends Seeder
         Unit::query()->truncate();
         Objective::query()->truncate();
         Group::query()->truncate();
+        Tracking::query()->truncate();
 
         $this->call(UsersTableSeeder::class);
         $this->call(WorkspacesTableSeeder::class);
         $this->call(QuartersTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
         $this->call(GroupsTableSeeder::class);
+        $this->call(TrackingsTableSeeder::class);
     }
 }
