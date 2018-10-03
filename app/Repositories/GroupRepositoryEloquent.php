@@ -52,6 +52,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             $this->getlinkParent($parent, $listGroup);
 
             $parents = $listGroup['parent_path'];
+           
             $listGroup->setAttribute('link', $this->showLink($parents, $parentName));
 
             $listGroup->makeHidden('parent_path');
@@ -97,6 +98,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $string = '';
         $count = count($parents);
+       
         for ($i = $count - 1; $i >= 0; $i--) {
             $string .= $parents[$i]['name'] . '/';
         }
@@ -403,5 +405,51 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         }
 
         return $data;
+    }
+
+    public function getGroupBySearchName($name)
+    {
+        $groups = $this->where('name', 'like', $name . '%')->get();
+        
+        for ($i = 0; $i < count($groups); $i++) {
+            $data[$i] = $groups[$i];
+            $data[$i]['link'] = $this->showLinkSearch($groups[$i]->id);
+        }
+
+        return $data;
+    }
+
+    public function showLinkSearch($groupId)
+    {
+        $group = $this->findOrFail($groupId);
+        $type = $group->type;
+
+        if ($type == Group::DEFAULT_GROUP) {
+            $parent = $group->parentGroup;
+
+            $listGroup = $parent;
+            $parentName = $group->parentGroup->name;
+
+            $this->getlinkParent($parent, $listGroup);
+
+            $parents = $listGroup['parent_path'];
+
+            return $this->showLink($parents, $parentName);
+        }
+
+        $userCode = $group->code;
+        $userId = User::where('code', $userCode)->firstOrFail()->id;
+        // get list group of group has id = $groupId except it
+        $list = User::findOrFail($userId)->groups()->get()->except($groupId);
+
+        foreach ($list as $item) {
+            $listGroup = $item;
+
+            $this->getlinkParent($item, $listGroup);
+
+            $parents = $item['parent_path'];
+
+            return $this->showLink($parents, $item->name);
+        }
     }
 }
