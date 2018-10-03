@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Eloquent\Group;
 use App\Eloquent\Workspace;
+use DB;
 
 class User extends Authenticatable
 {
@@ -85,6 +86,7 @@ class User extends Authenticatable
     public function isGroupManager($groupId)
     {
         $group = Group::findOrFail($groupId);
+        $arrUserInGroup = DB::table('group_user')->where('group_id', $groupId)->pluck('user_id')->toArray();
 
         $parentPath = $group->parent_path;
         $workSpaces = $this->workspaces;
@@ -92,6 +94,9 @@ class User extends Authenticatable
         $userFromPath = $parentPath ? $this->getUserFromParentPath($parentPath) : null;
         $userFromWorkspace = $workSpaces ? $this->getUserFromWorkspace($workSpaces) : null;
 
+        if (in_array($this->id, $arrUserInGroup)) {
+            return true;
+        }
         // If userId logged is Admin
         if (isset($userFromWorkspace) && in_array($this->id, $userFromWorkspace)) {
             return true;
