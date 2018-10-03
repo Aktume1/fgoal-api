@@ -256,4 +256,19 @@ class GroupController extends ApiController
             $this->compacts['data'] = $this->repository->getTrackingByWeek($groupId, $quarterId);
         });
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function getGroupBySearchName(Request $request)
+    {
+        $searchQuery = $request->query('name');
+        
+        if (isset($searchQuery)) {
+            return $this->getData(function () use ($searchQuery) {
+                $this->compacts['data'] = $this->repository->getGroupBySearchName($searchQuery);
+            });
+        }
+    }
 }
