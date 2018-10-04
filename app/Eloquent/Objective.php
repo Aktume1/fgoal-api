@@ -41,7 +41,6 @@ class Objective extends Model implements Auditable
         'estimate',
         'parent_id',
         'unit_id',
-        'link',
         'group_id',
         'quarter_id',
     ];
