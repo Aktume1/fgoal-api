@@ -216,12 +216,27 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $keyResult = $this->isKeyResult()
             ->where('id', $data['keyResultId'])
             ->firstOrFail();
+        
+        $link = $keyResult->name;
+        $parentObjective = $keyResult->parentObjective;
+
+        while ($parentObjective) {
+            $keyResultParent = $parentObjective->name;
+            $link = $keyResultParent . '/' . $link ;
+            $parentObjective = $this->findOrFail($parentObjective->id)->parentObjective;
+        }
 
         $objective->update([
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
-            'link' => $data['link'],
         ]);
+        
+        $linkTo['title'] = $keyResult->name;
+        $linkTo['id'] = $keyResult->id;
+        $linkTo['link'] = $link;
+
+        $obj = json_decode(json_encode($linkTo), false);
+        $objective->setAttribute('linkTo', $linkTo);
 
         return $objective;
     }
