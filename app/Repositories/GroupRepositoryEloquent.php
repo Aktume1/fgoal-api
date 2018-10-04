@@ -156,6 +156,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     public function getChildGroups($groupId)
     {
         $group = $this->findOrFail($groupId);
+        $group->setAttribute('link', $this->showLinkSearch($groupId));
 
         return $group->setAttribute('child_group', $group->childGroup);
     }
@@ -350,7 +351,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             ->get();
 
         foreach ($trackings as $tracking) {
-            $data[] = $tracking->actual;
+            $data['progress'] = $tracking->actual;
+            $data['update_at'] = $tracking->date;
         }
 
         return $data;
@@ -423,11 +425,10 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $group = $this->findOrFail($groupId);
         $type = $group->type;
-
         if ($type == Group::DEFAULT_GROUP) {
             $parent = $group->parentGroup;
-
             $listGroup = $parent;
+            
             $parentName = $group->parentGroup->name;
 
             $this->getlinkParent($parent, $listGroup);
