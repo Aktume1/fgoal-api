@@ -53,7 +53,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
             $parents = $listGroup['parent_path'];
            
-            $listGroup->setAttribute('link', $this->showLink($parents, $parentName));
+            $listGroup->setAttribute('link', [$this->showLink($parents, $parentName)]);
 
             $listGroup->makeHidden('parent_path');
 
@@ -104,9 +104,8 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         }
 
         $string .= $parentName;
-        $pathFinal[] = $string;
 
-        return $pathFinal;
+        return $string;
     }
 
     /**
@@ -156,7 +155,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     public function getChildGroups($groupId)
     {
         $group = $this->findOrFail($groupId);
-        $group->setAttribute('link', $this->showLinkSearch($groupId));
+        $group->setAttribute('link', [$this->showLinkSearch($groupId)]);
 
         return $group->setAttribute('child_group', $group->childGroup);
     }
@@ -415,7 +414,10 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         
         for ($i = 0; $i < count($groups); $i++) {
             $data[$i] = $groups[$i];
-            $data[$i]['link'] = $this->showLinkSearch($groups[$i]->id);
+            $data[$i]['link'] = $this->showLinkSearch($groups[$i]->id) . '/' . $groups[$i]->name;
+            $lengthOfLink = strlen($data[$i]['link']);
+            $data[$i]['link'] = str_split($data[$i]['link'], $lengthOfLink);
+
         }
 
         return $data;
