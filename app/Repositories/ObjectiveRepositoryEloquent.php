@@ -230,6 +230,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
         ]);
+
+        $keyResult->update([
+            'status' => Objective::WAITING,
+        ]);
         
         $linkTo['title'] = $keyResult->name;
         $linkTo['id'] = $keyResult->id;
@@ -253,8 +257,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->findOrFail($objectiveId);
+        $objectiveParent = $this->findOrFail($objective->parentObjective->id);
 
         $objective->update([
+            'status' => Objective::APPROVE,
+        ]);
+
+        $objectiveParent->update([
             'status' => Objective::APPROVE,
         ]);
 
@@ -317,7 +326,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective->update([
             'status' => Objective::CANCEL,
             'parent_id' => null,
-            'link' => null,
         ]);
     }
 
