@@ -350,9 +350,9 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             ->whereBetween('date', [$time['start_date'], $time['end_date']])
             ->get();
 
-        foreach ($trackings as $tracking) {
-            $data['progress'] = $tracking->actual;
-            $data['update_at'] = $tracking->date;
+        foreach ($trackings as $key => $tracking) {
+            $data[$key]['progress'] = $tracking->actual;
+            $data[$key]['updated_at'] = $tracking->date;
         }
 
         return $data;
