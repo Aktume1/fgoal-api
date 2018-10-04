@@ -39,4 +39,6 @@ interface ObjectiveRepository extends AbstractRepository
     public function checkParentObjective($objectiveId);
 
     public function getObjectiveLogById($groupId, $objectiveId);
+
+    public function checkExpriedQuarter($quarterId);
 }

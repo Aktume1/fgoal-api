@@ -10,6 +10,7 @@ class Quarter extends Model
         'name',
         'start_date',
         'end_date',
+        'expried',
     ];
 
     protected $hidden = [
