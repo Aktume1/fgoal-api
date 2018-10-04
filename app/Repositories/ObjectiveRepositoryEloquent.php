@@ -10,6 +10,7 @@ use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\UnknownException;
 use Auth;
 use App\Eloquent\Comment;
+use App\Eloquent\Quarter;
 
 class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements ObjectiveRepository
 {
@@ -28,6 +29,16 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return;
     }
 
+    public function checkExpriedQuarter($quarterId)
+    {
+        $quarter = Quarter::findOrFail($quarterId);
+        $expried = $quarter->expried;
+        if ($expried == config('model.quarter.expried.expried')) {
+            throw new UnknownException(translate('quarter.expried'));
+        }
+
+        return;
+    }
     /**
      * Create Objective
      * @param int $groupId
@@ -37,6 +48,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function create($groupId, $data)
     {
         $this->checkUserIsGroupManager($groupId);
+        $this->checkExpriedQuarter($data['quarter_id']);
 
         if (!isset($data['parent_id'])) {
             $data['parent_id'] = null;
@@ -112,10 +124,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function updateObjectiveActual($groupId, $objectiveId, $data)
     {
         $this->checkUserIsGroupManager($groupId);
+        
 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
+
+        $this->checkExpriedQuarter($objective->quarter_id);
 
         $type = $this->checkTypeObjective($objective);
         $oldActual = $objective->actual;

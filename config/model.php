@@ -20,5 +20,11 @@ return [
     ],
     'workspace' => [
         'is_manager' => 1,
+    ],
+    'quarter' => [
+        'expried' => [
+            'unexpried' => 0,
+            'expried' =>1,
+        ],
     ]
 ];
