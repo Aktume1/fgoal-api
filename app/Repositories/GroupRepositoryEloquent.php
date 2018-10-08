@@ -414,10 +414,16 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         
         for ($i = 0; $i < count($groups); $i++) {
             $data[$i] = $groups[$i];
-            $data[$i]['link'] = $this->showLinkSearch($groups[$i]->id) . '/' . $groups[$i]->name;
+            $link = $this->showLinkSearch($groups[$i]->id);
+
+            if (!isset($link)) {
+                $data[$i]['link'] =  $groups[$i]->name;
+            } else {
+                $data[$i]['link'] = $this->showLinkSearch($groups[$i]->id) . '/' . $groups[$i]->name;
+            }
+
             $lengthOfLink = strlen($data[$i]['link']);
             $data[$i]['link'] = str_split($data[$i]['link'], $lengthOfLink);
-
         }
 
         return $data;
@@ -430,6 +436,10 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         if ($type == Group::DEFAULT_GROUP) {
             $parent = $group->parentGroup;
             $listGroup = $parent;
+
+            if (!isset($group->parentGroup)) {
+                return null;
+            }
             
             $parentName = $group->parentGroup->name;
 
