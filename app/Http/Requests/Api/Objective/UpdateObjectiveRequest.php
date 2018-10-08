@@ -24,7 +24,7 @@ class UpdateObjectiveRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'actual' => 'required|integer|min:0|max:100',
+            'actual' => 'required|between:0,100|numeric',
         ];
     }
 }
