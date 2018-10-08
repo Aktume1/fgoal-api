@@ -226,6 +226,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $parentObjective = $this->findOrFail($parentObjective->id)->parentObjective;
         }
 
+        $link = $keyResult->group->name . '/' . $link;
+
         $objective->update([
             'parent_id' => $keyResult->id,
             'status' => Objective::WAITING,
@@ -239,7 +241,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $linkTo['id'] = $keyResult->id;
         $linkTo['link'] = $link;
 
-        $obj = json_decode(json_encode($linkTo), false);
+        $linkTo = json_decode(json_encode($linkTo), false);
         $objective->setAttribute('linkTo', $linkTo);
 
         return $objective;
@@ -446,6 +448,32 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             ->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
+
+        if (!isset($objective->parent_id)) {
+            return $objective;
+        }
+        
+        $keyResult = $this->isKeyResult()->where('id', $objective->parent_id)->firstOrFail();
+                    
+        if ($objective->status != Objective::CANCEL) {
+            $link = $keyResult->name;
+
+            $parentObjective = $keyResult->parentObjective;
+
+            while ($parentObjective) {
+                $keyResultParent = $parentObjective->name;
+                $link = $keyResultParent . '/' . $link ;
+                $parentObjective = $this->findOrFail($parentObjective->id)->parentObjective;
+            }
+
+            $link = $keyResult->group->name . '/' . $link;
+            $linkTo['title'] = $keyResult->name;
+            $linkTo['id'] = $keyResult->id;
+            $linkTo['link'] = $link;
+
+            $linkTo = json_decode(json_encode($linkTo), false);
+            $objective->setAttribute('linkTo', $linkTo);
+        }
 
         return $objective;
     }
