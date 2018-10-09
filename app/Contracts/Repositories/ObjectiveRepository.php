@@ -40,5 +40,5 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function getObjectiveLogById($groupId, $objectiveId);
 
-    public function checkExpriedQuarter($quarterId);
+    public function checkExpriedQuarter($quarterId, $message);
 }

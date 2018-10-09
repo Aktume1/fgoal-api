@@ -29,12 +29,12 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return;
     }
 
-    public function checkExpriedQuarter($quarterId)
+    public function checkExpriedQuarter($quarterId, $message)
     {
         $quarter = Quarter::findOrFail($quarterId);
         $expried = $quarter->expried;
         if ($expried == config('model.quarter.expried.expried')) {
-            throw new UnknownException(translate('quarter.expried'));
+            throw new UnknownException($message);
         }
 
         return;
@@ -47,8 +47,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function create($groupId, $data)
     {
+        $message = translate('quarter.create_objective');
         $this->checkUserIsGroupManager($groupId);
-        $this->checkExpriedQuarter($data['quarter_id']);
+        $this->checkExpriedQuarter($data['quarter_id'], $message);
 
         if (!isset($data['parent_id'])) {
             $data['parent_id'] = null;
@@ -130,7 +131,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             ->where('group_id', $groupId)
             ->firstOrFail();
 
-        $this->checkExpriedQuarter($objective->quarter_id);
+        $message = translate('quarter.update_objective');
+        $this->checkExpriedQuarter($objective->quarter_id, $message);
 
         $type = $this->checkTypeObjective($objective);
         $oldActual = $objective->actual;
@@ -212,6 +214,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             ->firstOrFail();
 
         $this->checkUserIsGroupManager($objective->group_id);
+
+        $message = translate('quarter.link_objective');
+        $this->checkExpriedQuarter($objective->quarter_id, $message);
 
         $keyResult = $this->isKeyResult()
             ->where('id', $data['keyResultId'])

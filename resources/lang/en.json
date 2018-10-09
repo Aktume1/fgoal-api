@@ -43,6 +43,9 @@
     "cancel_link": "Cancel Successful"
   },
   "quarter":{
-    "expried": "This quarter has expried"
+    "expried": "This quarter has expried",
+    "create_objective": "This quarter has expried, you can't create new objective",
+    "update_objective": "This quarter has expried, you can't update objective",
+    "link_objective": "This quarter has expried, you can't link objective"
   }
 }
