@@ -181,7 +181,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         if ($childObjectiveCount == 0) {
             $estimate = 0;
         } else {
-            $estimate = (int)($sum / $childs->count());
+            $estimate = (float)($sum / $childs->count());
         }
 
         if ($parentObjective->match != Objective::MATCH) {
