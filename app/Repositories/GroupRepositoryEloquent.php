@@ -75,7 +75,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             $this->getlinkParent($item, $listGroup);
 
             $parents = $item['parent_path'];
-            $item->setAttribute('link', $this->showLink($parents, $item->name));
+            $item->setAttribute('link', [$this->showLink($parents, $item->name)]);
 
             $item->makeHidden('parent_path');
         }
