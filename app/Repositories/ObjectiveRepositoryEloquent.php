@@ -218,36 +218,22 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $message = translate('quarter.link_objective');
         $this->checkExpriedQuarter($objective->quarter_id, $message);
 
-        $keyResult = $this->isKeyResult()
+        $parentObj = $this->isKeyResult()
             ->where('id', $data['keyResultId'])
             ->firstOrFail();
-        
-        $link = $keyResult->name;
-        $parentObjective = $keyResult->parentObjective;
-
-        while ($parentObjective) {
-            $keyResultParent = $parentObjective->name;
-            $link = $keyResultParent . '/' . $link ;
-            $parentObjective = $this->findOrFail($parentObjective->id)->parentObjective;
-        }
-
-        $link = $keyResult->group->name . '/' . $link;
-
+    
         $objective->update([
-            'parent_id' => $keyResult->id,
+            'parent_id' => $parentObj->id,
             'status' => Objective::WAITING,
         ]);
 
-        $keyResult->update([
+        $parentObj->update([
             'status' => Objective::WAITING,
         ]);
         
-        $linkTo['title'] = $keyResult->name;
-        $linkTo['id'] = $keyResult->id;
-        $linkTo['link'] = $link;
-
-        $linkTo = json_decode(json_encode($linkTo), false);
-        $objective->setAttribute('linkTo', $linkTo);
+        $parentObj->makeHidden('group_id');
+        $parentObj->setAttribute('group', $parentObj->group);
+        $objective->setAttribute('link_to', $parentObj);
 
         return $objective;
     }
@@ -459,25 +445,11 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         }
         
         $parentObj = $this->where('id', $objective->parent_id)->firstOrFail();
-                  
+
         if ($objective->status != Objective::CANCEL) {
-            $link = $parentObj->name;
-
-            $parentObjective = $parentObj->parentObjective;
-
-            while ($parentObjective) {
-                $keyResultParent = $parentObjective->name;
-                $link = $keyResultParent . '/' . $link ;
-                $parentObjective = $this->findOrFail($parentObjective->id)->parentObjective;
-            }
-
-            $link = $parentObj->group->name . '/' . $link;
-            $linkTo['title'] = $parentObj->name;
-            $linkTo['id'] = $parentObj->id;
-            $linkTo['link'] = $link;
-
-            $linkTo = json_decode(json_encode($linkTo), false);
-            $objective->setAttribute('linkTo', $linkTo);
+            $parentObj->makeHidden('group_id');
+            $parentObj->setAttribute('group', $parentObj->group);
+            $objective->setAttribute('link_to', $parentObj);
         }
 
         return $objective;
