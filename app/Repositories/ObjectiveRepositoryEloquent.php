@@ -226,10 +226,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => $parentObj->id,
             'status' => Objective::WAITING,
         ]);
-
-        $parentObj->update([
-            'status' => Objective::WAITING,
-        ]);
         
         $parentObj->makeHidden('group_id');
         $parentObj->setAttribute('group', $parentObj->group);
@@ -250,13 +246,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objective = $this->findOrFail($objectiveId);
-        $objectiveParent = $this->findOrFail($objective->parentObjective->id);
 
         $objective->update([
-            'status' => Objective::APPROVE,
-        ]);
-
-        $objectiveParent->update([
             'status' => Objective::APPROVE,
         ]);
 
@@ -435,8 +426,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function showObjectiveDetail($groupId, $objectiveId)
     {
-        $objective = $this->with('childObjective')
-            ->where('id', $objectiveId)
+        $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
 
@@ -444,14 +434,25 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             return $objective;
         }
         
-        $parentObj = $this->where('id', $objective->parent_id)->firstOrFail();
-
+        $parentObj = [];
         if ($objective->status != Objective::CANCEL) {
+            $parentObj = $this->where('id', $objective->parent_id)->firstOrFail();
             $parentObj->makeHidden('group_id');
             $parentObj->setAttribute('group', $parentObj->group);
-            $objective->setAttribute('link_to', $parentObj);
+        }
+        $objective->setAttribute('link_to', $parentObj);
+        $objective->makeHidden('group_id');
+
+        $childObjective = $objective->childObjective;
+
+        $childArr = [];
+        for ($i=0; $i < count($childObjective); $i++) {
+            $childObjective[$i]->makeHidden('group_id');
+            $childArr[$i] = $childObjective[$i]->setAttribute('group', $childObjective[$i]->group);
         }
 
+        $objective->setAttribute('child_objective', $childArr);
+        
         return $objective;
     }
 
