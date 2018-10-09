@@ -46,18 +46,20 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         if ($type == Group::DEFAULT_GROUP) {
             $parent = $group->parentGroup;
-            $listGroup = $parent;
-            $parentName = $group->parentGroup->name;
+            if ($parent) {
+                $listGroup = $parent;
+                $parentName = $group->parentGroup->name;
 
-            $this->getlinkParent($parent, $listGroup);
+                $this->getlinkParent($parent, $listGroup);
 
-            $parents = $listGroup['parent_path'];
-           
-            $listGroup->setAttribute('link', [$this->showLink($parents, $parentName)]);
+                $parents = $listGroup['parent_path'];
+                $listGroup->setAttribute('link', [$this->showLink($parents, $parentName)]);
+                $listGroup->makeHidden('parent_path');
 
-            $listGroup->makeHidden('parent_path');
-
-            $list[] = (object)($listGroup);
+                $list[] = (object)($listGroup);
+            } else {
+                $list= [];
+            }
 
             return $list;
         }

@@ -1,0 +1,636 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"quarter",
+				"quarter"
+			],
+			[
+				"me",
+				"message"
+			],
+			[
+				"qu",
+				"quarter"
+			],
+			[
+				"ser",
+				"service"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"da",
+				"day_of_week"
+			],
+			[
+				"btn-",
+				"btn-option"
+			],
+			[
+				"col",
+				"col-sm-2"
+			],
+			[
+				"nav",
+				"nav-item"
+			],
+			[
+				"ca",
+				"class\tAttr"
+			],
+			[
+				"bore",
+				"border-width\tproperty"
+			],
+			[
+				"B",
+				"BookingRepository"
+			],
+			[
+				"se",
+				"selectStylist"
+			],
+			[
+				"boo",
+				"bookingRepository"
+			],
+			[
+				"servi",
+				"services"
+			],
+			[
+				"service",
+				"service_id"
+			],
+			[
+				"servie",
+				"service_id"
+			],
+			[
+				"status",
+				"status_id"
+			],
+			[
+				"data",
+				"dataType"
+			],
+			[
+				"wi",
+				"width\tproperty"
+			],
+			[
+				"mar",
+				"margin-top\tproperty"
+			],
+			[
+				"margin",
+				"margin-top\tproperty"
+			],
+			[
+				"time",
+				"time_booking"
+			],
+			[
+				"btn",
+				"btn-primary"
+			],
+			[
+				"select",
+				"selectedSalon"
+			],
+			[
+				"form",
+				"form-control"
+			],
+			[
+				"remove",
+				"removeAttr"
+			],
+			[
+				"stat",
+				"status_id"
+			],
+			[
+				"sel",
+				"selectSalon"
+			],
+			[
+				"st",
+				"stylist_id"
+			],
+			[
+				"sele",
+				"selectUser"
+			],
+			[
+				"name",
+				"namespace"
+			],
+			[
+				"cs",
+				"csrf-token"
+			],
+			[
+				"Site",
+				"SiteController"
+			],
+			[
+				"salon",
+				"salon_id"
+			],
+			[
+				"get",
+				"getRequest"
+			],
+			[
+				"va",
+				"valueSelected"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"arr",
+				"array"
+			],
+			[
+				"a",
+				"array\t$… = array (…)"
+			],
+			[
+				"catego",
+				"Category"
+			],
+			[
+				"pre",
+				"prefix"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"tic",
+				"TicketFormRequest"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "routes/api.php",
+			"settings":
+			{
+				"buffer_size": 3762,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/Api/ObjectiveController.php",
+			"settings":
+			{
+				"buffer_size": 8905,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Repositories/ObjectiveRepositoryEloquent.php",
+			"settings":
+			{
+				"buffer_size": 14819,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/var/www/fgoal-api",
+		"/var/www/fgoal-api/app",
+		"/var/www/fgoal-api/app/Eloquent",
+		"/var/www/fgoal-api/app/Helpers",
+		"/var/www/fgoal-api/app/Http",
+		"/var/www/fgoal-api/database",
+		"/var/www/fgoal-api/database/migrations",
+		"/var/www/fgoal-api/resources",
+		"/var/www/fgoal-api/resources/assets",
+		"/var/www/fgoal-api/resources/lang",
+		"/var/www/fgoal-api/resources/lang/en",
+		"/var/www/fgoal-api/resources/views",
+		"/var/www/fgoal-api/resources/views/mobile",
+		"/var/www/fgoal-api/routes"
+	],
+	"file_history":
+	[
+		"/var/www/fgoal-api/resources/lang/en.json",
+		"/var/www/fgoal-api/app/Eloquent/Quarter.php",
+		"/var/www/fgoal-api/app/Http/Middleware/Api.php",
+		"/var/www/fgoal-api/database/seeds/QuartersTableSeeder.php",
+		"/var/www/fgoal-api/vendor/framgia/fauth-php/src/Provider/FramgiaProvider.php",
+		"/var/www/fgoal-api/config/model.php",
+		"/var/www/fgoal-api/app/Contracts/Repositories/ObjectiveRepository.php",
+		"/var/www/fgoal-api/app/Repositories/GroupRepositoryEloquent.php",
+		"/var/www/fgoal-api/app/Exceptions/Api/UnknownException.php",
+		"/var/www/fgoal-api/database/migrations/2018_07_22_142358_create_objectives_table.php",
+		"/var/www/fgoal-api/app/Exceptions/Api/ApiException.php",
+		"/var/www/fgoal-api/database/migrations/2018_10_08_025212_update_07_column_to_objectives_table.php",
+		"/var/www/fgoal-api/.env",
+		"/var/www/fgoal-api/database/migrations/2018_08_22_083833_update_02_objective_table.php",
+		"/var/www/fgoal-api/database/migrations/2018_08_01_064616_update_01_objectives_table.php",
+		"/var/www/fgoal-api/vendor/league/flysystem/src/Exception.php",
+		"/var/www/fgoal-api/app/Contracts/Repositories/GroupRepository.php",
+		"/var/www/fgoal-api/app/Eloquent/User.php",
+		"/var/www/fgoal-api/config/app.php",
+		"/var/www/fgoal-api/app/Http/Controllers/Api/Auth/LoginController.php",
+		"/var/www/fgoal-api/app/Http/Controllers/Api/QuarterController.php",
+		"/var/www/fgoal-api/app/Repositories/QuarterRepositoryEloquent.php",
+		"/var/www/fgoal-api/app/Http/Controllers/Api/ObjectiveController.php",
+		"/var/www/fgoal-api/.env.civ3.example",
+		"/var/www/fgoal-api/app/Http/Requests/Api/Auth/LoginRequest.php",
+		"/var/www/fgoal-api/app/Http/Requests/Api/Auth/RefreshTokenRequest.php",
+		"/var/www/fgoal-api/app/Auth/CustomUser.php",
+		"/var/www/fgoal-api/app/Eloquent/Objective.php",
+		"/var/www/fgoal-api/app/Http/Controllers/Api/ApiController.php",
+		"/var/www/fgoal-api/app/Repositories/ObjectiveRepositoryEloquent.php",
+		"/var/www/fgoal-api/app/Contracts/Repositories/QuarterRepository.php",
+		"/var/www/fgoal-api/app/Http/Controllers/Api/GroupController.php",
+		"/var/www/fgoal-api/app/Http/Requests/Api/Objective/CreateObjectiveRequest.php",
+		"/var/www/fgoal-api/database/migrations/2018_10_04_011351_add_column_to_quarters_table.php",
+		"/var/www/fgoal-api/app/Policies/AbstractPolicy.php",
+		"/var/www/fgoal-api/database/migrations/2018_10_04_011239_update_01_quaters_table.php",
+		"/var/www/hair/resources/views/home.blade.php",
+		"/var/www/hair/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RegistersUsers.php",
+		"/var/www/hair/resources/views/admin/register.blade.php",
+		"/var/www/hair/resources/views/admin/login.blade.php",
+		"/var/www/hair/routes/web.php",
+		"/var/www/hair/resources/lang/en/admin.php",
+		"/var/www/hair/app/Repositories/Eloquents/BookingRepository.php",
+		"/var/www/hair/app/Providers/RepositoryServiceProvider.php",
+		"/var/www/hair/database/migrations/2018_08_08_041946_add_foreign_key_in_bookings_table.php",
+		"/var/www/hair/resources/views/admin/user/load.blade.php",
+		"/var/www/hair/app/Providers/AppServiceProvider.php",
+		"/var/www/hair/app/Http/Controllers/Admin/BookingController.php",
+		"/var/www/hair/app/Repositories/Contracts/BookingRepositoryInterface.php",
+		"/var/www/hair/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php",
+		"/var/www/hair/resources/views/admin/booking/load.blade.php",
+		"/var/www/hair/resources/lang/en/booking.php",
+		"/var/www/hair/config/session.php",
+		"/var/www/hair/resources/views/admin/user/create.blade.php",
+		"/var/www/hair/vendor/laravel/framework/src/Illuminate/Foundation/Auth/ThrottlesLogins.php",
+		"/var/www/hair/app/Http/Middleware/RedirectIfAuthenticated.php",
+		"/var/www/laravel/test/app/Role.php",
+		"/var/www/laravel/test/app/Post.php",
+		"/var/www/laravel/test/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RegistersUsers.php",
+		"/var/www/laravel/test/database/seeds/PostsSeeder.php",
+		"/var/www/laravel/test/resources/views/layouts/index.blade.php",
+		"/var/www/laravel/test/resources/views/layouts/create.blade.php",
+		"/var/www/hair/node_modules/request/lib/auth.js",
+		"/var/www/hair/app/Http/Controllers/Auth/LoginController.php",
+		"/var/www/hair/resources/views/master.blade.php",
+		"/var/www/hair/public/js/pagination.js",
+		"/var/www/hair/.env",
+		"/var/www/hair/resources/views/admin/salon/edit.blade.php",
+		"/var/www/hair/resources/views/admin/salon/load.blade.php",
+		"/var/www/hair/resources/views/admin/service/load.blade.php",
+		"/var/www/hair/app/Service.php",
+		"/var/www/hair/app/Http/Controllers/Admin/ServiceController.php",
+		"/var/www/hair/app/Providers/AuthServiceProvider.php",
+		"/var/www/hair/app/Http/Controllers/Auth/ForgotPasswordController.php",
+		"/var/www/hair/resources/views/admin/service/create.blade.php",
+		"/var/www/hair/app/Http/Controllers/Admin/SalonController.php",
+		"/var/www/hair/public/js/image.js",
+		"/var/www/hair/resources/views/admin/service/index.blade.php",
+		"/media/sangcao1003/Windows 7/Users/Administrator/Desktop/HTML/Lumino/Lumino/tables.html",
+		"/var/www/hair/public/css/styles_admin.css",
+		"/var/www/hair/resources/views/admin/service/edit.blade.php",
+		"/var/www/hair/app/Http/Controllers/Site/SiteController.php",
+		"/var/www/hair/app/Http/Controllers/PagesController.php",
+		"/var/www/hair/resources/views/admin/index.blade.php",
+		"/var/www/hair/database/migrations/2018_08_03_085348_add_columns_to_users_table.php",
+		"/var/www/hair/resources/views/admin/bill/show.blade.php",
+		"/var/www/hair/public/images/img_4.jpg",
+		"/var/www/hair/database/migrations/2018_09_12_133112_add_columns_to_services_table.php",
+		"/var/www/hair/routes/console.php",
+		"/var/www/hair/resources/views/admin/user/edit.blade.php",
+		"/var/www/hair/app/Http/Requests/ServiceFormRequest.php",
+		"/var/www/hair/storage/app/public/images/7trT2SF1kqk5EFUFFxjbzN8Fhe16jxJ1deAAy7A1.pdf",
+		"/var/www/hair/storage/app/public/images/WqWfxf60P8kOBmbk5FI06VDTjRrVAV4D7hdVxJIS.jpeg",
+		"/var/www/hair/app/Repositories/Eloquents/SiteRepository.php",
+		"/var/www/hair/.env.heroku",
+		"/var/www/hair/resources/views/admin/master.blade.php",
+		"/var/www/hair/bower.json",
+		"/var/www/hair/database/seeds/AdminSeeder.php",
+		"/var/www/hair/database/seeds/DatabaseSeeder.php",
+		"/var/www/hair/app/Http/Controllers/Admin/UserController.php",
+		"/var/www/hair/composer.json",
+		"/var/www/hair/composer.lock",
+		"/var/www/hair/app/TimeSheetStylist.php",
+		"/var/www/hair/.gitignore",
+		"/var/www/hair/public/js/chart-data.js",
+		"/var/www/hair/app/Http/Controllers/Admin/BillController.php",
+		"/var/www/hair/storage/app/public/images/6TF6HKjHFfbEN2qsVy2nYEf4rv00pq8hrlCwdmTk.jpeg",
+		"/var/www/loi_table/hair/public/bower_components/bower-hair/admin/js/chart-data.js",
+		"/var/www/hair/resources/views/sites/choose_timesheet.blade.php",
+		"/var/www/hair/database/seeds/AdminAccountSeeder.php",
+		"/var/www/hair/public/bower_components/bower-hair/admin/js/chart-data.js",
+		"/var/www/hair/resources/views/admin/salon/index.blade.php",
+		"/var/www/hair/resources/views/admin/stylists/index.blade.php",
+		"/var/www/hair/resources/views/sites/booking.blade.php",
+		"/var/www/hair/app/Http/Controllers/Admin/AdminController.php",
+		"/var/www/hair/public/bower_components/bower-hair/admin/css/bootstrap-table.css",
+		"/var/www/hair/resources/views/admin/bill/create.blade.php",
+		"/var/www/hair/resources/views/admin/booking/status.blade.php",
+		"/var/www/hair/public/css/style.css",
+		"/var/www/hair/resources/views/footer.blade.php",
+		"/var/www/hair/public/bower_components/bower-hair/admin/js/easypiechart-data.js",
+		"/var/www/hair/public/js/validate.js",
+		"/var/www/hair/vendor/laravel/framework/src/Illuminate/Console/Command.php",
+		"/var/www/hair/resources/views/admin/booking/index.blade.php",
+		"/var/www/hair/resources/views/admin/RenderBooking/index.blade.php",
+		"/var/www/hair/public/js/modal-steps.min.js",
+		"/var/www/sida/hair/public/bower_components/bower-hair/booking/js/jquery.validate.min.js",
+		"/var/www/sida/hair/public/css/style.css"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 98.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"int",
+			"link",
+			"checkExpriedQuarter",
+			"actual",
+			"BAD_REQUEST",
+			"showLink",
+			"patch final",
+			"search",
+			"$quarter_id",
+			"quarter_id",
+			"store",
+			"quarter",
+			"quater",
+			"get",
+			"scope"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "routes/api.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3762,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2581,
+								2581
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/Http/Controllers/Api/ObjectiveController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3414,
+								3414
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1440.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Repositories/ObjectiveRepositoryEloquent.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14819,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10614,
+								10614
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5667.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "fgoal.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 414.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
