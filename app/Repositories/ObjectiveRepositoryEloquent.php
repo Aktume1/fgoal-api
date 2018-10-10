@@ -139,7 +139,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective->update([
             'actual' => $data['actual'],
-            'match' => Objective::UNMATCH,
+            'match' => Objective::MATCH,
         ]);
 
         Log::create([
@@ -184,7 +184,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $estimate = (float)($sum / $childs->count());
         }
 
-        if ($parentObjective->match != Objective::MATCH) {
+        if ($parentObjective->match != Objective::UNMATCH) {
             $parentObjective->update([
                 'estimate' => $estimate,
             ]);
@@ -412,7 +412,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective->update([
             'actual' => $objective->estimate,
-            'match' => Objective::MATCH,
+            'match' => Objective::UNMATCH,
         ]);
 
         return $objective;
@@ -429,15 +429,17 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
-
         $parentObj = [];
+
         if ($objective->status != Objective::CANCEL) {
             $parentObj = $this->where('id', $objective->parent_id)->firstOrFail();
             $parentObj->makeHidden('group_id');
             $parentObj->setAttribute('group', $parentObj->group);
         }
+        
         $objective->setAttribute('link_to', $parentObj);
         $objective->makeHidden('group_id');
+        $objective->setAttribute('group', $objective->group);
 
         $childObjective = $objective->childObjective;
 
