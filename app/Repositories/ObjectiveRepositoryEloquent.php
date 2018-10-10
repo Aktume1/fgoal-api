@@ -430,10 +430,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             ->where('group_id', $groupId)
             ->firstOrFail();
 
-        if (!isset($objective->parent_id)) {
-            return $objective;
-        }
-        
         $parentObj = [];
         if ($objective->status != Objective::CANCEL) {
             $parentObj = $this->where('id', $objective->parent_id)->firstOrFail();

@@ -412,6 +412,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $groups = $this->where('name', 'like', $name . '%')->get();
         
+        $data= [];
         for ($i = 0; $i < count($groups); $i++) {
             $data[$i] = $groups[$i];
             $link = $this->showLinkSearch($groups[$i]->id);
