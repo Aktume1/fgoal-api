@@ -14,10 +14,9 @@ class Update08ObjectivesTable extends Migration
     public function up()
     {
         Schema::table('objectives', function (Blueprint $table) {
-            $table->tinyInteger('match')->default(1)->after('status');
+            $table->integer('match')->default(1)->after('status')->change();
         });
     }
-
     /**
      * Reverse the migrations.
      *
