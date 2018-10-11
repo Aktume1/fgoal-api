@@ -8,7 +8,7 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function checkUserIsGroupManager($groupId);
 
-    public function getObjective($groupId);
+    public function getObjective($groupId, $quarterId = null);
 
     public function getObjectiveByGroup($groupId);
 
