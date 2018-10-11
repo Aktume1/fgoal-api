@@ -94,15 +94,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function getObjective($groupId)
     {
-
-        $objectives = $this->isObjective()->where('group_id', $groupId)->get();
-        foreach ($objectives as $objective) {
-            foreach ($objective->childObjective as $child) {
-                $child = $child->setAttribute('child_objective', $child->childObjective);
-            }
-        }
-
-        return $objectives;
+        return $this->isObjective()->where('group_id', $groupId)->with('childObjective');
     }
 
     /**
@@ -111,7 +103,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function getObjectiveByGroup($groupId)
     {
-        return $this->getObjective($groupId);
+        return $this->getObjective($groupId)->get();
     }
 
     /**
@@ -120,7 +112,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function getObjectiveByQuarter($groupId, $quarterId)
     {
-        return $this->getObjective($groupId)->where('quarter_id', $quarterId);
+        return $this->getObjective($groupId)->where('quarter_id', $quarterId)->get();
     }
 
     /**
