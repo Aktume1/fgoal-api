@@ -28,7 +28,7 @@ class Objective extends Model implements Auditable
     const CREATE = 'Create';
     const UPDATE = 'Update';
     const DELETE = 'Delete';
-
+    
     protected $fillable = [
         'is_private',
         'name',
