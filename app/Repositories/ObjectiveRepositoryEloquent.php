@@ -199,7 +199,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $parentObjective->update([
             'estimate' => $estimate,
-            'actual' => $estimate,
+            'match' => Objective::UNMATCH,
         ]);
 
         return $parentObjective;    
