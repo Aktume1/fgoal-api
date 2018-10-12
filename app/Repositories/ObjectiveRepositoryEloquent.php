@@ -140,7 +140,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->checkUserIsGroupManager($groupId);
         
-
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
@@ -153,7 +152,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective->update([
             'actual' => $data['actual'],
-            'match' => Objective::MATCH,
+            'match' => Objective::UNMATCH,
         ]);
 
         Log::create([
@@ -198,20 +197,12 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $estimate = (float)($sum / $childs->count());
         }
 
-        if ($parentObjective->match != Objective::UNMATCH) {
-            $parentObjective->update([
-                'estimate' => $estimate,
-            ]);
-
-            return $parentObjective;
-        }
-
         $parentObjective->update([
             'estimate' => $estimate,
             'actual' => $estimate,
         ]);
 
-        return $parentObjective;
+        return $parentObjective;    
     }
 
     /**
@@ -426,7 +417,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective->update([
             'actual' => $objective->estimate,
-            'match' => Objective::UNMATCH,
+            'match' => Objective::MATCH,
         ]);
 
         return $objective;
