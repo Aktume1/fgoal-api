@@ -105,6 +105,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         foreach ($objectives as $objective) {
             foreach ($objective->childObjective as $child) {
                 $child = $child->setAttribute('child_objective', $child->childObjective);
+                $child->makeHidden('group_id');
+                $child->setAttribute('group', $child->group);
             }
         }
 
@@ -445,17 +447,17 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective->setAttribute('link_to', $parentObj);
         $objective->makeHidden('group_id');
         $objective->setAttribute('group', $objective->group);
+        
+        foreach ($objective->childObjective as $childs) {
+            $childs->makeHidden('group_id');
+            $childs->setAttribute('group', $childs->group);
 
-        $childObjective = $objective->childObjective;
-
-        $childArr = [];
-        for ($i=0; $i < count($childObjective); $i++) {
-            $childObjective[$i]->makeHidden('group_id');
-            $childArr[$i] = $childObjective[$i]->setAttribute('group', $childObjective[$i]->group);
+            foreach ($childs->childObjective as $child) {
+                $child->makeHidden('group_id');
+                $child->setAttribute('group', $child->group);
+            }
         }
 
-        $objective->setAttribute('child_objective', $childArr);
-        
         return $objective;
     }
 
