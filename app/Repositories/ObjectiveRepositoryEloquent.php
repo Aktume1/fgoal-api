@@ -236,7 +236,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $parentObj->setAttribute('group', $parentObj->group);
         $objective->setAttribute('link_to', $parentObj);
 
-        return $objective;
+        return $this->caculateObjectiveFromChild($groupId, $objective->id);
     }
 
     /**
