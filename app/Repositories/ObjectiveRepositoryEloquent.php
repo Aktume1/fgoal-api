@@ -185,7 +185,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             return $objective;
         }
 
-        $childs = $parentObjective->childObjective()->where('status', '<>', Objective::WAITING)->get();
+        $childs = $parentObjective->childObjective()->get();
 
         $sum = $childs->sum(function ($objective) {
             return $objective->actual * $objective->weight;
