@@ -178,19 +178,28 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             ->firstOrFail();
 
         $message = translate('quarter.update_objective');
-        $this->checkExpriedQuarter($objective->quarter_id, $message);
 
+        $this->checkExpriedQuarter($objective->quarter_id, $message);
         $type = $this->checkTypeObjective($objective);
         $oldActual = $objective->actual;
-
+        
         $objective->update([
             'actual' => $data['actual'],
             'match' => Objective::UNMATCH,
         ]);
 
-        $this->caculateObjectiveFromChild($groupId, $objective->id);
+        Log::create([
+            'type' => $type,
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'property' => 'actual',
+            'logable_id' => $objective->id,
+            'action' => Objective::UPDATE,
+            'old_value' => $oldActual,
+            'new_value' => $data['actual'],
+        ]);
 
-        return $this->getFullObjective($groupId, $objective->id);
+        return $this->caculateObjectiveFromChild($groupId, $objective->id);
     }
 
     /**
