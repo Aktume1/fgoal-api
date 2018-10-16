@@ -55,7 +55,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         
         $objective->setAttribute('link_to', null);
 
-        if ($objective->status == Objective::APPROVE) {
+        if ($objective->status != Objective::CANCEL) {
             $objective->setAttribute('link_to', $parentObj);
         }
 
