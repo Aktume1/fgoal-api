@@ -39,6 +39,41 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         return;
     }
+
+    public function getFullObjective($groupId, $objectiveId)
+    {
+        $objective = $this->where('id', $objectiveId)
+                ->where('group_id', $groupId)
+                ->firstOrFail();
+
+        $parentObj = $this->where('id', $objective->parent_id)->first();
+
+        if (isset($parentObj)) {
+            $parentObj->makeHidden('group_id');
+            $parentObj->setAttribute('group', $parentObj->group);
+        }
+        
+        $objective->setAttribute('link_to', null);
+
+        if ($objective->status == Objective::APPROVE) {
+            $objective->setAttribute('link_to', $parentObj);
+        }
+
+        $objective->makeHidden('group_id');
+        $objective->setAttribute('group', $objective->group);
+        
+        foreach ($objective->childObjective as $childs) {
+            $childs->makeHidden('group_id');
+            $childs->setAttribute('group', $childs->group);
+
+            foreach ($childs->childObjective as $child) {
+                $child->makeHidden('group_id');
+                $child->setAttribute('group', $child->group);
+            }
+        }
+
+        return $objective;
+    }
     /**
      * Create Objective
      * @param int $groupId
@@ -101,16 +136,12 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         }
 
         $objectives = $objectives->get();
-
+        $arrObjective = [];
         foreach ($objectives as $objective) {
-            foreach ($objective->childObjective as $child) {
-                $child = $child->setAttribute('child_objective', $child->childObjective);
-                $child->makeHidden('group_id');
-                $child->setAttribute('group', $child->group);
-            }
+            $arrObjective[] = $this->getFullObjective($groupId, $objective->id);
         }
 
-        return $objectives;
+        return $arrObjective;
     }
 
     /**
@@ -157,18 +188,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'match' => Objective::UNMATCH,
         ]);
 
-        Log::create([
-            'type' => $type,
-            'user_id' => Auth::guard('fauth')->user()->id,
-            'group_id' => $groupId,
-            'property' => 'actual',
-            'logable_id' => $objective->id,
-            'action' => Objective::UPDATE,
-            'old_value' => $oldActual,
-            'new_value' => $data['actual'],
-        ]);
+        $this->caculateObjectiveFromChild($groupId, $objective->id);
 
-        return $this->caculateObjectiveFromChild($groupId, $objective->id);
+        return $this->getFullObjective($groupId, $objective->id);
     }
 
     /**
@@ -433,32 +455,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function showObjectiveDetail($groupId, $objectiveId)
     {
-        $objective = $this->where('id', $objectiveId)
-            ->where('group_id', $groupId)
-            ->firstOrFail();
-
-        $parentObj = null;
-        if ($objective->status != Objective::CANCEL) {
-            $parentObj = $this->where('id', $objective->parent_id)->firstOrFail();
-            $parentObj->makeHidden('group_id');
-            $parentObj->setAttribute('group', $parentObj->group);
-        }
-        
-        $objective->setAttribute('link_to', $parentObj);
-        $objective->makeHidden('group_id');
-        $objective->setAttribute('group', $objective->group);
-        
-        foreach ($objective->childObjective as $childs) {
-            $childs->makeHidden('group_id');
-            $childs->setAttribute('group', $childs->group);
-
-            foreach ($childs->childObjective as $child) {
-                $child->makeHidden('group_id');
-                $child->setAttribute('group', $child->group);
-            }
-        }
-
-        return $objective;
+        return $this->getFullObjective($groupId, $objectiveId);
     }
 
     /**
