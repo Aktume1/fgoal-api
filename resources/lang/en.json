@@ -46,6 +46,7 @@
     "expried": "This quarter has expried",
     "create_objective": "This quarter has expried, you can't create new objective",
     "update_objective": "This quarter has expried, you can't update objective",
-    "link_objective": "This quarter has expried, you can't link objective"
+    "link_objective": "This quarter has expried, you can't link objective",
+    "update_key": "This quarter has expried, you can't update key result"
   }
 }

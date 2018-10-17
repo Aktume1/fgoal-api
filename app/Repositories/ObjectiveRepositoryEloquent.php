@@ -405,11 +405,14 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('group_id', $groupId)
             ->findOrFail($objectiveId);
             
-        $message = translate('quarter.update_objective');
+        if ($objective->objectiveable_type == Objective::OBJECTIVE) {
+            $message = translate('quarter.update_objective');
+        } else {
+            $message = translate('quarter.update_key');
+        }
+        
         $this->checkExpriedQuarter($objective->quarter_id, $message);
 
-        $message = translate('quarter.update_objective');
-        $this->checkExpriedQuarter($objective->quarter_id, $message);
 
         $oldName = $objective->name;
 
