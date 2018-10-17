@@ -232,8 +232,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $parentObjective->update([
             'estimate' => $estimate,
-            'match' => Objective::UNMATCH,
         ]);
+
+        if ($estimate != $objective->actual) {
+            $parentObjective->update([
+                'match' => Objective::UNMATCH,
+            ]);
+        }
 
         return $parentObjective;    
     }
@@ -399,6 +404,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $objective = $this->where('group_id', $groupId)
             ->findOrFail($objectiveId);
+
+        $message = translate('quarter.update_objective');
+        $this->checkExpriedQuarter($objective->quarter_id, $message);
 
         $oldName = $objective->name;
 
