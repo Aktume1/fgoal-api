@@ -119,21 +119,20 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     public function getInfomationGroup($groupId, $quarterId)
     {
         $group = $this->findOrFail($groupId);
-        $user = $group->users;
-        $weight = $avg = 0;
-        foreach ($user as $row) {
-            $checkManager = User::findOrFail($row->id)->isGroupManager($groupId);
+        $users = $group->users;
 
+        foreach ($users as $user) {
+            $weight = $avg = 0;
+            $checkManager = User::findOrFail($user->id)->isGroupManager($groupId);
             if ($checkManager) {
-                $row->setAttribute('role', User::ADMIN);
+                $user->setAttribute('role', User::ADMIN);
             } else {
-                $row->setAttribute('role', User::MEMBER);
+                $user->setAttribute('role', User::MEMBER);
             }
 
-            $groupUser = $this->where('code', $row->code)->first();
-
+            $groupUser = $this->where('code', $user->code)->first();
+            
             foreach ($groupUser->objectives as $obj) {
-
                 if ($obj->objectiveable_type == Objective::OBJECTIVE && $obj->quarter_id == $quarterId) {
                     $weight += $obj->weight;
                     $avg += $obj->actual * $obj->weight;
@@ -141,17 +140,17 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
             }
 
             if (count($groupUser->objectives) == 0) {
-                $row->setAttribute('process', 0);
+                $user->setAttribute('process', 0);
             } else {
                 if ($weight == 0) {
-                    $row->setAttribute('process', 0);
+                    $user->setAttribute('process', 0);
                 } else {
-                    $row->setAttribute('process', $avg / $weight);
+                    $user->setAttribute('process', $avg / $weight);
                 }
             }
         }
 
-        return $group->setAttribute('users', $user);
+        return $group->setAttribute('users', $users);
     }
 
     public function getChildGroups($groupId)
