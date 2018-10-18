@@ -199,7 +199,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'new_value' => $data['actual'],
         ]);
 
-        return $this->caculateObjectiveFromChild($groupId, $objective->id);
+        $this->caculateObjectiveFromChild($groupId, $objective->id);
+        
+        return $this->getFullObjective($groupId, $objective->parentObjective->id);
     }
 
     /**
