@@ -71,7 +71,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
                 $child->setAttribute('group', $child->group);
             }
         }
-
+        
         return $objective;
     }
     /**
@@ -187,7 +187,14 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'actual' => $data['actual'],
             'match' => Objective::UNMATCH,
         ]);
-
+        
+        $getFullObjectiveId = null;
+        if ($objective->objectiveable_type == Objective::OBJECTIVE) {
+            $getFullObjectiveId = $objective->id;
+        } else {
+            $getFullObjectiveId = isset($objective->parentObjective) ? $objective->parentObjective->id : $getFullObjectiveId;
+        }
+        
         Log::create([
             'type' => $type,
             'user_id' => Auth::guard('fauth')->user()->id,
@@ -199,7 +206,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'new_value' => $data['actual'],
         ]);
 
-        return $this->caculateObjectiveFromChild($groupId, $objective->id);
+        $this->caculateObjectiveFromChild($groupId, $objective->id);
+        
+        return $this->getFullObjective($groupId, $getFullObjectiveId);
     }
 
     /**
