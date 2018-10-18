@@ -199,9 +199,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'new_value' => $data['actual'],
         ]);
 
-        $this->caculateObjectiveFromChild($groupId, $objective->id);
-        
-        return $this->getFullObjective($groupId, $objective->parentObjective->id);
+        return $this->caculateObjectiveFromChild($groupId, $objective->id);
     }
 
     /**
@@ -234,13 +232,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $parentObjective->update([
             'estimate' => $estimate,
+            'actual' => $estimate,
+            'match' => Objective::MATCH
         ]);
-
-        if ($estimate != $objective->actual) {
-            $parentObjective->update([
-                'match' => Objective::UNMATCH,
-            ]);
-        }
 
         return $parentObjective;    
     }
