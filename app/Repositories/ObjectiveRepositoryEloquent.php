@@ -63,15 +63,19 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective->setAttribute('group', $objective->group);
         
         foreach ($objective->childObjective as $childs) {
+            $parentObjChild = $this->where('id', $childs->parent_id)->first();
             $childs->makeHidden('group_id');
+            $childs->setAttribute('link_to', $parentObjChild);
             $childs->setAttribute('group', $childs->group);
 
             foreach ($childs->childObjective as $child) {
+                $parentChild = $this->where('id', $child->parent_id)->first();
                 $child->makeHidden('group_id');
+                $child->setAttribute('link_to', $parentChild);
                 $child->setAttribute('group', $child->group);
             }
         }
-        
+
         return $objective;
     }
     /**
@@ -120,10 +124,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $this->caculateObjectiveFromChild($groupId, $objective->id);
         }
 
-
         return $this->find($objective->id);
     }
-
     /**
      * Get Objective and key by Group Id
      * @param int $groupId
