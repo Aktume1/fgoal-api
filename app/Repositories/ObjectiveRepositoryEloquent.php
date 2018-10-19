@@ -81,17 +81,18 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      * @return Objective
      */
     public function create($groupId, $data)
-    {
-        $message = translate('quarter.create_objective');
+    {   
         $this->checkUserIsGroupManager($groupId);
-        $this->checkExpriedQuarter($data['quarter_id'], $message);
 
         if (!isset($data['parent_id'])) {
             $data['parent_id'] = null;
             $data['objective_type'] = 'Objective';
+            $message = translate('quarter.create_objective');
         } else {
             $data['objective_type'] = 'Key Result';
+            $message = translate('quarter.create_key');
         }
+        $this->checkExpriedQuarter($data['quarter_id'], $message);
 
         if (!isset($data['description'])) {
             $data['description'] = null;
@@ -457,6 +458,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
+            
+        $message = translate('quarter.match');
+        $this->checkExpriedQuarter($objective->quarter_id, $message);
 
         $objective->update([
             'actual' => $objective->estimate,
