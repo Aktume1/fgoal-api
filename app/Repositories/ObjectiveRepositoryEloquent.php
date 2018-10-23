@@ -482,7 +482,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'match' => Objective::MATCH,
         ]);
 
-        return $objective;
+        return $this->caculateObjectiveFromChild($groupId, $objective->id);
     }
 
     /**
