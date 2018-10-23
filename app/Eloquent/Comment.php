@@ -10,9 +10,6 @@ class Comment extends Model
         'user_id',
         'content',
         'objective_id',
-    ];
-
-    protected $hidden = [
         'created_at',
         'updated_at',
     ];
