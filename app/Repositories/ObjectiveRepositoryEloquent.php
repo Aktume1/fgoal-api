@@ -227,8 +227,12 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         if (!$parentObjective) {
             return $objective;
         }
-
-        $childs = $parentObjective->childObjective()->get();
+        $childs = $this->where('parent_id', $parentObjective->id)
+               ->where(function ($q) {
+                    $q->where('status', Objective::CANCEL)
+                        ->orWhere('status', Objective::APPROVE);
+               })
+               ->get();
 
         $sum = $childs->sum(function ($objective) {
             return $objective->actual * $objective->weight;
@@ -282,11 +286,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'status' => Objective::WAITING,
         ]);
         
-        $parentObj->makeHidden('group_id');
-        $parentObj->setAttribute('group', $parentObj->group);
-        $objective->setAttribute('link_to', $parentObj);
-
-        return $this->caculateObjectiveFromChild($groupId, $objective->id);
+        return $objective;
     }
 
     /**
