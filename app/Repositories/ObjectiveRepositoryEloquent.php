@@ -233,16 +233,16 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
                         ->orWhere('status', Objective::APPROVE);
                })
                ->get();
-
+        
         $sum = $childs->sum(function ($objective) {
             return $objective->actual * $objective->weight;
         });
 
-        $childObjectiveCount = $parentObjective->childObjective->count();
+        $childObjectiveCount = $childs->count();
         if ($childObjectiveCount == 0) {
             $estimate = 0;
         } else {
-            $estimate = (float)($sum / $childs->count());
+            $estimate = (float)($sum / $childObjectiveCount);
         }
 
         $parentObjective->update([
