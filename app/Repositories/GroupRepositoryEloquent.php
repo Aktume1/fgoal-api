@@ -411,7 +411,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
     public function getGroupBySearchName($name)
     {
-        $groups = $this->where('name', 'like', $name . '%')->get();
+        $groups = $this->where('name', 'like', "%$name%")->get();
         
         $data= [];
         for ($i = 0; $i < count($groups); $i++) {
@@ -453,18 +453,22 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         }
 
         $userCode = $group->code;
-        $userId = User::where('code', $userCode)->firstOrFail()->id;
-        // get list group of group has id = $groupId except it
-        $list = User::findOrFail($userId)->groups()->get()->except($groupId);
+        $user = User::where('code', $userCode)->first();
 
-        foreach ($list as $item) {
-            $listGroup = $item;
+        if ($user) {
+            $userId = $user->id;
+             // get list group of group has id = $groupId except it
+            $list = User::findOrFail($userId)->groups()->get()->except($groupId);
 
-            $this->getlinkParent($item, $listGroup);
+            foreach ($list as $item) {
+                $listGroup = $item;
 
-            $parents = $item['parent_path'];
+                $this->getlinkParent($item, $listGroup);
 
-            return $this->showLink($parents, $item->name);
+                $parents = $item['parent_path'];
+
+                return $this->showLink($parents, $item->name);
+            }
         }
     }
 }
