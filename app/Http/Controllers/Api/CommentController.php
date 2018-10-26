@@ -26,9 +26,11 @@ class CommentController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($objectiveId)
     {
-        //
+        return $this->doAction(function () use ($objectiveId) {
+            $this->compacts['data'] = $this->commentRepository->getCommentObjective($objectiveId);
+        });
     }
 
     /**
@@ -62,12 +64,6 @@ class CommentController extends ApiController
         });
     }
 
-    public function getCommentsObjective($objectiveId)
-    {
-        return $this->doAction(function () use ($objectiveId) {
-            $this->compacts['data'] = $this->commentRepository->getCommentObjective($objectiveId);
-        });
-    }
     /**
      * Display the specified resource.
      *
@@ -97,9 +93,16 @@ class CommentController extends ApiController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $objectiveId, $commentId)
     {
-        //
+        $data = $request->only(
+            'content'
+        );
+
+        return $this->doAction(function () use ($objectiveId, $commentId, $data) {
+            $this->compacts['data'] = $this->commentRepository->updateComment($objectiveId, $commentId, $data);
+            $this->compacts['description'] = translate('success.update');
+        });
     }
 
     /**
@@ -108,8 +111,11 @@ class CommentController extends ApiController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($objectiveId, $commentId)
     {
-        //
+        return $this->doAction(function () use ($objectiveId, $commentId) {
+            $this->compacts['data'] = $this->commentRepository->deleteComment($objectiveId, $commentId);
+            $this->compacts['description'] = translate('success.delete');
+        });
     }
 }

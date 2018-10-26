@@ -7,12 +7,21 @@ use App\Eloquent\Objective;
 use Auth;
 use App\Eloquent\Comment;
 use App\Exceptions\Api\NotFoundException;
+use App\Exceptions\Api\UnknownException;
 
 class CommentRepositoryEloquent extends AbstractRepositoryEloquent implements CommentRepository
 {
     public function model()
     {
         return app(Comment::class);
+    }
+
+    public function checkUser($groupId, $comment)
+    {
+        $this->setGuard('fauth');
+        if ( (!$this->user->isGroupManager($groupId)) && ($this->user->id != $comment->user_id) ) {
+            throw new UnknownException(translate('http_message.unauthorized'));
+        }
     }
 
     /**
@@ -23,7 +32,7 @@ class CommentRepositoryEloquent extends AbstractRepositoryEloquent implements Co
     public function commentObjective($objectiveId, $data)
     {
         $userId = Auth::guard('fauth')->user()->id;
-        $comment = $this->model()->create([
+        $comment = $this->create([
             'user_id' => $userId,
             'content' => $data['content'],
             'objective_id' => $objectiveId
@@ -50,5 +59,31 @@ class CommentRepositoryEloquent extends AbstractRepositoryEloquent implements Co
 
         return $comments;
     }
+
+    public function updateComment($objectiveId, $commentId, $data)
+    {
+        $comment = Comment::findOrFail($commentId);
+        $groupId = Objective::findOrFail($objectiveId)->group_id;
+        
+        $this->checkUser($groupId, $comment);
+
+        $comment->update([
+            'content' => $data['content'],
+        ]);
+
+        return $comment;
+    }
+
+    public function deleteComment($objectiveId, $commentId)
+    {   
+        $comment = Comment::findOrFail($commentId);
+        $groupId = Objective::findOrFail($objectiveId)->group_id;
+        $this->checkUser($groupId, $comment);
+
+        $comment->delete();
+
+        return;
+    }
+    
 }
 
