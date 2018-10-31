@@ -71,6 +71,12 @@ class CommentRepositoryEloquent extends AbstractRepositoryEloquent implements Co
             'content' => $data['content'],
         ]);
 
+        $name = $comment->user->name;
+        $avatar = $comment->user->avatar;
+        $comment->setAttribute('user_name', $name);
+        $comment->setAttribute('user_avatar', $avatar);
+        $comment->makeHidden('user');
+
         return $comment;
     }
 
