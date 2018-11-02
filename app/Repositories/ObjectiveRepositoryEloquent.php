@@ -514,7 +514,26 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         if ($this->checkParentObjective($objectiveId)) {
             $childObject = $objective->childObjective;
             foreach ($childObject as $child) {
-                $child->delete();
+                $childObjectLink = $child->childObjective;
+                foreach ($childObjectLink as $childLink) {
+                    if ($childLink->status == Objective::CANCEL) {
+                        $childLink->delete();
+                    } else {
+                        $childLink->update([
+                            'parent_id' => null,
+                            'status' => Objective::CANCEL,
+                        ]);
+                    }
+                }
+
+                if ($child->status == Objective::CANCEL) {
+                    $child->delete();
+                } else {
+                    $child->update([
+                        'parent_id' => null,
+                        'status' => Objective::CANCEL,
+                    ]);
+                }
             }
         }
 
