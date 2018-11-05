@@ -5,12 +5,14 @@ namespace App\Repositories;
 use App\Eloquent\ActivityLog;
 use App\Eloquent\Log;
 use App\Eloquent\Objective;
+use App\Eloquent\Group;
 use App\Contracts\Repositories\ObjectiveRepository;
 use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\UnknownException;
 use Auth;
 use App\Eloquent\Comment;
 use App\Eloquent\Quarter;
+use DB;
 
 class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements ObjectiveRepository
 {
@@ -45,7 +47,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveId)
                 ->where('group_id', $groupId)
                 ->firstOrFail();
-
         $parentObj = $this->where('id', $objective->parent_id)->first();
 
         if (isset($parentObj)) {
@@ -97,7 +98,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $message = translate('quarter.create_key');
         }
         $this->checkExpriedQuarter($data['quarter_id'], $message);
-
+        
         if (!isset($data['description'])) {
             $data['description'] = null;
         }
@@ -112,6 +113,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => $data['parent_id'],
         ]);
 
+        $userId = $this->user->id;
+        $typeOfGroup = Group::findOrFail($groupId)->type;
+        if($typeOfGroup == Group::TYPE_USER){
+            $objective->users()->attach($userId, [
+                'type' => OBJECTIVE::USER,
+            ]);
+        }
         Log::create([
             'type' => Objective::OBJECTIVE,
             'user_id' => Auth::guard('fauth')->user()->id,
@@ -132,8 +140,19 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function getObjective($groupId, $quarterId = null)
     {
-        $objectives = $this->isObjective()->where('group_id', $groupId);
-
+        $typeOfGroup = Group::findOrFail($groupId)->type;
+        if($typeOfGroup == Group::TYPE_USER) {
+            $objectives = $this->isObjective()
+                                    ->join('objective_user', 'objectives.id', '=', 'objective_user.objective_id')
+                                    ->join('users', 'users.id', '=', 'objective_user.user_id')
+                                    ->join('groups', 'groups.code', '=', 'users.code')
+                                    ->where('objectives.group_id', $groupId)  
+                                    ->where('objective_user.type', '=', OBJECTIVE::USER)
+                                    ->select('objectives.*');
+        } else {
+            $objectives = $this->isObjective()->where('group_id', $groupId);
+        }
+        
         if (isset($quarterId)) {
             $objectives->where('quarter_id', $quarterId);
         }
