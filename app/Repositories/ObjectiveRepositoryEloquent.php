@@ -550,9 +550,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective->delete();
 
 
-        if ($objective->objectiveable_type != Objective::OBJECTIVE) {
+        if ($objective->objectiveable_type != Objective::OBJECTIVE || $objective->status == Objective::APPROVE) {
             $this->caculateObjectiveFromChild($groupId, $objectiveId);
         }
+
     }
 
     public function checkParentObjective($objectiveId)
