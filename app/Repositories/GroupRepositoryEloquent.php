@@ -171,8 +171,11 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     public function deleteUserFromGroup($groupId, $userId)
     {
         $this->checkUserIsGroupManager($groupId);
-        $group = $this->find($groupId);
-
+        $group = $this->findOrFail($groupId);
+        $group->users()->wherePivot('user_id', $userId)->firstOrFail();
+        
+        $this->duplicateObjectiveLinked($groupId, $userId);
+        
         Log::create([
             'user_id' => Auth::guard('fauth')->user()->id,
             'group_id' => $groupId,
@@ -181,6 +184,35 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         ]);
 
         $group->users()->detach($userId);
+    }
+
+    public function duplicateObjectiveLinked($groupId, $userId)
+    {
+        $user = User::findOrFail($userId);
+        $objectives = $user->objectives;
+        $currentUserId = Auth::guard('fauth')->user()->id;
+
+        foreach ($objectives as $objective) {
+            $typeObjective = $objective->objectiveable_type;
+            $linkedKeyResultId = $objective->parent_id;
+
+            //check a objective in collection is objective and has link to
+            if ($typeObjective == Objective::OBJECTIVE && isset($linkedKeyResultId)){
+                $linkedKeyResult = Objective::findOrFail($linkedKeyResultId);
+                $groupIdOfLinkedKeyResult = $linkedKeyResult->group_id;
+
+                if($groupIdOfLinkedKeyResult == $groupId){
+                    $duplicateObjective = $objective->replicate();
+                    $duplicateObjective->save();
+                    $duplicateObjective->users()->attach($currentUserId, [
+                        'type' => OBJECTIVE::GROUP,
+                    ]);
+
+                    $objective->parent_id = null;
+                    $objective->save();
+                }
+            }
+        }
     }
 
     public function getUserWithPer($groupId)
@@ -205,7 +237,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         $group = $this->findOrFail($groupId);
 
         $email = $data['email'];
-        $user = User::where('email', $email)->get();
+        $user = User::where('email', $email)->firstOrFail();
 
         Log::create([
             'user_id' => Auth::guard('fauth')->user()->id,

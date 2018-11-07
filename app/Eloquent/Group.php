@@ -25,6 +25,8 @@ class Group extends Model implements Auditable
     const DEFAULT_GROUP = 0;
     const USER_GROUP = 1;
 
+    const TYPE_GROUP = 0;
+    const TYPE_USER = 1;
     public function users()
     {
         return $this->belongsToMany(User::class, 'group_user', 'group_id', 'user_id')

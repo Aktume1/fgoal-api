@@ -26,7 +26,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::get('groups/{groupId}/information', 'GroupController@getInfomationGroup');
         Route::get('groups/{groupId}/child_groups', 'GroupController@getChildGroupsInfor');
         Route::get('groups/{groupId}/parents', 'GroupController@getParentByGroupId');
-        Route::delete('groups/{groupId}/{userId}/delete_user', 'GroupController@deleteUserFromGroup');
+        Route::delete('groups/{groupId}/delete_user/{userId}', 'GroupController@deleteUserFromGroup');
         Route::get('groups/{code}/informationbycode', 'GroupController@getGroupByCode');
         Route::get('groups/{groupId}/process/quarter/{quarterId}', 'GroupController@getProcessByGroupId');
         Route::get('groups/{groupId}/log', 'GroupController@getLogGroup');

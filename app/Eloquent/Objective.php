@@ -29,6 +29,9 @@ class Objective extends Model implements Auditable
     const UPDATE = 'Update';
     const DELETE = 'Delete';
     
+    const GROUP = 0;
+    const USER = 1;
+
     protected $fillable = [
         'is_private',
         'name',
@@ -61,7 +64,7 @@ class Objective extends Model implements Auditable
     public function users()
     {
         return $this->belongsToMany(User::class, 'objective_user', 'objective_id', 'user_id')
-            ->withPivot('progress')->withTimestamps();
+            ->withPivot('type')->withTimestamps();
     }
 
     public function unit()
