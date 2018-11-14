@@ -32,12 +32,15 @@ class Objective extends Model implements Auditable
     const GROUP = 0;
     const USER = 1;
 
+    const WEIGHT_DEFAULT = 1;
+
     protected $fillable = [
         'is_private',
         'name',
         'description',
         'status',
         'process',
+        'weight',
         'match',
         'objectiveable_type',
         'actual',
