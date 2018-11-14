@@ -275,11 +275,17 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
     {
         $off = $inprocess = $done = 0;
         $totalObjectives = 0;
+        $group = Group::findOrFail($groupId);
 
         $objectives = Objective::isObjective()->where('group_id', $groupId)
-                    ->where('quarter_id', $quarterId)
-                    ->get();
-                    
+                    ->where('quarter_id', $quarterId);
+        if ($group->type == GROUP::TYPE_USER) {
+            $objectives = $objectives->whereHas('users', function ($query){
+                                $query->where('type', '=', OBJECTIVE::USER);
+                            });
+        }
+        $objectives = $objectives->get();
+
         foreach ($objectives as $objective) {
             if ($objective->objectiveable_type == Objective::OBJECTIVE) {
                 $processObjective = $objective->actual;
