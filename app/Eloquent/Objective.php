@@ -38,6 +38,7 @@ class Objective extends Model implements Auditable
         'description',
         'status',
         'process',
+        'weight',
         'match',
         'objectiveable_type',
         'actual',

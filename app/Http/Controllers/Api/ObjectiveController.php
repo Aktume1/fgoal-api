@@ -64,6 +64,7 @@ class ObjectiveController extends ApiController
         $data = $request->only(
             'name',
             'description',
+            'weight',
             'unit_id',
             'quarter_id',
             'parent_id'
