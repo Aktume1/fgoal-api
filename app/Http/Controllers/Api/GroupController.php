@@ -115,7 +115,7 @@ class GroupController extends ApiController
     public function getInfomationGroup(Request $request, $groupId)
     {
         $quarterId = $request->quarter;
-
+        
         return $this->getData(function () use ($groupId, $quarterId) {
             $this->compacts['data'] = $this->repository->getInfomationGroup($groupId, $quarterId);
         });
@@ -194,27 +194,6 @@ class GroupController extends ApiController
     {
         return $this->getData(function () use ($groupId, $quarterId) {
             $this->compacts['data'] = $this->repository->getProcessById($groupId, $quarterId);
-        });
-    }
-    
-    public function getLogGroup($groupId)
-    {
-        return $this->getData(function () use ($groupId) {
-            $this->compacts['data'] = $this->repository->getLogGroup($groupId);
-        });
-    }
-
-    /**
-     * Get logs group
-     *
-     * @param int $groupId
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \App\Exceptions\Api\UnknownException
-     */
-    public function getLogsGroup($groupId)
-    {
-        return $this->getData(function () use ($groupId) {
-            $this->compacts['data'] = $this->repository->getLogsGroup($groupId);
         });
     }
 

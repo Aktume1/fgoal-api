@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Eloquent\ActivityLog;
-use App\Eloquent\Log;
 use App\Eloquent\Objective;
 use App\Eloquent\Group;
 use App\Contracts\Repositories\ObjectiveRepository;
@@ -118,6 +117,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => $data['parent_id'],
         ]);
 
+        $objectiveCreated = $this->findOrFail($objective->id);
+
         $userId = $this->user->id;
         $typeOfGroup = Group::findOrFail($groupId)->type;
         if($typeOfGroup == Group::TYPE_USER){
@@ -125,20 +126,31 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
                 'type' => OBJECTIVE::USER,
             ]);
         }
-        Log::create([
-            'type' => Objective::OBJECTIVE,
-            'user_id' => Auth::guard('fauth')->user()->id,
-            'group_id' => $groupId,
-            'logable_id' => $objective->id,
-            'action' => Objective::CREATE,
-        ]);
+
+        $this->getLogObjective($groupId, Objective::CREATE, $data['objective_type'], [], $objectiveCreated);
+
 
         if ($data['objective_type'] != Objective::OBJECTIVE) {
             $this->caculateObjectiveFromChild($groupId, $objective->id);
         }
 
-        return $this->find($objective->id);
+        return $objectiveCreated;
     }
+
+    public function getLogObjective($groupId, $event, $type, $oldValues, $newValues)
+    {
+        ActivityLog::create([
+            'user_id' => Auth::guard('fauth')->user()->id,
+            'group_id' => $groupId,
+            'event' => $event,
+            'type' => $type,
+            'old_values' => json_encode($oldValues),
+            'new_values' => json_encode($newValues),
+        ]);
+
+        return;
+    }
+
     /**
      * Get Objective and key by Group Id
      * @param int $groupId
@@ -200,19 +212,25 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->checkUserIsGroupManager($groupId);
         
+        $objectiveOld = $this->where('id', $objectiveId)
+            ->where('group_id', $groupId)
+            ->firstOrFail();
+
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
-            
+                
         $message = translate('quarter.update_objective');
+
         $this->checkExpriedQuarter($objective->quarter_id, $message);
         $type = $this->checkTypeObjective($objective);
-        $oldActual = $objective->actual;
         
         $objective->update([
             'actual' => $data['actual'],
             'match' => Objective::UNMATCH,
         ]);
+
+        $this->getLogObjective($groupId, Objective::UPDATE, $objective->objectiveable_type, $objectiveOld, $objective);
         
         $getFullObjectiveId = null;
         if ($objective->objectiveable_type == Objective::OBJECTIVE) {
@@ -221,17 +239,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $getFullObjectiveId = isset($objective->parentObjective) ? $objective->parentObjective->id : $getFullObjectiveId;
         }
         
-        Log::create([
-            'type' => $type,
-            'user_id' => Auth::guard('fauth')->user()->id,
-            'group_id' => $groupId,
-            'property' => 'actual',
-            'logable_id' => $objective->id,
-            'action' => Objective::UPDATE,
-            'old_value' => $oldActual,
-            'new_value' => $data['actual'],
-        ]);
-
         $this->caculateObjectiveFromChild($groupId, $objective->id);
         
         return $this->getFullObjective($groupId, $getFullObjectiveId);
@@ -292,6 +299,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function linkObjectiveToKeyResult($groupId, $data)
     {
+        $objectiveOld = $this->isObjective()
+            ->where('id', $data['objectiveId'])
+            ->firstOrFail();
+
         $objective = $this->isObjective()
             ->where('id', $data['objectiveId'])
             ->firstOrFail();
@@ -309,6 +320,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'parent_id' => $parentObj->id,
             'status' => Objective::WAITING,
         ]);
+
+        $this->getLogObjective($groupId, Objective::LINK, $objective->objectiveable_type, $objectiveOld, $objective);
         
         return $objective;
     }
@@ -474,17 +487,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $type = $this->checkTypeObjective($objective);
 
-        Log::create([
-            'type' => $type,
-            'user_id' => Auth::guard('fauth')->user()->id,
-            'group_id' => $groupId,
-            'property' => 'name',
-            'logable_id' => $objective->id,
-            'action' => Objective::UPDATE,
-            'old_value' => $oldName,
-            'new_value' => $data,
-        ]);
-
         return $objective;
     }
 
@@ -579,13 +581,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $type = $this->checkTypeObjective($objective);
 
-        Log::create([
-            'type' => $type,
-            'user_id' => Auth::guard('fauth')->user()->id,
-            'group_id' => $groupId,
-            'logable_id' => $objective->id,
-            'action' => Objective::DELETE,
-        ]);
+        $this->getLogObjective($groupId, Objective::DELETE, $objective->objectiveable_type, $objective, $objective);
 
         $objective->delete();
 

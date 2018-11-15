@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Eloquent\Group;
-use App\Eloquent\Log;
+use App\Eloquent\ActivityLog;
 use App\Eloquent\Objective;
 use App\Eloquent\Quarter;
 use App\Eloquent\Tracking;
@@ -314,38 +314,6 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         }
 
         return $process;
-    }
-
-    /**
-     * Get log of group
-     *
-     * @param int $groupId
-     * @return $group
-     */
-    public function getLogGroup($groupId)
-    {
-        $group = $this->findOrFail($groupId)
-            ->audits;
-
-        return $group;
-    }
-
-    /**
-     * Get logs of group
-     *
-     * @param int $groupId
-     * @return $group
-     */
-    public function getLogsGroup($groupId)
-    {
-        $logs = Log::where('group_id', $groupId)->get();
-        foreach ($logs as $row) {
-            $objective = Objective::findOrFail($row->logable_id);
-            $name = $objective->name;
-            $row->setAttribute('objective_name', $name);
-        }
-
-        return $logs;
     }
 
     public function checkAdminGroup($groupId, $userId)
