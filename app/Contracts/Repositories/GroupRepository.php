@@ -31,4 +31,6 @@ interface GroupRepository extends AbstractRepository
     public function getTrackingByWeek($groupId, $quarterId);
     
     public function getGroupBySearchName($name);
+
+    public function getWaitingApproveRequestByGroups();
 }
