@@ -28,6 +28,8 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function removeLinkedObjective($groupId, $objectiveId);
 
+    public function removeLinkObjectiveAccepted($groupId, $objectiveId);
+
     public function matchActualWithEstimate($groupId, $objectiveId);
 
     public function showObjectiveDetail($groupId, $objectiveId);

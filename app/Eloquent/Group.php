@@ -3,12 +3,9 @@
 namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class Group extends Model implements Auditable
+class Group extends Model 
 {
-    use \OwenIt\Auditing\Auditable;
-
     protected $fillable = [
         'code',
         'name',
