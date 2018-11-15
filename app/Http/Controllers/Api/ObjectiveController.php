@@ -189,6 +189,14 @@ class ObjectiveController extends ApiController
         });
     }
 
+    public function removeLinkObjectiveAccepted($groupId, $objectiveId)
+    {
+        return $this->doAction(function () use ($groupId, $objectiveId) {
+            $this->compacts['data'] = $this->objectiveRepository->removeLinkObjectiveAccepted($groupId, $objectiveId);
+            $this->compacts['description'] = translate('success.update');
+        });
+    }
+
     /**
      * Match Objective's Actual With Estimate
      *

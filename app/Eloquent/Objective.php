@@ -4,11 +4,10 @@ namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class Objective extends Model implements Auditable
+class Objective extends Model
 {
-    use SoftDeletes, \OwenIt\Auditing\Auditable;
+    use SoftDeletes;
 
     const CANCEL = 0;
     const WAITING = 1;

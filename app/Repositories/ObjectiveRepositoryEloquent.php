@@ -402,6 +402,22 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return $this->findOrFail($objectiveId);
     }
 
+    public function removeLinkObjectiveAccepted($groupId, $objectiveId)
+    {
+        $this->checkUserIsGroupManager($groupId);
+
+        $objective = $this->findOrFail($objectiveId);
+
+        if ($objective->status == Objective::APPROVE) {
+            $objective->update([
+                'status' => Objective::CANCEL,
+                'parent_id' => null,
+            ]);
+        }
+
+        return $objective;
+    }
+
     /**
      * Remove all objectives link to keyresult
      *
