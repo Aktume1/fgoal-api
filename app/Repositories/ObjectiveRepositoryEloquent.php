@@ -103,6 +103,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $data['description'] = null;
         }
 
+        if (!isset($data['weight'])) {
+            $data['weight'] = OBJECTIVE::WEIGHT_DEFAULT;
+        }
+
         $objective = $this->model()->create([
             'name' => $data['name'],
             'objectiveable_type' => $data['objective_type'],

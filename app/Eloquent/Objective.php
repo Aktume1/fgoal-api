@@ -31,6 +31,8 @@ class Objective extends Model
     const GROUP = 0;
     const USER = 1;
 
+    const WEIGHT_DEFAULT = 1;
+
     protected $fillable = [
         'is_private',
         'name',
