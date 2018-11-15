@@ -519,11 +519,9 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         foreach ($groups as $group) {
             $objectiveIds = Objective::isKeyResult()->where('group_id', '=', $group->id)->pluck('id')->toArray();
             $countObjectives = Objective::whereIn('parent_id', $objectiveIds)->where('status', '=', OBJECTIVE::WAITING)->count();
-
-            $group->setAttribute('waiting_request', $countObjectives);
+            $group->setAttribute('waiting_request', $countObjectives);    
             $group->makeHidden('pivot');
         }
-        $groups = $groups->where('waiting_request', '>', GROUP::NO_WAITING);
 
         return $groups;
     }
