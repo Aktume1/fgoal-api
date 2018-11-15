@@ -24,6 +24,9 @@ class Group extends Model
 
     const TYPE_GROUP = 0;
     const TYPE_USER = 1;
+
+    const NO_WAITING = 0;
+    
     public function users()
     {
         return $this->belongsToMany(User::class, 'group_user', 'group_id', 'user_id')

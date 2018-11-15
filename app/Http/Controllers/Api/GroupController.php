@@ -271,4 +271,16 @@ class GroupController extends ApiController
             });
         }
     }
+
+    /**
+     * Get all link request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function getWaitingApproveRequestByGroups()
+    {
+        return $this->getData(function () {
+            $this->compacts['data'] = $this->repository->getWaitingApproveRequestByGroups();
+        });
+    }
 }
