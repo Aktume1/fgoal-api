@@ -34,7 +34,11 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function showObjectiveDetail($groupId, $objectiveId);
 
-    public function updateContent($objectiveId, $groupId, $data);
+    public function updateName($groupId, $objectiveId, $data);
+
+    public function updateWeight($groupId, $objectiveId, $data);
+
+    public function updateContent($groupId, $objectiveId, $data);
 
     public function deleteObjective($groupId, $objectiveId);
 

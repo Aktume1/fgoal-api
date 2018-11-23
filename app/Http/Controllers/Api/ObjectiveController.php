@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\Objective\CommentObjectiveRequest;
-use App\Http\Requests\Api\Objective\UpdateContentRequest;
+use App\Http\Requests\Api\Objective\UpdateNameRequest;
+use App\Http\Requests\Api\Objective\UpdateWeightRequest;
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\ObjectiveRepository;
 use App\Http\Requests\Api\Objective\UpdateObjectiveRequest;
@@ -120,20 +121,31 @@ class ObjectiveController extends ApiController
     }
 
     /**
-     * @param UpdateContentRequest $request
+     * @param UpdateNameRequest $request
+     * @param $groupId
      * @param $objectiveId
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \App\Exceptions\Api\ActionException
-     * @throws \App\Exceptions\Api\NotFoundException
-     * @throws \App\Exceptions\Api\NotOwnerException
-     * @throws \App\Exceptions\Api\UnknownException
      */
-    public function updateContent(UpdateContentRequest $request, $groupId, $objectiveId)
+    public function updateName(UpdateNameRequest $request, $groupId, $objectiveId)
     {
         $data = $request->name;
 
-        return $this->doAction(function () use ($objectiveId, $groupId, $data) {
-            $this->compacts['data'] = $this->objectiveRepository->updateContent($objectiveId, $groupId, $data);
+        return $this->doAction(function () use ($groupId, $objectiveId, $data) {
+            $this->compacts['data'] = $this->objectiveRepository->updateContent($groupId, $objectiveId, $data);
+            $this->compacts['description'] = translate('success.update');
+        });
+    }
+
+     /**
+     * @param UpdateWeightRequest $request
+     * @param $groupId
+     * @param $objectiveId
+     */
+    public function updateWeight(UpdateWeightRequest $request, $groupId, $objectiveId)
+    {
+        $data = $request->weight;
+
+        return $this->doAction(function () use ($groupId, $objectiveId, $data) {
+            $this->compacts['data'] = $this->objectiveRepository->updateContent($groupId, $objectiveId, $data);
             $this->compacts['description'] = translate('success.update');
         });
     }

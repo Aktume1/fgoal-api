@@ -42,7 +42,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::post('groups/{groupId}/objectives/link_objective', 'ObjectiveController@linkObjective');
         Route::get('groups/{groupId}/objectives/{objectiveId}/log', 'ObjectiveController@logObjective');
         Route::patch('groups/{groupId}/objectives/{id}/match_actual', 'ObjectiveController@matchActualWithEstimate');
-        Route::patch('groups/{groupId}/objectives/{objectiveId}/name', 'ObjectiveController@updateContent');
+        Route::patch('groups/{groupId}/objectives/{objectiveId}/name', 'ObjectiveController@updateName');
+        Route::patch('groups/{groupId}/objectives/{objectiveId}/weight', 'ObjectiveController@updateWeight');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/verify_link', 'ObjectiveController@verifyLinkObjective');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/verify_all', 'ObjectiveController@verifyAllLinkRequest');
         Route::patch('groups/{groupId}/objectives/{objectiveId}/remove_link', 'ObjectiveController@removeLinkObjective');
