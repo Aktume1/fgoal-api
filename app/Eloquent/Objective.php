@@ -4,6 +4,7 @@ namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use  App\Eloquent\Unit;
 
 class Objective extends Model
 {
@@ -59,6 +60,23 @@ class Objective extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $remapAttrs = [
+        'unit_id' => 'unit',
+    ];
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+        foreach($this->remapAttrs as $key => $new_key) {
+            if (isset($array[$key])) {
+                $array[$new_key] = $array[$key];
+                unset($array[$key]);
+            }
+        }
+
+        return $array;
+    }
+
     public function group()
     {
         return $this->belongsTo(Group::class, 'group_id', 'id');
@@ -77,11 +95,15 @@ class Objective extends Model
 
     public function parentObjective()
     {
+        $this->getUnitIdAttribute($this);
+
         return $this->belongsTo(Objective::class, 'parent_id', 'id');
     }
 
     public function childObjective()
     {
+        $this->getUnitIdAttribute($this);
+        
         return $this->hasMany(Objective::class, 'parent_id', 'id');
     }
 
@@ -108,5 +130,10 @@ class Objective extends Model
     public function scopeIsKeyResult($query)
     {
         return $this->ofType('Key Result');
+    }
+
+    public function getUnitIdAttribute($value)
+    {
+        return Unit::find($value);
     }
 }
