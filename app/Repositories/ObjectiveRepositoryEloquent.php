@@ -457,13 +457,39 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     }
 
     /**
+     * Update name objective
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @param int $data
+     * @return Objective
+     */
+    public function updateName($groupId, $objectiveId, $data)
+    {
+        return $this->updateContent($groupId, $objectiveId, $data);
+    }
+
+    /**
+     * Update weight objective
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @param int $data
+     * @return Objective
+     */
+    public function updateWeight($groupId, $objectiveId, $data)
+    {
+        return $this->updateContent($groupId, $objectiveId, $data);
+    }
+
+    /**
      * Update content objective
      *
      * @param int $objectiveId
      * @param int $data
      * @return Objective
      */
-    public function updateContent($objectiveId, $groupId, $data)
+    public function updateContent($groupId, $objectiveId, $data)
     {
         $this->checkUserIsGroupManager($groupId);
 

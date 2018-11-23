@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\Objective;
 
 use App\Http\Requests\Api\AbstractRequest;
 
-class UpdateContentRequest extends AbstractRequest
+class UpdateWeightRequest extends AbstractRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateContentRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:191',
+            'weight' => 'required|integer|min:1',
         ];
     }
 }
