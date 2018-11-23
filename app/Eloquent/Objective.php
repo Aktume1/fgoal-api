@@ -24,9 +24,10 @@ class Objective extends Model
     const PROCESS_OFF = 0;
     const PROCESS_DONE = 100;
 
-    const CREATE = 'Create';
-    const UPDATE = 'Update';
-    const DELETE = 'Delete';
+    const CREATE = 'created';
+    const UPDATE = 'updated';
+    const DELETE = 'deleted';
+    const LINK = 'linked';
     
     const GROUP = 0;
     const USER = 1;

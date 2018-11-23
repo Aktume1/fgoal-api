@@ -13,8 +13,7 @@
         "laravel/framework": "5.6.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "^1.0",
-        "nesbot/carbon": "1.25.*",
-        "owen-it/laravel-auditing": "^8.0"
+        "nesbot/carbon": "1.25.*"
     },
     "repositories": [{
         "url": "https://github.com/framgia/fauth-php",

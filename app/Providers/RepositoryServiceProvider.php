@@ -31,6 +31,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Contracts\Repositories\CommentRepository::class,
             \App\Repositories\CommentRepositoryEloquent::class,
         ],
+        'log' => [
+            \App\Contracts\Repositories\ActivityLogRepository::class,
+            \App\Repositories\ActivityLogRepositoryEloquent::class,
+        ],
         'webhook' => [
             \App\Contracts\Repositories\WebhookRepository::class,
             \App\Repositories\WebhookRepositoryEloquent::class,

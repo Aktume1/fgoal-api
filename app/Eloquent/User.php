@@ -78,6 +78,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Workspace::class)->withPivot('is_manager');
     }
 
+    public function logs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
+
     /**
      * Check if user is group's manager
      * @param int $groupId

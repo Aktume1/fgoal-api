@@ -30,9 +30,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::delete('groups/{groupId}/delete_user/{userId}', 'GroupController@deleteUserFromGroup');
         Route::get('groups/{code}/informationbycode', 'GroupController@getGroupByCode');
         Route::get('groups/{groupId}/process/quarter/{quarterId}', 'GroupController@getProcessByGroupId');
-        Route::get('groups/{groupId}/log', 'GroupController@getLogGroup');
+        Route::get('groups/{groupId}/logs', 'ActivityLogController@getLogsByGroupId');
         Route::post('groups/{groupId}/add_member', 'GroupController@addMemberGroup');
-        Route::get('groups/{groupId}/logs', 'GroupController@getLogsGroup');
         Route::get('groups/{groupId}/check_admin/{userId}', 'GroupController@checkAdminGroup');
         Route::get('groups/{groupId}/get_request_link', 'GroupController@getLinkRequest');
         Route::get('groups/{groupId}/quarter/{quarterId}/tracking', 'GroupController@getTracking');
