@@ -136,4 +136,9 @@ class Objective extends Model
     {
         return Unit::find($value);
     }
+
+    public function setUnitIdAttribute($value)
+    {
+        $this->attributes['unit_id'] = $value;
+    }
 }
