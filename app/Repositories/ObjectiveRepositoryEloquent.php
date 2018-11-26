@@ -493,6 +493,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->checkUserIsGroupManager($groupId);
 
+        $objectiveOld = $objective = $this->where('group_id', $groupId)
+                    ->findOrFail($objectiveId);
+
         $objective = $this->where('group_id', $groupId)
             ->findOrFail($objectiveId);
             
@@ -504,15 +507,15 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         
         $this->checkExpriedQuarter($objective->quarter_id, $message);
 
-
-        $oldName = $objective->name;
-
+        $keyData = key($data);
+        $valueData = $data[$keyData];
+        
         $objective->update([
-            'name' => $data,
+            $keyData => $valueData,
         ]);
 
-        $type = $this->checkTypeObjective($objective);
-
+        $this->getLogObjective($groupId, Objective::UPDATE, $objective->objectiveable_type, $objectiveOld, $objective);
+        
         return $objective;
     }
 
@@ -574,6 +577,10 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->checkUserIsGroupManager($groupId);
 
+        $objectiveDeleted = $this->where('id', $objectiveId)
+            ->where('group_id', $groupId)
+            ->firstOrFail();
+
         $objective = $this->where('id', $objectiveId)
             ->where('group_id', $groupId)
             ->firstOrFail();
@@ -607,7 +614,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $type = $this->checkTypeObjective($objective);
 
-        $this->getLogObjective($groupId, Objective::DELETE, $objective->objectiveable_type, $objective, $objective);
+        $this->getLogObjective($groupId, Objective::DELETE, $objectiveDeleted->objectiveable_type, $objectiveDeleted, []);
 
         $objective->delete();
 

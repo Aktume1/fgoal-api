@@ -127,10 +127,10 @@ class ObjectiveController extends ApiController
      */
     public function updateName(UpdateNameRequest $request, $groupId, $objectiveId)
     {
-        $data = $request->name;
+        $data['name'] = $request->name;
 
         return $this->doAction(function () use ($groupId, $objectiveId, $data) {
-            $this->compacts['data'] = $this->objectiveRepository->updateContent($groupId, $objectiveId, $data);
+            $this->compacts['data'] = $this->objectiveRepository->updateName($groupId, $objectiveId, $data);
             $this->compacts['description'] = translate('success.update');
         });
     }
@@ -142,10 +142,10 @@ class ObjectiveController extends ApiController
      */
     public function updateWeight(UpdateWeightRequest $request, $groupId, $objectiveId)
     {
-        $data = $request->weight;
+        $data['weight'] = $request->weight;
 
         return $this->doAction(function () use ($groupId, $objectiveId, $data) {
-            $this->compacts['data'] = $this->objectiveRepository->updateContent($groupId, $objectiveId, $data);
+            $this->compacts['data'] = $this->objectiveRepository->updateWeight($groupId, $objectiveId, $data);
             $this->compacts['description'] = translate('success.update');
         });
     }

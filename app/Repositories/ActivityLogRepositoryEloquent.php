@@ -15,6 +15,20 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
         return app(ActivityLog::class);
     }
 
+    public function flattenArrayLog($array)
+    {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $keyV => $valueV) {
+                    $array[$key . '_' . $keyV] = $valueV;
+                }
+                unset($array[$key]);
+            }
+        }
+
+        return $array;
+    }
+
     /**
      * Get logs of group
      *
@@ -33,8 +47,9 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
 
             $actionUser = null;
 
-            $oldValues = json_decode($log->old_values, true);
-            $newValues = json_decode($log->new_values, true);
+            $oldValues = $this->flattenArrayLog(json_decode($log->old_values, true));
+            $newValues = $this->flattenArrayLog(json_decode($log->new_values, true));
+
             $oldDiff = array_diff($oldValues, $newValues);
             $newDiff = array_diff($newValues, $oldValues);
 
@@ -54,7 +69,7 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
                 }
 
             } elseif ($log->event == Objective::DELETE) {
-                $actionUser = Objective::DELETE . ' ' . $newValues['objectiveable_type'] . ' ' . $newValues['name'];
+                $actionUser = Objective::DELETE . ' ' . $oldValues['objectiveable_type'] . ' ' . $oldValues['name'];
             
             } elseif ($log->event == Objective::LINK) {
                 $keyResultLinked = Objective::where('id', $newValues['parent_id'])->first();
@@ -64,9 +79,11 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
             $log->makeHidden('old_values');
             $log->makeHidden('new_values');
             $log->setAttribute('action', $actionUser);
-            $log->setAttribute('objective_id', $newValues['id']);
-            $user->setAttribute('log', $log);
 
+            $objectiveId = empty($oldValues) ? $newValues['id'] : $oldValues['id'];
+            $log->setAttribute('objective_id', $objectiveId);
+
+            $user->setAttribute('log', $log);
             $groupLogs[] = $user;
         }
 
