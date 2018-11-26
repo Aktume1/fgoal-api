@@ -29,6 +29,7 @@ class CreateObjectiveRequest extends AbstractRequest
             'unit_id' => 'required|integer|min:1',
             'quarter_id' => 'required|integer|min:1',
             'parent_id' => 'integer|nullable|min:1',
+            'target' => 'integer|min:1',
         ];
     }
 }

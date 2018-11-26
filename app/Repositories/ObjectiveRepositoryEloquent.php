@@ -113,6 +113,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             'description' => $data['description'],
             'weight' => $data['weight'],
             'unit_id' => $data['unit_id'],
+            'target' => $data['target'],
             'quarter_id' => $data['quarter_id'],
             'parent_id' => $data['parent_id'],
         ]);
