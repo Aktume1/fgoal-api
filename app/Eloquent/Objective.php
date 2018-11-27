@@ -50,6 +50,7 @@ class Objective extends Model
         'unit_id',
         'group_id',
         'quarter_id',
+        'target',
     ];
 
     protected $hidden = [

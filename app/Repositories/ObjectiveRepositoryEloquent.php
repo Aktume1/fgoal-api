@@ -483,6 +483,30 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     }
 
     /**
+     * Update target vs unit objective
+     *
+     * @param int $groupId
+     * @param int $objectiveId
+     * @param int $data
+     * @return Objective
+     */
+    public function updateTargetVsUnit($groupId, $objectiveId, $data)
+    {
+        $objective = $this->where('group_id', $groupId)
+                    ->findOrFail($objectiveId);
+
+        $objectiveType = $objective->objectiveable_type;
+
+        if ($objectiveType == Objective::KEYRESULT) {
+            $this->updateContent($groupId, $objectiveId, $data['unit_id']);
+
+            return $this->updateContent($groupId, $objectiveId, $data['target']);
+        }
+
+        return $objective;
+    }
+
+    /**
      * Update content objective
      *
      * @param int $objectiveId
@@ -509,11 +533,11 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
         $keyData = key($data);
         $valueData = $data[$keyData];
-        
+
         $objective->update([
             $keyData => $valueData,
         ]);
-
+        
         $this->getLogObjective($groupId, Objective::UPDATE, $objective->objectiveable_type, $objectiveOld, $objective);
         
         return $objective;
