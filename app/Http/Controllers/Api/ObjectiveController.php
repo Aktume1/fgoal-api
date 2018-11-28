@@ -68,7 +68,8 @@ class ObjectiveController extends ApiController
             'weight',
             'unit_id',
             'quarter_id',
-            'parent_id'
+            'parent_id',
+            'target'
         );
 
         return $this->doAction(function () use ($groupId, $data) {
