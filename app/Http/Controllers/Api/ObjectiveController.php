@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\Api\Objective\CommentObjectiveRequest;
 use App\Http\Requests\Api\Objective\UpdateNameRequest;
 use App\Http\Requests\Api\Objective\UpdateWeightRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\Api\Objective\UpdateTargetVsUnitRequest;
 use App\Contracts\Repositories\ObjectiveRepository;
 use App\Http\Requests\Api\Objective\UpdateObjectiveRequest;
 use App\Http\Requests\Api\Objective\CreateObjectiveRequest;
@@ -129,14 +130,14 @@ class ObjectiveController extends ApiController
     public function updateName(UpdateNameRequest $request, $groupId, $objectiveId)
     {
         $data['name'] = $request->name;
-
+        
         return $this->doAction(function () use ($groupId, $objectiveId, $data) {
             $this->compacts['data'] = $this->objectiveRepository->updateName($groupId, $objectiveId, $data);
             $this->compacts['description'] = translate('success.update');
         });
     }
 
-     /**
+    /**
      * @param UpdateWeightRequest $request
      * @param $groupId
      * @param $objectiveId
@@ -144,9 +145,25 @@ class ObjectiveController extends ApiController
     public function updateWeight(UpdateWeightRequest $request, $groupId, $objectiveId)
     {
         $data['weight'] = $request->weight;
-
+        
         return $this->doAction(function () use ($groupId, $objectiveId, $data) {
             $this->compacts['data'] = $this->objectiveRepository->updateWeight($groupId, $objectiveId, $data);
+            $this->compacts['description'] = translate('success.update');
+        });
+    }
+
+    /**
+     * @param UpdateTargetVsUnitRequest $request
+     * @param $groupId
+     * @param $objectiveId
+     */
+    public function updateTargetVsUnit(UpdateTargetVsUnitRequest $request, $groupId, $objectiveId)
+    {
+        $data['target']['target'] = $request->target;
+        $data['unit_id']['unit_id'] = $request->unit_id;
+
+        return $this->doAction(function () use ($groupId, $objectiveId, $data) {
+            $this->compacts['data'] = $this->objectiveRepository->updateTargetVsUnit($groupId, $objectiveId, $data);
             $this->compacts['description'] = translate('success.update');
         });
     }

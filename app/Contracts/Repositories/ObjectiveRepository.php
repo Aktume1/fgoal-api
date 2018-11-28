@@ -38,6 +38,8 @@ interface ObjectiveRepository extends AbstractRepository
 
     public function updateWeight($groupId, $objectiveId, $data);
 
+    public function updateTargetVsUnit($groupId, $objectiveId, $data);
+
     public function updateContent($groupId, $objectiveId, $data);
 
     public function deleteObjective($groupId, $objectiveId);
