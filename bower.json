@@ -1,0 +1,20 @@
+{
+  "name": "fgoal-api",
+  "description": "",
+  "main": "",
+  "authors": [
+    "thanhpv958 <thanhpv958@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/thanhpv958/fgoal-api",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fgoal-assets": "https://github.com/thanhpv958/fgoal-assets.git#develop"
+  }
+}
