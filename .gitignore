@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/bower_components
 storage/debugbar/
 /storage/*.key
 /vendor
@@ -18,4 +19,3 @@ public/.DS_Store
 .framgia-ci-result.temp.yml
 /.framgia-ci-reports
 framgia-ci.yml
-fgoal.sublime-project

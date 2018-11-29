@@ -10,11 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/mobile-app', function () {
     return view('mobile.welcome');
 });
+
+Route::any('{all}', function () {
+    return view('index');
+})->where(['all' => '.*']);
