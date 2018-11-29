@@ -5,4 +5,6 @@ namespace App\Contracts\Repositories;
 interface ActivityLogRepository extends AbstractRepository
 {
     public function getLogsByGroupId($groupId);
+
+    public function getAllLog();
 }

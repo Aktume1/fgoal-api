@@ -21,4 +21,11 @@ class ActivityLogController extends ApiController
             $this->compacts['data'] = $this->logRepository->getLogsByGroupId($groupId);
         });
     }
+
+    public function getAllLog()
+    {
+        return $this->getData(function () {
+            $this->compacts['data'] = $this->logRepository->getAllLog();
+        });
+    }
 }
