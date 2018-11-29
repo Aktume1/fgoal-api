@@ -20,6 +20,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::post('refresh_token', ['as' => 'login', 'uses' => 'LoginController@refreshToken']);
     });
     Route::group(['middleware' => 'fapi'], function () {
+        Route::get('logs', 'ActivityLogController@getAllLog');
+
         Route::get('groups/search/', 'GroupController@getGroupBySearchName');
         Route::get('groups/get_waiting_approve', 'GroupController@getWaitingApproveRequestByGroups');
         Route::resource('groups', 'GroupController');

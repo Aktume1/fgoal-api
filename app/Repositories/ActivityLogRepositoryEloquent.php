@@ -39,7 +39,36 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
     {
         $group = Group::select('id', 'name')->findOrFail($groupId);
         $logs = $this->where('group_id', $groupId)->get();
-        $groupLogs = null;
+
+        $logs = $this->getLogs($logs);
+
+        $group->setAttribute('group_logs', $logs);
+
+        return $group;
+    }
+
+    /**
+     * Get logs of system
+     *
+     * @return $log
+    */
+    public function getAllLog()
+    {
+        $logAll = $this->get();
+        $logs = $this->getLogs($logAll);
+
+        return $logs;
+    }
+
+
+    /**
+     * Get logs from log param
+     *
+     * @return $arrLog
+    */
+    private function getLogs($logs)
+    {
+        $arrLog = null;
 
         foreach ($logs as $log) {
             $user = User::where('id', $log->user_id)->first();
@@ -50,8 +79,8 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
             $oldValues = $this->flattenArrayLog(json_decode($log->old_values, true));
             $newValues = $this->flattenArrayLog(json_decode($log->new_values, true));
 
-            $oldDiff = array_diff($oldValues, $newValues);
-            $newDiff = array_diff($newValues, $oldValues);
+            $oldDiff = array_diff_assoc($oldValues, $newValues);
+            $newDiff = array_diff_assoc($newValues, $oldValues);
 
             if ($log->event == Objective::CREATE) {
                 $actionUser = Objective::CREATE . ' ' . $newValues['objectiveable_type'] . ' ' . $newValues['name'];
@@ -62,9 +91,9 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
 
                 foreach ($oldDiff as $key => $value) {
                     if (end($keyArr) != $key) {
-                        $actionUser .= " $key = $oldDiff[$key] to $newDiff[$key],";
+                        $actionUser .= " $key from $oldDiff[$key] to $newDiff[$key],";
                     } else {
-                        $actionUser .= " $key = $oldDiff[$key] to $newDiff[$key]";
+                        $actionUser .= " $key from $oldDiff[$key] to $newDiff[$key]";
                     }
                 }
 
@@ -81,14 +110,12 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
             $log->setAttribute('action', $actionUser);
 
             $objectiveId = empty($oldValues) ? $newValues['id'] : $oldValues['id'];
-            $log->setAttribute('objective_id', $objectiveId);
 
+            $log->setAttribute('objective_id', $objectiveId);
             $user->setAttribute('log', $log);
-            $groupLogs[] = $user;
+            $arrLog[] = $user;
         }
 
-        $group->setAttribute('group_logs', $groupLogs);
-
-        return $group;
+        return $arrLog;
     }
 }
