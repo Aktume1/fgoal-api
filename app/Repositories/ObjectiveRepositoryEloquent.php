@@ -270,11 +270,15 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             return $objective->actual * $objective->weight;
         });
 
+        $sumWeight = $childs->sum(function ($objective) {
+            return $objective->weight;
+        });
+
         $childObjectiveCount = $childs->count();
         if ($childObjectiveCount == 0) {
             $estimate = 0;
         } else {
-            $estimate = (float)($sum / $childObjectiveCount);
+            $estimate = (float)($sum / $sumWeight);
         }
 
         $parentObjective->update([
