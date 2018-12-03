@@ -24,7 +24,7 @@ class UpdateNameRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:191',
+            'name' => 'required|string',
         ];
     }
 }
