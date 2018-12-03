@@ -274,7 +274,6 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             return $objective->weight;
         });
 
-        $childObjectiveCount = $childs->count();
         if ($childObjectiveCount == 0) {
             $estimate = 0;
         } else {
