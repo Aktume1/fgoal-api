@@ -10,10 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/mobile-app', function () {
-    return view('mobile.welcome');
-});
+// Route::get('/mobile-app', function () {
+//     return view('mobile.welcome');
+// });
 
-Route::any('{all}', function () {
-    return view('index');
-})->where(['all' => '.*']);
+// Route::any('{all}', function () {
+//     return view('index');
+// })->where(['all' => '.*']);
+
+Route::group(['namespace' => 'Cms'], function() {
+    Route::get('/', 'HomeController@index')->name('home');
+});
