@@ -11,6 +11,7 @@ use App\Exceptions\Api\UnknownException;
 use Auth;
 use App\Eloquent\Comment;
 use App\Eloquent\Quarter;
+use App\Eloquent\ObjectiveLink;
 use DB;
 
 class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements ObjectiveRepository
@@ -41,43 +42,63 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return;
     }
 
+    public function getAllLink($groupId, $objectiveId) {
+        $objectiveLinks = ObjectiveLink::where('objective_id', $objectiveId)->get();
+
+        $linkTo = null;
+        $getLinkTo = null;
+
+        foreach ($objectiveLinks as $objLink) {
+            $keyResult = $this->where('id', $objLink->key_result_id)->first();
+
+            $keyResult->setAttribute('group', $keyResult->group);
+            $linkTo['status'] = $objLink->status;
+            $linkTo['key_result'] = $keyResult;
+            $getLinkTo[] = $linkTo;
+        }
+
+        return $getLinkTo;
+    }
+    
     public function getFullObjective($groupId, $objectiveId)
     {
         $objective = $this->where('id', $objectiveId)
                 ->where('group_id', $groupId)
                 ->firstOrFail();
-        $parentObj = $this->where('id', $objective->parent_id)->first();
-
-        if (isset($parentObj)) {
-            $parentObj->makeHidden('group_id');
-            $parentObj->setAttribute('group', $parentObj->group);
-        }
-        
-        $objective->setAttribute('link_to', null);
-
-        if ($objective->status != Objective::CANCEL) {
-            $objective->setAttribute('link_to', $parentObj);
-        }
 
         $objective->makeHidden('group_id');
         $objective->setAttribute('group', $objective->group);
-        
+        $linkTo = null;
+        $getLinkTo = null;
+
         foreach ($objective->childObjective as $childs) {
-            $parentObjChild = $this->where('id', $childs->parent_id)->first();
             $childs->makeHidden('group_id');
-            $childs->setAttribute('link_to', $parentObjChild);
             $childs->setAttribute('group', $childs->group);
 
-            foreach ($childs->childObjective as $child) {
-                $parentChild = $this->where('id', $child->parent_id)->first();
-                $child->makeHidden('group_id');
-                $child->setAttribute('link_to', $parentChild);
-                $child->setAttribute('group', $child->group);
-            }
+            $ObjectiveLink = ObjectiveLink::where('key_result_id', $childs->id)->first();
+
+            if ($ObjectiveLink) {
+                $ObjectiveLinkId = $ObjectiveLink->objective_id;
+                $ObjectiveLinkStatus = $ObjectiveLink->status;
+
+                $objectiveLinkTo = $this->where('id', $ObjectiveLinkId)->first();
+                $objectiveLinkTo->setAttribute('group', $objectiveLinkTo->group);
+
+                $linkTo['status'] = $ObjectiveLinkStatus;
+                $linkTo['key_result'] = $objectiveLinkTo;
+                $getLinkTo[] = $linkTo;
+
+                $childs->setAttribute('link_to', $getLinkTo);
+                
+                $objectiveLinkTo->setAttribute('link_to', $this->getAllLink($objectiveLinkTo->group_id, $ObjectiveLinkId));
+            }   
         }
+
+        $objective->setAttribute('link_to', $this->getAllLink($groupId, $objectiveId));
 
         return $objective;
     }
+
     /**
      * Create Objective
      * @param int $groupId
@@ -304,31 +325,41 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function linkObjectiveToKeyResult($groupId, $data)
     {
+
         $objectiveOld = $this->isObjective()
-            ->where('id', $data['objectiveId'])
+            ->where('id', $data['objective_id'])
             ->firstOrFail();
 
         $objective = $this->isObjective()
-            ->where('id', $data['objectiveId'])
+            ->where('id', $data['objective_id'])
             ->firstOrFail();
 
         $this->checkUserIsGroupManager($objective->group_id);
 
         $message = translate('quarter.link_objective');
+
         $this->checkExpriedQuarter($objective->quarter_id, $message);
 
-        $parentObj = $this->isKeyResult()
-            ->where('id', $data['keyResultId'])
-            ->firstOrFail();
-    
-        $objective->update([
-            'parent_id' => $parentObj->id,
-            'status' => Objective::WAITING,
-        ]);
+        $keyResultIds = $data['key_result_id'];
+        $getKeyResults = explode(',', $keyResultIds);
 
-        $this->getLogObjective($groupId, Objective::LINK, $objective->objectiveable_type, $objectiveOld, $objective);
-        
-        return $objective;
+        foreach ($getKeyResults as $keyResultId) {
+            $parentObj = $this->isKeyResult()
+            ->where('id', $keyResultId)
+            ->firstOrFail();
+
+            $objective_link = ObjectiveLink::create([
+                'objective_id' => $objective->id,
+                'key_result_id' => $parentObj->id,
+                'status' => ObjectiveLink::WAITING,
+            ]);
+
+            $objectiveLinkTo = $this->where('id', $keyResultId)->first();
+            $objectiveLinkTo->setAttribute('status', $objective_link->status);
+            $arrayObjectiveLinkTo[] = $objectiveLinkTo;
+        }
+
+        return $arrayObjectiveLinkTo;
     }
 
     /**
@@ -342,10 +373,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $objective = $this->findOrFail($objectiveId);
-
-        $objective->update([
-            'status' => Objective::APPROVE,
+        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
+        $keyResult->update([
+            'status' => ObjectiveLink::APPROVE,
         ]);
 
         $this->caculateObjectiveFromChild($groupId, $objectiveId);
@@ -363,7 +393,11 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->verifyLinkObj($groupId, $objectiveId);
 
-        return $this->findOrFail($objectiveId);
+        $objective = $this->findOrFail($objectiveId);
+        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
+        $objective->setAttribute('status', $keyResult->status);
+
+        return $objective;
     }
 
     /**
@@ -375,15 +409,18 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function verifyAllLink($groupId, $keyResultId)
     {
-        $keyResult = $this->findOrFail($keyResultId);
+        $keyResults = ObjectiveLink::where('key_result_id',$keyResultId)->get();
 
-        $objectivejLink = $keyResult->childObjective;
-
-        foreach ($objectivejLink as $objective) {
-            $this->verifyLinkObj($groupId, $objective->id);
+        foreach ($keyResults as $keyResult) {
+            $keyResult->update([
+                'status' => ObjectiveLink::APPROVE,
+            ]);
+            $objective = $this->where('id', $keyResult->objective_id)->first();
+            $objective->setAttribute('status', $keyResult->status);
+            $arrObjective[] = $objective;
         }
 
-        return $keyResult;
+        return $arrObjective;
     }
 
     /**
@@ -398,15 +435,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $objective = $this->findOrFail($objectiveId);
+        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
 
-        if ($objective->status == Objective::APPROVE) {
-            return $objective;
+        if ($keyResult->status == ObjectiveLink::APPROVE) {
+            return $keyResult;
         }
-
-        $objective->update([
-            'status' => Objective::CANCEL,
-            'parent_id' => null,
+        $keyResult->update([
+            'status' => ObjectiveLink::CANCEL,
         ]);
     }
 
@@ -422,21 +457,27 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->removeLinkObj($groupId, $objectiveId);
 
-        return $this->findOrFail($objectiveId);
+        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
+        $objective = $this->where('id',$keyResult->objective_id)->first();
+        $objective->setAttribute('status', $keyResult->status);
+
+        return $objective;
     }
 
     public function removeLinkObjectiveAccepted($groupId, $objectiveId)
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $objective = $this->findOrFail($objectiveId);
+        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
 
-        if ($objective->status == Objective::APPROVE) {
-            $objective->update([
-                'status' => Objective::CANCEL,
-                'parent_id' => null,
+        if ($keyResult->status == ObjectiveLink::APPROVE) {
+            $keyResult->update([
+                'status' => ObjectiveLink::CANCEL,
             ]);
         }
+
+        $objective = $this->where('id',$keyResult->objective_id)->first();
+        $objective->setAttribute('status', $keyResult->status);
 
         return $objective;
     }
@@ -450,12 +491,13 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function removeAllLink($groupId, $keyResultId)
     {
-        $keyResult = $this->findOrFail($keyResultId);
+        $keyResults = ObjectiveLink::where('key_result_id',$keyResultId)->get();
 
-        $objectivejLink = $keyResult->childObjective;
-
-        foreach ($objectivejLink as $objective) {
-            $this->removeLinkObj($groupId, $objective->id);
+        foreach ($keyResults as $keyResult) {
+            //$this->removeLinkObj($groupId, $keyResult->key_result_id);
+            $keyResult->update([
+                'status' => ObjectiveLink::CANCEL,
+            ]);
         }
 
         return $this->findOrFail($keyResultId);

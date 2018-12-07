@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateObjectivesTable extends Migration
+class Update10ObjectiveTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class UpdateObjectivesTable extends Migration
     public function up()
     {
         Schema::table('objectives', function (Blueprint $table) {
-            $table->integer('status')->default(0)->change();
+            $table->integer('status');
         });
     }
 

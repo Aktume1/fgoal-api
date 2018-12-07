@@ -24,8 +24,8 @@ class LinkObjectiveRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'objectiveId' => 'required|integer|min:1',
-            'keyResultId' => 'required|integer|min:1',
+            'objective_id' => 'required|integer|min:1',
+            'key_result_id' => 'required|string|min:1',
         ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateObjectiveTable extends Migration
+class RenameObjectiveLinkedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class UpdateObjectiveTable extends Migration
      */
     public function up()
     {
-        Schema::table('objectives', function (Blueprint $table) {
-            $table->integer('status');
-        });
+        Schema::rename('objective_linked', 'objective_links');
     }
 
     /**
@@ -25,8 +23,6 @@ class UpdateObjectiveTable extends Migration
      */
     public function down()
     {
-        Schema::table('objectives', function (Blueprint $table) {
-            $table->dropColumn('status');
-        });
+        Schema::rename('objective_links', 'objective_linked');
     }
 }
