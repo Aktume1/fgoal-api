@@ -27,8 +27,27 @@ class QuarterRepositoryEloquent extends AbstractRepositoryEloquent implements Qu
                     ->first();
 
         $data['current_quarter'] = $curentQuarter;
-        $data['quarters'] = $quarters;
+        $data['quarters'] = $quarters;
         
         return $data;
+    }
+
+    /**
+     * Create Objective
+     * @param int $groupId
+     * @param array $data
+     * @return Objective
+     */
+    public function create($data)
+    {
+        $quarter = $this->model()->create([
+            'name' => $data['name'],
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date'],
+        ]);
+
+        $quarterCreated = $this->findOrFail($quarter->id);
+
+        return $quarterCreated;
     }
 }

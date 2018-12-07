@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\QuarterRepository;
+use App\Http\Requests\Api\Quarter\CreateQuarterRequest;
 
 class QuarterController extends ApiController
 {
@@ -46,8 +47,18 @@ class QuarterController extends ApiController
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateQuarterRequest $request)
     {
+        $data = $request->only(
+            'name',
+            'start_date',
+            'end_date'
+        );
+
+        return $this->doAction(function () use ($data) {
+            $this->compacts['data'] = $this->quarterRepository->create($data);
+            $this->compacts['description'] = translate('success.create');
+        });
     }
 
     /**
