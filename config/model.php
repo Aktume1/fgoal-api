@@ -18,6 +18,11 @@ return [
             'member' => 0,
         ],
     ],
+    'objective' => [
+        'role' => [
+            'process' => 0,
+        ],
+    ],
     'workspace' => [
         'is_manager' => 1,
     ],

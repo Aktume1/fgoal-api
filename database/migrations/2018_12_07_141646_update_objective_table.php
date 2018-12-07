@@ -14,7 +14,7 @@ class UpdateObjectiveTable extends Migration
     public function up()
     {
         Schema::table('objectives', function (Blueprint $table) {
-            $table->dropColumn('status');
+            $table->integer('status');
         });
     }
 
@@ -26,7 +26,7 @@ class UpdateObjectiveTable extends Migration
     public function down()
     {
         Schema::table('objectives', function (Blueprint $table) {
-            $table->integer('status');
+            $table->dropColumn('status');
         });
     }
 }
