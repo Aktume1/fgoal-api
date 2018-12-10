@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateObjectiveTable extends Migration
+class Update09ObjectiveTable extends Migration
 {
     /**
      * Run the migrations.

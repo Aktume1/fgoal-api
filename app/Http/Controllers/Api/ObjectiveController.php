@@ -191,8 +191,8 @@ class ObjectiveController extends ApiController
     public function linkObjective(LinkObjectiveRequest $request, $groupId)
     {
         $data = $request->only(
-            'objectiveId',
-            'keyResultId'
+            'objective_id',
+            'key_result_id'
         );
 
         return $this->doAction(function () use ($groupId, $data) {
