@@ -6,6 +6,7 @@ use App\Contracts\Repositories\ActivityLogRepository;
 use App\Eloquent\ActivityLog;
 use App\Eloquent\Group;
 use App\Eloquent\Objective;
+use App\Eloquent\ObjectiveLink;
 use App\Eloquent\User;
 
 class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implements ActivityLogRepository
@@ -101,8 +102,8 @@ class ActivityLogRepositoryEloquent extends AbstractRepositoryEloquent implement
                 $actionUser = Objective::DELETE . ' ' . $oldValues['objectiveable_type'] . ' ' . $oldValues['name'];
             
             } elseif ($log->event == Objective::LINK) {
-                $keyResultLinked = Objective::where('id', $newValues['parent_id'])->first();
-                $actionUser = Objective::LINK . ' ' . $newValues['objectiveable_type'] . ' ' . $newValues['name'] . ' to '  . Objective::KEYRESULT . ' ' . $keyResultLinked->name;
+                $keyResultLinked = Objective::where('id', $newValues['id'])->first();
+                $actionUser = Objective::LINK . ' ' . $oldValues['objectiveable_type'] . ' ' . $oldValues['name'] . ' to '  . Objective::KEYRESULT . ' ' . $keyResultLinked->name;
             }
 
             $log->makeHidden('old_values');

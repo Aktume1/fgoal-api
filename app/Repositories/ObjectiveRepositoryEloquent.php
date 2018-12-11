@@ -357,6 +357,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
             $objectiveLinkTo = $this->where('id', $keyResultId)->first();
             $objectiveLinkTo->setAttribute('status', $objective_link->status);
             $arrayObjectiveLinkTo[] = $objectiveLinkTo;
+            
+            $this->getLogObjective($groupId, Objective::LINK, $objective->objectiveable_type, $objective, $parentObj);
         }
 
         return $arrayObjectiveLinkTo;
