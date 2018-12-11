@@ -143,4 +143,21 @@ return [
 
     'attributes' => [],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Unit
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used to swap attribute place-holders
+    | with something more reader friendly such as E-Mail Address instead
+    | of "email". This simply helps us make messages a little cleaner.
+    |
+    */
+
+    'warningUnit' => 'Please input unit',
+    'createUnit' => 'Create Successfully',
+    'updateUnit' => 'Update Successfully',
+    'deleteUnit' => 'Delete Successfully',
+    'uniqueUnit' => 'Unit already exists',
+
 ];

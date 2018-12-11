@@ -14,6 +14,39 @@ class UnitRepositoryEloquent extends AbstractRepositoryEloquent implements UnitR
 
     public function getAll()
     {
-    	return $this->get();
+        return $this->get();
+    }
+
+    public function create($data)
+    {
+        $unit = $this->model()->create([
+            'unit' => $data['unit'],
+        ]);
+
+        return $this->findOrFail($unit->id);
+    }
+
+    public function show($id)
+    {
+        $unit = $this->findOrFail($id);
+
+        return $unit;
+    }
+
+
+    public function update($id, $data)
+    {
+        $unit = $this->findOrFail($id);
+        $unit->update($data);
+
+        return $unit;
+    }
+
+    public function delete($id)
+    {
+        $unit = $this->findOrFail($id);
+        $unit->delete();
+
+        return $unit;
     }
 }

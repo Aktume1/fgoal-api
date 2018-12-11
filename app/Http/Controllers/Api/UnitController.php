@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\UnitRepository;
+use App\Http\Requests\Api\Unit\RequestUnit;
 
 class UnitController extends ApiController
 {
@@ -38,6 +39,7 @@ class UnitController extends ApiController
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -46,8 +48,16 @@ class UnitController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestUnit $request)
     {
+        $data = $request->only(
+            'unit'
+        );
+        
+        return $this->doAction(function () use ($data) {
+            $this->compacts['data'] = $this->unitRepository->create($data);
+            $this->compacts['description'] = translate('success.create');
+        });
     }
 
     /**
@@ -58,6 +68,9 @@ class UnitController extends ApiController
      */
     public function show($id)
     {
+        return $this->getData(function () use ($id) {
+            $this->compacts['data'] = $this->unitRepository->show($id);
+        });
     }
 
     /**
@@ -68,6 +81,7 @@ class UnitController extends ApiController
      */
     public function edit($id)
     {
+        //
     }
 
     /**
@@ -77,8 +91,16 @@ class UnitController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RequestUnit $request, $id)
     {
+        $data = $request->only(
+            'unit'
+        );
+
+        return $this->doAction(function () use ($id, $data) {
+            $this->compacts['data'] = $this->unitRepository->update($id, $data);
+            $this->compacts['description'] = translate('success.update');
+        });
     }
 
     /**
@@ -89,5 +111,9 @@ class UnitController extends ApiController
      */
     public function destroy($id)
     {
+        return $this->doAction(function () use ($id) {
+            $this->compacts['data'] = $this->unitRepository->delete($id);
+            $this->compacts['description'] = translate('success.delete');
+        });
     }
 }
