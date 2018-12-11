@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Eloquent\Group;
 use App\Eloquent\ActivityLog;
 use App\Eloquent\Objective;
+use App\Eloquent\ObjectiveLink;
 use App\Eloquent\Quarter;
 use App\Eloquent\Tracking;
 use App\Eloquent\User;
@@ -486,7 +487,7 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         foreach ($groups as $group) {
             $objectiveIds = Objective::isKeyResult()->where('group_id', '=', $group->id)->pluck('id')->toArray();
-            $countObjectives = Objective::whereIn('parent_id', $objectiveIds)->where('status', '=', OBJECTIVE::WAITING)->count();
+            $countObjectives = ObjectiveLink::whereIn('key_result_id', $objectiveIds)->where('status', '=', ObjectiveLink::WAITING)->count();
             $group->setAttribute('waiting_request', $countObjectives);    
             $group->makeHidden('pivot');
         }
