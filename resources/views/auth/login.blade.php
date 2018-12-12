@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
         <!--begin::Web font -->
-        {{ Html::script('bower_components/bower-fgoal/js/webfont.js') }}
+        {{ Html::script('bower_components/fgoal-assets/login/js/webfont.js') }}
         <script>
             WebFont.load({
                 google: {
@@ -19,8 +19,8 @@
             });
         </script>
 
-        {{ Html::style('bower_components/bower-fgoal/css/vendors.bundle.css') }}
-        {{ Html::style('bower_components/bower-fgoal/css/style.bundle.css') }}
+        {{ Html::style('bower_components/fgoal-assets/login/css/vendors.bundle.css') }}
+        {{ Html::style('bower_components/fgoal-assets/login/css/style.bundle.css') }}
         {{ Html::style('images/favicon.ico') }}
     </head>
 
@@ -95,7 +95,7 @@
         </div>
         
     </body>
-        {{ Html::script('bower_components/bower-fgoal/js/vendors.bundle.js') }}
-        {{ Html::script('bower_components/bower-fgoal/js/scripts.bundle.js') }}
-        {{ Html::script('bower_components/bower-fgoal/js/login.js') }}
+        {{ Html::script('bower_components/fgoal-assets/login/js/vendors.bundle.js') }}
+        {{ Html::script('bower_components/fgoal-assets/login/js/scripts.bundle.js') }}
+        {{ Html::script('bower_components/fgoal-assets/login/js/login.js') }}
 </html>

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Cms;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Session;
 use App\Eloquent\Unit;
 use App\Http\Requests\Cms\RequestUnit;
-use Illuminate\Support\Facades\Route;
 
-class UnitController extends Controller
+class UnitController extends CmsController
 {
     /**
      * Display a listing of the resource.
@@ -19,23 +17,9 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $request = Request::create('/api/v1/units', 'GET');
-        $request->headers->set('Authorization', 'ae8m0R6WPLT8ZxWDrLIiSh1h4Qsait5wGbL2ckIhOQwWCk7yNb19ztxYhls1');
-        $response = Route::dispatch($request);
-        $units = $response->getData();
-        $data = $units->data;
+        $data = $this->requestToApi('/api/v1/units', 'GET');
 
         return view('cms.unit.index', compact('data'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -46,9 +30,7 @@ class UnitController extends Controller
      */
     public function store(RequestUnit $request)
     {
-        $request = Request::create('/api/v1/units', 'POST', Input::get());
-        $request->headers->set('Authorization', 'ae8m0R6WPLT8ZxWDrLIiSh1h4Qsait5wGbL2ckIhOQwWCk7yNb19ztxYhls1');
-        $response = Route::dispatch($request);
+        $data = $this->requestToApi('/api/v1/units', 'POST', Input::get());
         Session::flash('success', __('validation.createUnit'));
 
         return redirect()->back();
@@ -62,24 +44,9 @@ class UnitController extends Controller
      */
     public function show($id)
     {
-        $request = Request::create('/api/v1/units/'. $id, 'GET');
-        $request->headers->set('Authorization', 'ae8m0R6WPLT8ZxWDrLIiSh1h4Qsait5wGbL2ckIhOQwWCk7yNb19ztxYhls1');
-        $response = Route::dispatch($request);
-        $units = $response->getData();
-        $data = $units->data;
+        $data = $this->requestToApi('/api/v1/units/'. $id, 'GET');
 
         return view('cms.unit.edit', compact('data'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -91,9 +58,7 @@ class UnitController extends Controller
      */
     public function update(RequestUnit $request, $id)
     {
-        $request = Request::create('/api/v1/units/'. $id, 'POST', Input::get());
-        $request->headers->set('Authorization', 'ae8m0R6WPLT8ZxWDrLIiSh1h4Qsait5wGbL2ckIhOQwWCk7yNb19ztxYhls1');
-        $response = Route::dispatch($request);
+        $data = $this->requestToApi('/api/v1/units/'. $id, 'POST', Input::get());
         Session::flash('success', __('validation.updateUnit'));
 
         return redirect()->route('units.index');
@@ -107,9 +72,7 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        $request = Request::create('/api/v1/units/'. $id, 'POST', Input::get());
-        $request->headers->set('Authorization', 'ae8m0R6WPLT8ZxWDrLIiSh1h4Qsait5wGbL2ckIhOQwWCk7yNb19ztxYhls1');
-        $response = Route::dispatch($request);
+        $data = $this->requestToApi('/api/v1/units/'. $id, 'DELETE', Input::get());
         Session::flash('success', __('validation.deleteUnit'));
 
         return redirect()->route('units.index');
