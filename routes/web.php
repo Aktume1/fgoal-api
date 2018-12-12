@@ -11,7 +11,15 @@
 |
 */
 
-Route::group(['namespace' => 'Cms'], function() {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::resource('units', 'UnitController');
+Route::group(['namespace' => 'Cms'], function () {
+	Auth::routes();
+	Route::resource('units', 'UnitController');
+	Route::group(['namespace' => 'Auth'], function () {
+	    Route::get('login/framgia', 'LoginController@redirectToProvider')->name('framgia.login');
+	    Route::get('login/framgia/callback', 'LoginController@handleProviderCallback');
+	});
+
+	Route::middleware(['auth'])->group(function () {
+		Route::get('/', 'HomeController@index')->name('dashboard');
+	});
 });
