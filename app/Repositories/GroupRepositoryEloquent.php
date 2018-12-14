@@ -331,16 +331,22 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
         $group = $this->findOrFail($groupId);
 
         $list = [];
+        $array = [];
+        $keyResultId = [];
         foreach ($group->objectives as $objective) {
 
             if ($objective->objectiveable_type == Objective::KEYRESULT) {
-                $array = Objective::where('parent_id', $objective->id)->where('status', Objective::WAITING)->with('group')->get();
+                $objectiveLinks = ObjectiveLink::where('key_result_id', $objective->id)->where('status', ObjectiveLink::WAITING)->get();
 
-                if (count($array) > 0) {
+                foreach ($objectiveLinks as $objLink) {
+                    $array[] = Objective::where('id', $objLink->objective_id)->with('group')->first();
+                    $keyResultId[] = $objLink->key_result_id;
+                }
+      
+                if (count($array) > 0 && in_array($objective->id, $keyResultId, true)) {
                     $objective->setAttribute('parent_objective', $objective->parentObjective);
                     $list[] = $objective->setAttribute('link_request', $array);
-
-                }
+                }  
             }
         }
 
