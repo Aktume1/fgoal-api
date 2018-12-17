@@ -375,7 +375,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
+        $keyResult = ObjectiveLink::where('key_result_id', $objectiveId)->first();
         $keyResult->update([
             'status' => ObjectiveLink::APPROVE,
         ]);
@@ -396,7 +396,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->verifyLinkObj($groupId, $objectiveId);
 
         $objective = $this->findOrFail($objectiveId);
-        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
+        $keyResult = ObjectiveLink::where('key_result_id', $objectiveId)->first();
         $objective->setAttribute('status', $keyResult->status);
 
         return $objective;
@@ -411,7 +411,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function verifyAllLink($groupId, $keyResultId)
     {
-        $keyResults = ObjectiveLink::where('key_result_id',$keyResultId)->get();
+        $keyResults = ObjectiveLink::where('key_result_id', $keyResultId)->get();
 
         foreach ($keyResults as $keyResult) {
             $keyResult->update([
@@ -433,18 +433,20 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      * @return mixed
      * @throws UnknownException
      */
-    public function removeLinkObj($groupId, $objectiveId)
+    public function removeLinkObj($groupId, $objectiveId, $keyResultId)
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
+        $objective = ObjectiveLink::where('objective_id', $objectiveId)->where('key_result_id', $keyResultId)->first();
 
-        if ($keyResult->status == ObjectiveLink::APPROVE) {
-            return $keyResult;
+        if ($objective->status == ObjectiveLink::APPROVE) {
+            return $objective;
         }
-        $keyResult->update([
+        
+        $objective->update([
             'status' => ObjectiveLink::CANCEL,
         ]);
+        $objective->delete();
     }
 
     /**
@@ -455,31 +457,34 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      * @return Objective
      * @throws UnknownException
      */
-    public function removeLinkedObjective($groupId, $objectiveId)
+    public function removeLinkedObjective($groupId, $objectiveId, $data)
     {
-        $this->removeLinkObj($groupId, $objectiveId);
 
-        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
-        $objective = $this->where('id',$keyResult->objective_id)->first();
+        $this->removeLinkObj($groupId, $objectiveId, $data['key_result_id']);
+
+        $keyResult = ObjectiveLink::withTrashed()->where('key_result_id', $data['key_result_id'])->first();
+        $objective = $this->where('id', $keyResult->objective_id)->first();
+
         $objective->setAttribute('status', $keyResult->status);
-
+        $objective->setAttribute('link_to', $this->getAllLink($groupId, $objectiveId));
         return $objective;
     }
 
-    public function removeLinkObjectiveAccepted($groupId, $objectiveId)
+    public function removeLinkObjectiveAccepted($groupId, $objectiveId, $data)
     {
         $this->checkUserIsGroupManager($groupId);
 
-        $keyResult = ObjectiveLink::where('key_result_id',$objectiveId)->first();
+        $objectiveLink = ObjectiveLink::where('objective_id', $objectiveId)->where('key_result_id', $data['key_result_id'])->first();
 
-        if ($keyResult->status == ObjectiveLink::APPROVE) {
-            $keyResult->update([
+        if ($objectiveLink->status == ObjectiveLink::APPROVE) {
+            $objectiveLink->update([
                 'status' => ObjectiveLink::CANCEL,
             ]);
         }
 
-        $objective = $this->where('id',$keyResult->objective_id)->first();
-        $objective->setAttribute('status', $keyResult->status);
+        $objective = $this->where('id', $objectiveLink->objective_id)->first();
+        $objective->setAttribute('status', $objectiveLink->status);
+        $objective->setAttribute('link_to', $this->getAllLink($groupId, $objectiveId));
 
         return $objective;
     }
@@ -493,10 +498,9 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
      */
     public function removeAllLink($groupId, $keyResultId)
     {
-        $keyResults = ObjectiveLink::where('key_result_id',$keyResultId)->get();
+        $keyResults = ObjectiveLink::where('key_result_id', $keyResultId)->get();
 
         foreach ($keyResults as $keyResult) {
-            //$this->removeLinkObj($groupId, $keyResult->key_result_id);
             $keyResult->update([
                 'status' => ObjectiveLink::CANCEL,
             ]);

@@ -11,6 +11,8 @@ use App\Contracts\Repositories\ObjectiveRepository;
 use App\Http\Requests\Api\Objective\UpdateObjectiveRequest;
 use App\Http\Requests\Api\Objective\CreateObjectiveRequest;
 use App\Http\Requests\Api\Objective\LinkObjectiveRequest;
+use App\Http\Requests\Api\Objective\RemoveLinkObjectiveRequest;
+use App\Http\Requests\Api\Objective\RemoveLinkAcceptedRequest;
 
 class ObjectiveController extends ApiController
 {
@@ -212,18 +214,26 @@ class ObjectiveController extends ApiController
      * @throws \App\Exceptions\Api\NotOwnerException
      * @throws \App\Exceptions\Api\UnknownException
      */
-    public function removeLinkObjective($groupId, $objectiveId)
+    public function removeLinkObjective(RemoveLinkObjectiveRequest $request, $groupId, $objectiveId)
     {
-        return $this->doAction(function () use ($groupId, $objectiveId) {
-            $this->compacts['data'] = $this->objectiveRepository->removeLinkedObjective($groupId, $objectiveId);
+        $data = $request->only(
+            'key_result_id'
+        );
+
+        return $this->doAction(function () use ($groupId, $objectiveId, $data) {
+            $this->compacts['data'] = $this->objectiveRepository->removeLinkedObjective($groupId, $objectiveId, $data);
             $this->compacts['description'] = translate('success.update');
         });
     }
 
-    public function removeLinkObjectiveAccepted($groupId, $objectiveId)
+    public function removeLinkObjectiveAccepted(RemoveLinkAcceptedRequest $request, $groupId, $objectiveId)
     {
-        return $this->doAction(function () use ($groupId, $objectiveId) {
-            $this->compacts['data'] = $this->objectiveRepository->removeLinkObjectiveAccepted($groupId, $objectiveId);
+        $data = $request->only(
+            'key_result_id'
+        );
+
+        return $this->doAction(function () use ($groupId, $objectiveId, $data) {
+            $this->compacts['data'] = $this->objectiveRepository->removeLinkObjectiveAccepted($groupId, $objectiveId, $data);
             $this->compacts['description'] = translate('success.update');
         });
     }

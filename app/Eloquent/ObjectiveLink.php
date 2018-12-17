@@ -3,9 +3,12 @@
 namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ObjectiveLink extends Model
 {
+    use SoftDeletes;
+
     const CANCEL = 0;
     const WAITING = 1;
     const APPROVE = 2;
@@ -20,6 +23,7 @@ class ObjectiveLink extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
 
     public function objective()
