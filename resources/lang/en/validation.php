@@ -159,5 +159,8 @@ return [
     'updateUnit' => 'Update Successfully',
     'deleteUnit' => 'Delete Successfully',
     'uniqueUnit' => 'Unit already exists',
-
+    'warningName' => 'Please input name',
+    'uniqueEmail' => 'Email already exists',
+    'warningPass' => 'Please input password',
+    'deleteUser' => ' Delete Successfully',
 ];

@@ -18,5 +18,8 @@ return [
     'updateUnit'  => 'Cập nhật thành công',
     'deleteUnit'  => 'Xóa thành công',
     'uniqueUnit'  => 'Tên đơn vị đã tồn tại',
-
+    'warningName' => 'Tên không được để trống',
+    'uniqueEmail' => 'Email đã tồn tại',
+    'warningPass' => 'Mật khẩu không được để trống',
+    'deleteUser' => 'Xóa thành công',
 ];
