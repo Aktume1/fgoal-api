@@ -18,5 +18,14 @@ return [
     'updateUnit'  => 'Cập nhật thành công',
     'deleteUnit'  => 'Xóa thành công',
     'uniqueUnit'  => 'Tên đơn vị đã tồn tại',
-
+    'warningName' => 'Tên không được để trống',
+    'uniqueEmail' => 'Email đã tồn tại',
+    'warningPass' => 'Mật khẩu không được để trống',
+    'deleteUser' => 'Xóa thành công',
+    'codeUser' => 'mã không được để trống',
+    'birthdayUser' => 'Ngày sinh không được để trống',
+    'genderUser' => 'Giới tính không đưọc để trống',
+    'phoneUser' => 'Số điện thoại không được để trống',
+    'misionUser' =>  'Chức vụ không đưọc để trống',
+    'avatarUser' => 'Nhập đúng định dạng ảnh',
 ];

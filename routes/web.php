@@ -15,6 +15,7 @@ Route::group(['namespace' => 'Cms'], function () {
     Auth::routes();
 
     Route::resource('units', 'UnitController');
+    Route::resource('users', 'UserController');
 
     Route::group(['namespace' => 'Auth'], function () {
         Route::get('login/framgia', 'LoginController@redirectToProvider')->name('framgia.login');

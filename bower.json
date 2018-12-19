@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "fgoal-assets": "https://github.com/thanhpv958/fgoal-assets.git#develop"
+    "fgoal-assets": "https://github.com/thanhpv958/fgoal-assets.git#develop",
+    "datatables": "https://github.com/DataTables/DataTables.git"
   }
 }

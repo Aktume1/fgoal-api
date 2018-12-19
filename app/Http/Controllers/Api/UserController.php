@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\UserRepository;
+use App\Http\Requests\Api\User\RequestUser;
 
 class UserController extends ApiController
 {
@@ -26,28 +27,36 @@ class UserController extends ApiController
      */
     public function index()
     {
-        //
+        return $this->getData(function () {
+            $this->compacts['data'] = $this->userRepository->getAll();
+        });
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestUser $request)
     {
-        //
+        $data = $request->only(
+            'name',
+            'email',
+            'password',
+            'code',
+            'birthday',
+            'gender',
+            'phone',
+            'mission',
+            'avatar',
+            'status'
+        );
+        
+        return $this->doAction(function () use ($data) {
+            $this->compacts['data'] = $this->userRepository->create($data);
+            $this->compacts['description'] = translate('success.create');
+        });
     }
 
     /**
@@ -58,18 +67,9 @@ class UserController extends ApiController
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->getData(function () use ($id) {
+            $this->compacts['data'] = $this->userRepository->show($id);
+        });
     }
 
     /**
@@ -79,9 +79,24 @@ class UserController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RequestUser $request, $id)
     {
-        //
+        $data = $request->only(
+            'name',
+            'email',
+            'code',
+            'birthday',
+            'gender',
+            'phone',
+            'mission',
+            'avatar',
+            'status'
+        );
+        
+        return $this->doAction(function () use ($id, $data) {
+            $this->compacts['data'] = $this->userRepository->update($id, $data);
+            $this->compacts['description'] = translate('success.update');
+        });
     }
 
     /**
@@ -92,6 +107,9 @@ class UserController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        return $this->doAction(function () use ($id) {
+            $this->compacts['data'] = $this->userRepository->delete($id);
+            $this->compacts['description'] = translate('success.delete');
+        });
     }
 }
