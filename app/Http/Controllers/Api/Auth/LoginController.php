@@ -79,10 +79,12 @@ class LoginController extends ApiController
         $this->compacts['data'] = $service->getUserByPasswordGrant($data['email'], $data['password']);
         $this->compacts['description'] = 'Signed in successfully.';
 
-        $token_verification = $this->compacts['data']->token_verification;
-        $user = $this->repository->getUserByToken($token_verification);
-        $user->firebase_token = $data['firebase_token'];
-        $user->save();
+        if (isset($data['firebase_token'])) {
+            $token_verification = $this->compacts['data']->token_verification;
+            $user = $this->repository->getUserByToken($token_verification);
+            $user->firebase_token = $data['firebase_token'];
+            $user->save();            
+        }
 
         return $this->jsonRender();
     }

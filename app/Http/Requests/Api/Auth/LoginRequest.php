@@ -25,6 +25,7 @@ class LoginRequest extends AbstractRequest
         return [
             'email' => 'required|email|max:255',
             'password' => 'required|min:6|max:128',
+            'firebase_token' => 'nullable',
         ];
     }
 }
