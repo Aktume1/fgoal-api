@@ -29,6 +29,12 @@
                     <span class="m-menu__link-text">{{ __('i18n.unit') }}</span>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
+
+                <a href="{{ route('quarters.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-calendar-1"></i>
+                    <span class="m-menu__link-text">{{ __('i18n.quarter') }}</span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                </a>
             </li>
         </ul>
     </div>

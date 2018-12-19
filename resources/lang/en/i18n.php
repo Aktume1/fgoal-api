@@ -13,20 +13,24 @@ return [
     |
     */
     'add' => 'New record',
+    'cancel' => 'Cancel',
+    'close' => 'Close',
+    'deleteConfirm' => 'Are you sure you want to delete?',
+    'actions' => 'Actions',
+
+    // unit
     'unitlist' => 'Unit List',
     'unit' => 'Unit',
-    'actions' => 'Actions',
     'delete' => 'Delete',
     'update' => 'Update',
     'addUnit' => 'Add unit',
-    'updateUnit' => 'Update unit', 
-    'close'   => 'Close',
-    'nameunit'   => 'Unit',
-    'cancel'   => 'Cancel',
-    'deleteUnit'   => 'Delete unit',
-    'deleteConfirm'   => 'Are you sure you want to delete?',
-    'userList'   => 'List User',
-    'user'   => 'User',
+    'updateUnit' => 'Update unit',
+    'nameunit' => 'Unit',
+    'deleteUnit' => 'Delete unit',
+
+    // user
+    'userList' => 'List User',
+    'user' => 'User',
     'name' => 'Name',
     'password' => 'Password',
     'birthday' => 'Birthday',
@@ -40,4 +44,15 @@ return [
     'addUser' => 'Add user',
     'updateUser' => 'Update user',
     'deleteUser' => 'Delete user',
+
+    // quarter
+    'quarterList' => 'List Quarter',
+    'quarter' => 'Quarter',
+    'currentQuarter' => 'Current quarter',
+    'start_date' => 'Start date',
+    'end_date' => 'Start date',
+    'addQuarter' => 'Add quarter',
+    'updateQuarter' => 'Update quarter',
+    'deleteQuarter' => 'Delete quarter',
+
 ];

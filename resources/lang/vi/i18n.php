@@ -13,18 +13,23 @@ return [
     |
     */
     'add' => 'Thêm mới',
+    'cancel' => 'Quay lại',
+    'delete' => 'Xóa',
+    'close' => 'Đóng',
+    'deleteConfirm' => 'Bạn chắc chắn muốn xóa',
+    'actions' => 'Thao tác',
+
+
+    // unit
     'unitlist' => 'Danh sách đơn vị',
     'unit' => 'Đơn vị',
-    'actions' => 'Thao tác',
-    'delete' => 'Xóa',
     'update' => 'Sửa',
     'addUnit' => 'Thêm mới đơn vị',
     'updateUnit' => 'Sửa đơn vị',  
-    'close' => 'Đóng',
     'nameunit' => 'Đơn vị',
-    'cancel' => 'Quay lại',
     'deleteUnit' => 'Xóa đơn vị',
-    'deleteConfirm' => 'Bạn chắc chắn muốn xóa',
+
+    // user
     'userList' => 'Danh sách tài khoản',
     'user' => 'Tài khoản',
     'name' => 'Tên tài khoản',
@@ -40,4 +45,14 @@ return [
     'addUser' => 'Thêm mới Tài khoản',
     'updateUser' => 'Chỉnh sửa Tài khoản',
     'deleteUser' => 'Xóa tài khoản',
+
+    // quarter
+    'quarterList' => 'Danh sách quý',
+    'quarter' => 'Quý',
+    'currentQuarter' => 'Quý hiện tại',
+    'start_date' => 'Ngày bắt đầu',
+    'end_date' => 'Ngày kết thúc',
+    'addQuarter' => 'Thêm quý mới',
+    'updateQuarter' => 'Cập nhật quý',
+    'deleteQuarter' => 'Xóa quý',
 ];
