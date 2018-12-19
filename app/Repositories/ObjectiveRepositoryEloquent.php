@@ -118,6 +118,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
 
             $objective = $this->where('id', $objLinkTo->objective_id)->first();
 
+            $objective->setAttribute('group', $objective->group);
+
             $linkTo['status'] = $objLinkTo->status;
             $linkTo['objective'] = $objective;
             $getLinkTo[] = $linkTo;
@@ -514,6 +516,8 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $objective = $this->where('id', $objectiveLink->objective_id)->first();
         $objective->setAttribute('status', $objectiveLink->status);
         $objective->setAttribute('link_to', $this->getAllLink($groupId, $objectiveId));
+
+        $objectiveLink->delete();
 
         return $objective;
     }
