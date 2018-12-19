@@ -99,6 +99,35 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         return $objective;
     }
 
+    public function getFullKeyResult($groupId, $keyResultId)
+    {
+        $keyResult = $this->where('id', $keyResultId)
+                ->where('group_id', $groupId)
+                ->firstOrFail();
+
+        $keyResult->makeHidden('group_id');
+        $keyResult->setAttribute('group', $keyResult->group);
+
+        $linkTo = null;
+        $getLinkTo = null;
+        $objectiveLinkTo = ObjectiveLink::where('key_result_id', $keyResult->id)->get();
+
+        foreach($objectiveLinkTo as $objLinkTo) {
+            $objLinkTo->makeHidden('group_id');
+            $objLinkTo->setAttribute('group', $objLinkTo->group);
+
+            $objective = $this->where('id', $objLinkTo->objective_id)->first();
+
+            $linkTo['status'] = $objLinkTo->status;
+            $linkTo['objective'] = $objective;
+            $getLinkTo[] = $linkTo;
+        }
+
+        $keyResult->setAttribute('link_to', $getLinkTo);
+
+        return $keyResult;
+    }
+
     /**
      * Create Objective
      * @param int $groupId
@@ -475,7 +504,7 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
         $this->checkUserIsGroupManager($groupId);
 
         $objectiveLink = ObjectiveLink::where('objective_id', $objectiveId)->where('key_result_id', $data['key_result_id'])->first();
-
+       
         if ($objectiveLink->status == ObjectiveLink::APPROVE) {
             $objectiveLink->update([
                 'status' => ObjectiveLink::CANCEL,
@@ -642,6 +671,17 @@ class ObjectiveRepositoryEloquent extends AbstractRepositoryEloquent implements 
     public function showObjectiveDetail($groupId, $objectiveId)
     {
         return $this->getFullObjective($groupId, $objectiveId);
+    }
+
+    /**
+     * Show detail Key Result
+     * @param int $groupId
+     * @param int $objectiveId
+     * @return void
+     */
+    public function showKeyResultDetail($groupId, $keyResultId)
+    {
+        return $this->getFullKeyResult($groupId, $keyResultId);
     }
 
     /**

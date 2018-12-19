@@ -39,7 +39,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::get('groups/{groupId}/quarter/{quarterId}/tracking', 'GroupController@getTracking');
 
         Route::resource('groups.objectives', 'ObjectiveController');
-        Route::get('groups/{groupId}/objectives/{objectiveId}/detail', 'ObjectiveController@showObjective');
+        Route::get('groups/{groupId}/objectives/{objectiveId}/detail_objective', 'ObjectiveController@showObjective');
+        Route::get('groups/{groupId}/objectives/{keyResultId}/detail_key_result', 'ObjectiveController@showKeyResult');
         Route::post('groups/{groupId}/objectives/link_objective', 'ObjectiveController@linkObjective');
         Route::get('groups/{groupId}/objectives/{objectiveId}/log', 'ObjectiveController@logObjective');
         Route::patch('groups/{groupId}/objectives/{id}/match_actual', 'ObjectiveController@matchActualWithEstimate');
