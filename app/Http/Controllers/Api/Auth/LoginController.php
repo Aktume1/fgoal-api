@@ -74,10 +74,15 @@ class LoginController extends ApiController
 
     public function loginWithWsm(LoginRequest $request, SocialInterface $service)
     {
-        $data = $request->only(['email', 'password']);
+        $data = $request->only(['email', 'password', 'firebase_token']);
 
         $this->compacts['data'] = $service->getUserByPasswordGrant($data['email'], $data['password']);
         $this->compacts['description'] = 'Signed in successfully.';
+
+        $token_verification = $this->compacts['data']->token_verification;
+        $user = $this->repository->getUserByToken($token_verification);
+        $user->firebase_token = $data['firebase_token'];
+        $user->save();
 
         return $this->jsonRender();
     }
