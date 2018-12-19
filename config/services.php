@@ -41,4 +41,8 @@ return [
         'base_url' => env('FRAMGIA_CLIENT_BASE_URL'),
         'redirect' => env('APP_URL') . '/login/framgia/callback',
     ],
+
+    'fcm' => [
+        'url' => 'https://fcm.googleapis.com/fcm/send',
+    ],
 ];

@@ -60,6 +60,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
         Route::resource('objectives.comments', 'CommentController');
 
         Route::resource('users', 'UserController');
+
+        Route::get('firebase/send/{userId}', 'FirebaseController@send');
+        Route::resource('firebase', 'FirebaseController');
     });
 
     Route::post('webhook/wsm', 'WebhookController@handleWebhookWSM')->middleware('webhookWSM');
