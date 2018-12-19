@@ -39,6 +39,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Contracts\Repositories\WebhookRepository::class,
             \App\Repositories\WebhookRepositoryEloquent::class,
         ],
+        'firebasetoken' => [
+            \App\Contracts\Repositories\FirebaseTokenRepository::class,
+            \App\Repositories\FirebaseTokenRepositoryEloquent::class,
+        ],
     ];
 
     /**
