@@ -95,6 +95,19 @@ class ObjectiveController extends ApiController
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showKeyResult($groupId, $keyResultId)
+    {
+        return $this->getData(function () use ($groupId, $keyResultId) {
+            $this->compacts['data'] = $this->objectiveRepository->showKeyResultDetail($groupId, $keyResultId);
+        });
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
