@@ -29,4 +29,6 @@ interface GroupRepository extends AbstractRepository
     public function getGroupBySearchName($name);
 
     public function getWaitingApproveRequestByGroups();
+    
+    public function getAllGroupByLevel();
 }

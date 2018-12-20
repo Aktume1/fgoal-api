@@ -500,4 +500,27 @@ class GroupRepositoryEloquent extends AbstractRepositoryEloquent implements Grou
 
         return $groups;
     }
+
+    public function getChildGroupsByLevel($parent_id)
+    {
+
+        $childs = Group::where('parent_id', $parent_id)->get();
+
+        foreach ($childs as $child) {
+            $child->setAttribute('child_group', $this->getChildGroupsByLevel($child->id));     
+        }
+
+        return $childs;
+    }
+
+    public function getAllGroupByLevel()
+    {
+        $groups = Group::where('parent_id', NUll)->get();
+
+        foreach ($groups as $group) {
+            $group->setAttribute('child_group', $this->getChildGroupsByLevel($group->id));
+        }
+
+        return $groups;
+    }
 }
