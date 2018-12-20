@@ -262,4 +262,16 @@ class GroupController extends ApiController
             $this->compacts['data'] = $this->repository->getWaitingApproveRequestByGroups();
         });
     }
+
+    /**
+     * Get all group by level
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\Api\UnknownException
+     */
+    public function getAllGroupByLevel()
+    {
+        return $this->getData(function () {
+            $this->compacts['data'] = $this->repository->getAllGroupByLevel();
+        });
+    }
 }

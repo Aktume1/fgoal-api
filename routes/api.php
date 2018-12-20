@@ -24,6 +24,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'namespace' => 'Api'], functi
 
         Route::get('groups/search/', 'GroupController@getGroupBySearchName');
         Route::get('groups/get_waiting_approve', 'GroupController@getWaitingApproveRequestByGroups');
+        Route::get('groups/get_all_group_by_level', 'GroupController@getAllGroupByLevel');
         Route::resource('groups', 'GroupController');
         Route::get('groups/{id}/user_with_per', 'GroupController@getUserWithPer');
         Route::get('groups/{groupId}/information', 'GroupController@getInfomationGroup');
