@@ -14,10 +14,6 @@
 Route::group(['namespace' => 'Cms'], function () {
     Auth::routes();
 
-    Route::resource('units', 'UnitController');
-    Route::resource('users', 'UserController');
-    Route::resource('quarters', 'QuarterController');
-
     Route::group(['namespace' => 'Auth'], function () {
         Route::get('login/framgia', 'LoginController@redirectToProvider')->name('framgia.login');
         Route::get('login/framgia/callback', 'LoginController@handleProviderCallback');
@@ -25,5 +21,8 @@ Route::group(['namespace' => 'Cms'], function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/', 'HomeController@index')->name('dashboard');
+        Route::resource('units', 'UnitController');
+        Route::resource('users', 'UserController');
+        Route::resource('quarters', 'QuarterController');
     });
 });

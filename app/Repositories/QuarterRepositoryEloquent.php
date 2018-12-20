@@ -33,10 +33,10 @@ class QuarterRepositoryEloquent extends AbstractRepositoryEloquent implements Qu
     }
 
     /**
-     * Create Objective
-     * @param int $groupId
+     * Create quarter
+     * 
      * @param array $data
-     * @return Objective
+     * @return Quarter
      */
     public function create($data)
     {
@@ -46,8 +46,45 @@ class QuarterRepositoryEloquent extends AbstractRepositoryEloquent implements Qu
             'end_date' => $data['end_date'],
         ]);
 
-        $quarterCreated = $this->findOrFail($quarter->id);
+        return $this->findOrFail($quarter->id);
+    }
 
-        return $quarterCreated;
+    /**
+     * Show quarter
+     * 
+     * @param $id
+     * @return Objective
+     */
+    public function show($id)
+    {
+        return $this->findOrFail($id);
+    }
+
+    /**
+     * Update quarter
+     * 
+     * @param $id
+     * @return Objective
+     */
+    public function update($id, $data)
+    {
+        $quarter = $this->findOrFail($id);
+        $quarter->update($data);
+
+        return $quarter;
+    }
+
+    /**
+     * Delete quarter
+     * 
+     * @param $id
+     * @return Objective
+     */
+    public function delete($id)
+    {
+        $quarter = $this->findOrFail($id);
+        $quarter->delete();
+
+        return $quarter;
     }
 }

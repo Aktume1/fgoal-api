@@ -54,5 +54,6 @@ return [
     'addQuarter' => 'Add quarter',
     'updateQuarter' => 'Update quarter',
     'deleteQuarter' => 'Delete quarter',
-
+    'expired' => 'Expired',
+    'unExpired' => 'Unexpired',
 ];

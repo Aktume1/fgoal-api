@@ -20,15 +20,29 @@
         <!--begin::Form-->
         {!! Form::open(['method' => 'PUT','route' => ['quarters.update', $data->id]]) !!}
         <div class="m-portlet__body">
-            <div class="form-group m-form__group">
-                <span>{!! Form::label('Unit :', '', array('class' => '')) !!}</span>
-                <span>{!! Form::text('unit', $data->unit, array('class' => 'form-control m-input', 'required')) !!}</span>
+            <div class="form-group">
+                <span>{!! Form::label('Name :', '', ['class' => '']) !!}</span>
+                <span>{!! Form::text('name', $data->name, ['class' => 'form-control', 'required']) !!}</span>
             </div>
-        </div>
-        <div class="m-portlet__foot m-portlet__foot--fit">
+
+            <div class="form-group">
+                <span>{!! Form::label('Start date', '', ['class' => '']) !!}</span>
+                <span>{!! Form::text('start_date', $data->start_date, ['class' => 'form-control', 'required']) !!}</span>
+            </div>
+
+            <div class="form-group">
+                <span>{!! Form::label('End date', '', ['class' => '']) !!}</span>
+                <span>{!! Form::text('end_date', $data->end_date, ['class' => 'form-control', 'required']) !!}</span>
+            </div>
+
+            <div class="form-group">
+                <span>{!! Form::label('Expired', '', ['class' => '']) !!}</span>
+                <span>{!! Form::text('expried', $data->expried, ['class' => 'form-control']) !!}</span>
+            </div>
+
             <div class="m-form__actions">
                 <button type="submit" class="btn btn-brand">{{ __('i18n.update') }}</button>
-                <a href="{{ route('units.index')}}">
+                <a href="{{ route('quarters.index')}}">
                     <button type="button" class="btn btn-secondary">{{ __('i18n.cancel') }}</button>
                 </a>
             </div>

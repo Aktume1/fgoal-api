@@ -42,6 +42,16 @@
     "verify_link": "Verify Successful",
     "cancel_link": "Cancel Successful"
   },
+
+  "activity": {
+    "actions": "Actions",
+    "add": "New record",
+    "canncel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete?"
+  },
+
   "quarter":{
     "expried": "This quarter has expried",
     "create_objective": "This quarter has expried, you can't create new objective",
@@ -49,6 +59,16 @@
     "update_objective": "This quarter has expried, you can't update objective",
     "link_objective": "This quarter has expried, you can't link objective",
     "update_key": "This quarter has expried, you can't update key result",
-    "match": "This quarter has expried, you can't match"
+    "match": "This quarter has expried, you can't match",
+    "quarterList": "List Quarter",
+    "quarter": "Quarter",
+    "currentQuarter": "Current quarter",
+    "start_date": "Start date",
+    "end_date": "Start date",
+    "addQuarter": "Add quarter",
+    "updateQuarter": "Update quarter",
+    "deleteQuarter": "Delete quarter",
+    "expiredQuarter": "Expired",
+    "unExpiredQuarter": "Unexpired"
   }
 }
