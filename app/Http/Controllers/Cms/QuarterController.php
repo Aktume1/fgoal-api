@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Cms;
 
 use Illuminate\Support\Facades\Input;
 use App\Eloquent\Quarter;
+use App\Http\Requests\Cms\Quarter\CreateQuarterRequest;
+use App\Http\Requests\Cms\Quarter\UpdateQuarterRequest;
 use Session;
 
 class QuarterController extends CmsController
@@ -26,10 +28,10 @@ class QuarterController extends CmsController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestUnit $request)
+    public function store(CreateQuarterRequest $request)
     {
-        $data = $this->requestToApi('/api/v1/units', 'POST', Input::get());
-        Session::flash('success', __('validation.addQuarter'));
+        $data = $this->requestToApi('/api/v1/quarters', 'POST', Input::get());
+        Session::flash('success', translate('success.create'));
 
         return redirect()->back();
     }
@@ -54,10 +56,10 @@ class QuarterController extends CmsController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RequestUnit $request, $id)
+    public function update(UpdateQuarterRequest $request, $id)
     {
-        $data = $this->requestToApi('/api/v1/quarters/'. $id, 'POST', Input::get());
-        Session::flash('success', __('validation.updateQuarter'));
+        $data = $this->requestToApi('/api/v1/quarters/'. $id, 'PATCH', Input::get());
+        Session::flash('success', translate('success.update'));
 
         return redirect()->route('quarters.index');
     }
@@ -71,7 +73,7 @@ class QuarterController extends CmsController
     public function destroy($id)
     {
         $data = $this->requestToApi('/api/v1/quarters/'. $id, 'DELETE', Input::get());
-        Session::flash('success', __('validation.deleteQuarter'));
+        Session::flash('success', translate('success.delete'));
 
         return redirect()->route('quarters.index');
     }

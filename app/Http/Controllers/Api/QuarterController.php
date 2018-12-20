@@ -69,16 +69,10 @@ class QuarterController extends ApiController
      */
     public function show($id)
     {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
+        return $this->getData(function () use ($id) {
+            $this->compacts['data'] = $this->quarterRepository->show($id);
+            $this->compacts['description'] = translate('success.create');
+        });
     }
 
     /**
@@ -90,6 +84,17 @@ class QuarterController extends ApiController
      */
     public function update(Request $request, $id)
     {
+        $data = $request->only(
+            'name',
+            'start_date',
+            'end_date',
+            'expried'
+        );
+        
+        return $this->doAction(function () use ($id, $data) {
+            $this->compacts['data'] = $this->quarterRepository->update($id, $data);
+            $this->compacts['description'] = translate('success.create');
+        });
     }
 
     /**
@@ -100,5 +105,9 @@ class QuarterController extends ApiController
      */
     public function destroy($id)
     {
+        return $this->doAction(function () use ($id) {
+            $this->compacts['data'] = $this->quarterRepository->delete($id);
+            $this->compacts['description'] = translate('success.create');
+        });
     }
 }

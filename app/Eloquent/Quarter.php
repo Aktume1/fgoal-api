@@ -3,9 +3,12 @@
 namespace App\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quarter extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'name',
         'start_date',

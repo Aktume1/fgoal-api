@@ -31,7 +31,37 @@
     "service_unavailable": "Service Unavailable",
     "gateway_timeout": "Gateway Timeout"
   },
+
   "other_error": {
     "invalid": ":param is invalid value"
+  },
+
+  "activity": {
+    "actions": "Hành động",
+    "add": "Thêm mới",
+    "canncel": "Hủy",
+    "close": "Đóng",
+    "delete": "Xóa",
+    "deleteConfirm": "Bạn có muốn xóa không?"
+  },
+
+  "quarter":{
+    "expried": "Quý này đã hết hạn",
+    "create_objective": "Quý này đã hết hạn, bạn không thể tạo mới objective",
+    "create_key": "Quý này đã hết hạn, bạn không thể tạo mới key result",
+    "update_objective": "Quý này đã hết hạn, bạn không thể cập nhật objective",
+    "link_objective": "Quý này đã hết hạn, bạn không thể liên kết objective",
+    "update_key": "Quý này đã hết hạn, bạn không thể tạo mới objective",
+    "match": "Quý này đã hết hạn, bạn không thể match",
+    "quarterList": "Danh sách quý",
+    "quarter": "Quý",
+    "currentQuarter": "Quý hiện tại",
+    "start_date": "Ngày bắt đầu",
+    "end_date": "Ngày kết hạn",
+    "addQuarter": "Thêm quý mới",
+    "updateQuarter": "Cập nhật quý",
+    "deleteQuarter": "Xóa quý",
+    "expiredQuarter": "Hết hạn",
+    "unExpiredQuarter": "Chưa hết hạn"
   }
 }

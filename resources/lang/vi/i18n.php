@@ -55,4 +55,6 @@ return [
     'addQuarter' => 'Thêm quý mới',
     'updateQuarter' => 'Cập nhật quý',
     'deleteQuarter' => 'Xóa quý',
+    'expired' => 'Hết hạn',
+    'unExpired' => 'Chưa hết hạn',
 ];
